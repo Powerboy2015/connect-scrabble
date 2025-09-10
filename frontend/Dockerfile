@@ -7,4 +7,4 @@ RUN npm install -g live-server
 ENV CHOKIDAR_USEPOLLING=true
 
 EXPOSE 8080
-CMD ["live-server", "--host=0.0.0.0", "--port=8080", "--watch=.", "--wait=0", "--no-browser", "--verbose"]
+CMD ["live-server", "--host=0.0.0.0", "--port=80", "--watch=.", "--wait=0", "--no-browser", "--verbose"]

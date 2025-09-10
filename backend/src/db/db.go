@@ -26,16 +26,20 @@ func Connect() bool {
 }
 
 func GetWords(letters []string) ([]string, error) {
-	query := "SELECT word FROM words WHERE LENGTH(word) BETWEEN 4 AND 7 AND ("
-	args := []interface{}{}
-	for i, letter := range letters {
-		if i > 0 {
-			query += " AND "
-		}
-		query += fmt.Sprintf("word LIKE $%d", i+1)
-		args = append(args, "%"+letter+"%")
+	freq := map[string]int{}
+	for _, l := range letters {
+		freq[l]++
 	}
-	query += ")"
+
+	query := "SELECT word FROM words WHERE length(word) BETWEEN 4 AND 7"
+	args := []interface{}{}
+	
+	i := 1
+	for l, c := range freq {
+		query += fmt.Sprintf(" AND (length(word) - length(replace(lower(word), $%d::text, ''))) >= $%d", i, i+1)
+		args = append(args, l, c)
+		i += 2
+	}
 
 	rows, err := DB.Query(query, args...)
 	if err != nil {
@@ -43,7 +47,10 @@ func GetWords(letters []string) ([]string, error) {
 	}
 	defer rows.Close()
 
-	fmt.Println("Words matching letters:", letters)
+	if rows.Next() == false {
+		return []string{}, nil
+	}
+
 	words := []string{}
 	for rows.Next() {
 		var word string
@@ -51,7 +58,6 @@ func GetWords(letters []string) ([]string, error) {
 			return nil, err
 		}
 		words = append(words, word)
-		fmt.Println(word)
 	}
 
 	if err := rows.Err(); err != nil {

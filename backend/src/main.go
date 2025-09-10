@@ -32,9 +32,20 @@ func findWordHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if len(req.Letters) > 7 || len(req.Letters) < 4 {
+		http.Error(w, "incorrect amount of letters.", http.StatusBadRequest)
+		return
+	}
+
 	words, err := db.GetWords(req.Letters)
 	if err != nil {
-		http.Error(w, "Failed to retrieve words", http.StatusInternalServerError)
+		http.Error(w, "Failed to retrieve words", http.StatusNoContent)
+		return
+	}
+
+	// If an empty array is returned, send a 204 No Content response
+	if len(words) == 0 {
+		http.Error(w, "No words found", http.StatusNoContent)
 		return
 	}
 

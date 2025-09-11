@@ -1,0 +1,113 @@
+body {
+    background-color: #be9976;
+}
+
+#Gamename {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 6vw;
+}
+
+#Loc_Start_Button {
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    transform: translateX(-50%);
+}
+.Start_Button {
+    background-color: #32b060;
+    border: none;
+    border-radius: 20px;
+    width: 20vw;
+    padding: 4vh;
+    box-sizing: border-box;
+    color: #fad621;
+    font-size: 4vw;
+}
+.Start_Button:hover {
+    background-color: #269f52;
+}
+.Start_Button:active {
+    transform: scale(0.95);
+}
+
+
+#Loc_HTP_Button {
+    position: absolute;
+    top: 65%;
+    left: 35%;
+    transform: translateX(-50%);
+}
+.HTP_Button {
+    background-color: #e8552b;
+    border: none;
+    border-radius: 20px;
+    width: 18vw;
+    padding: 4vh;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-size: 2.5vw;
+}
+.HTP_Button:hover {
+    background-color: #ce4823;
+}
+.HTP_Button:active {
+    transform: scale(0.95);
+}
+
+#stupid_ass_box {
+    position: absolute;
+    top: 40%;
+    left: 62%;
+    transform: translateX(-50%);
+
+    background-color: #d9d9d9;
+    border-radius: 20px;
+    width: 25vw;
+    height: 45vh;
+
+}
+
+#nameInput {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+
+    width: 70%;
+    padding:4%;
+    border: none;
+    border-radius: 5px;
+}
+.Add_Name_Button {
+    position: absolute;
+    top: 9%;
+    left: 79%; /*Ik word ge van deze values*/
+    width: 14%; 
+    padding: 4.5%;
+
+    background-color: #1ed120;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+}
+.Add_Name_Button:hover {
+    background-color: #1bb31d;
+}
+.Add_Name_Button:active {
+    transform: scale(0.9);
+}
+
+#another_stupid_box {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: #cbcbcb;
+    border-radius: 5px;
+    width: 90%;
+    height: 65%;
+}

@@ -1,0 +1,13 @@
+body {
+    background-color: #be9976;
+}
+#GameName {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 6vw;
+
+}
+

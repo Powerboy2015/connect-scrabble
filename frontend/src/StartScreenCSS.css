@@ -1,13 +1,60 @@
 body {
     background-color: #be9976;
 }
-#GameName {
+#Gamename {
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 50%;
     transform: translateX(-50%);
     color: white;
     font-size: 6vw;
-
 }
 
+#Loc_Start_Button {
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    transform: translateX(-50%);
+}
+
+
+.Start_Button {
+    background-color: #32b060;
+    border: none;
+    border-radius: 20px;
+    width: 20vw;
+    padding: 2.3vw;
+    box-sizing: border-box;
+    color: #fad621;
+    font-size: 4vw;
+}
+.Start_Button:hover {
+    background-color: #269f52;
+}
+.Start_Button:active {
+    transform: scale(0.95);
+}
+
+
+#Loc_HTP_Button {
+    position: absolute;
+    top: 65%;
+    left: 30%;
+    transform: translateX(-50%);
+}
+.HTP_Button {
+    background-color: #e8552b;
+    border: none;
+    border-radius: 20px;
+    width: 18vw;
+    padding: 2vw;
+    box-sizing: border-box;
+    color: #ffffff;
+    font-size: 2.5vw;
+}
+.HTP_Button:hover {
+    background-color: #ce4823;
+}
+.HTP_Button:active {
+    transform: scale(0.95);
+}

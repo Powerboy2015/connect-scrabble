@@ -1,27 +1,42 @@
 <html lang="en">
+  <link rel="stylesheet" href="style.css">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      img {
-        width: 400px;
+     <style>
+      .image-inline {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
       }
-    </style>
-  </head>
-  <body style="background-color:C19875 ;">
+      .image-inline div {
+        text-align: center;
+      }
+      .image-inline img {
+        width: auto;
+        height: 500px;
+        display: block;
+        margin: 0 auto;
+      }
+     </style>
+     </head>
+  <body style="background-color:C19875 ;text-align: center;"></body>
       <h1>Hoe speel je scrabble op een rij</h1>
        <p>Scrabble op een rij is een combinatie van 2 spellen 4 op een rij en scrabbel.
         Je wint als je woord creëert langer dan 4 letters aan een gesloten.
-       </p>   
-    <img
-      src="https://image.intertoys.nl/wcsstore/IntertoysCAS/images/catalog/full/1105857-d8fc0d01.jpg"
-      alt="4 op een rij speelbord"/>
-      <p> 4 op een rij</p>
-    <img
-      src="https://i5.walmartimages.com/asr/6b01d5ee-7625-42bf-953c-7068cb59d09b.c67353df7bcab5a0c1755cb6c198141d.jpeg"
-      alt="scrabble speelbord"/>
-      <p>scrabble</p>
+       </p>
+    <div class="image-inline" >
+        <div>
+            <img src="/images/4 rowImage001.png" alt="4 op een rij speelbord"/>
+            <p>4 op een rij speelbord</p>
+        </div>
+
+        <div>
+            <img src="/images/scrabbleImage002.png" alt="scrabble speelbord"/>
+            <p>Scrabble speelbord</p>
+        </div>
+    </div>
     <a href="./StartScreen.html"><button style="background-color:26AF5E ;color:FFD400;border-radius: 10px;width: 300px;height: 50px;font-size: 40px; ">return</button></a>
   </body>
 </html>

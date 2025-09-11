@@ -11,6 +11,8 @@ function AddButton() {
       this.parentElement.remove();
     });
 
+    newButton.innerHTML = "x";
+
     document.getElementById("players").append(newListItem);
 
     document.getElementById("nameInput").value = "";

@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/main.css" />
+  </head>
+
+  <body onload="PlayerSelect()">
+    <div class="parent-div">
+      <div class="team1">
+        <div>
+          <div class="player" id="player0">0</div>
+          <div class="player" id="player2">2</div>
+        </div>
+      </div>
+      <div class="team2">
+        <div class="player" id="player1">1</div>
+        <div class="player" id="player3">3</div>
+      </div>
+      <div id="clock" class="clock"></div>
+      <button onclick="TimerStart()" class="Start_Button">Start</button>
+      <!--Placeholder timer knop-->
+      <div class="board">
+        <img
+          class="boardPic"
+          src="../images/Image010.png"
+          alt="4op een rij board"
+        />
+      </div>
+      <div class="letters">
+        <div class="letter">A</div>
+        <div class="letter">V</div>
+        <div class="letter">D</div>
+        <div class="letter">S</div>
+        <div class="letter">S</div>
+        <div class="letter">D</div>
+        <div class="letter">F</div>
+        <div class="letter">D</div>
+        <div class="letter">S</div>
+        <div class="letter">A</div>
+      </div>
+    </div>
+    <div id="idk" class="Overlay">
+      <div id="Placeholderbox">
+        <img src="../images/banner.png" class="banner">
+        <h1 id="WinText">testset</h1>
+      </div>  
+      <div class="Buttons">
+        <a href="./PlayScreen.html"><button class="PlayAgain_Button">Play Again</button></a>
+        <a href="./StartScreen.html"><button class="Back_StartScreen_Button">Main Menu</button></a>
+      </div>
+    </div>
+    <button onclick="PlayerSelect()"></button>
+  </body>
+  <script src="../JS/Timer.js"></script>
+  <script src="../JS/PlayerSelect.js"></script>
+</html>

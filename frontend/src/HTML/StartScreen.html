@@ -3,26 +3,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Super coole main menu StartScreen</title>
-    <link rel="stylesheet" href="../CSS/StartScreen.css"> 
+    <link rel="stylesheet" href="../CSS/StartScreen.css" />
   </head>
-  <body>
+  <body onload="clearLocalStorage()">
     <h1 id="Gamename">Scrabble op een rij</h1>
     <div id="Loc_Start_Button">
-      <a href="../src/index.html"><button class="Start_Button">Start</button></a>
+      <a href="../HTML/PlayScreen.html"
+        ><button class="Start_Button">Start</button></a
+      >
     </div>
     <div id="Loc_HTP_Button">
-      <a href="../HTML/Howtoplay.html"> <button class="HTP_Button">How to play</button></a>
+      <a href="../HTML/Howtoplay.html">
+        <button class="HTP_Button">How to play</button></a
+      >
     </div>
     <div id="stupid_ass_box">
       <div class="playersDiv">
-        <input id="nameInput" type="text" placeholder="Naam:">
+        <input id="nameInput" type="text" placeholder="Naam:" />
         <button onclick="AddButton()" class="Add_Name_Button"><b>✓</b></button>
         <div id="another_stupid_box">
-          <p id="playernamelistthingy"><b>Spelers:</b></p> <!--te lui om lists nu netjes te maken-->
+          <p id="playernamelistthingy"><b>Spelers:</b></p>
+          <!--te lui om lists nu netjes te maken-->
           <ul id="players"></ul>
         </div>
       </div>
     </div>
   </body>
   <script src="../JS/StartScreen.js"></script>
+  <script src="../JS/PlayerSelect.js"></script>
 </html>

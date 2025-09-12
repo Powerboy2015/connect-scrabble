@@ -36,29 +36,41 @@ player {
 }
 
 .board {
-  margin: 80px auto;
-  justify-content: center;
   z-index: 10;
+  justify-content: center;
+  position: fixed;
+  left: 38%;
+  bottom: -20%;
+
+}
+
+.boardPic {
+  object-fit: contain;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  
+  
 }
 
 .letters {
   position: fixed;
   left: 50%;
-  bottom: 10%;
+  bottom: -2%;
   transform: translate(-50%, -50%);
-  font-size: 60px;
+  font-size: 50px;
   display: grid;
-  grid-template-columns: 20px 20px 20px 20px 20px;
-  column-gap: 80px;
-  row-gap: 80px;
+  grid-template-columns: 40px 40px 40px 40px 40px;
+  column-gap: 40px;
+  row-gap: 40px;
   text-align: center;
 }
 
 .letter {
   background-color: aliceblue;
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
+  width: 70px;
+  height: 70px;
+  border-radius: 70px;
 }
 
 .clock {
@@ -68,4 +80,89 @@ player {
   background-color: green;
   padding: 5px 8px;
   border-radius: 100px;
+}
+.boardPic{
+  width: 170%;    
+  margin-bottom: 500px;  
+  display: flex;
+  justify-content: center;
+  
+      }
+
+
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999; /*lol*/
+
+  display: none;
+}
+
+#Placeholderbox {
+  background-color: rgba(0,0,0,0);
+  position: relative;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#WinText {
+  position: absolute;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
+ /*Ik word gek, ik hou dit voor nu*/
+.banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.Buttons {
+  display: flex;
+  flex-direction: normal;
+  gap: 1vw;
+}
+
+.PlayAgain_Button {
+    background-color: #e8552b;
+    border: none;
+    border-radius: 20px;
+    width: 18vw;
+    padding: 4vh;
+    color: #ffffff;
+    font-size: 2.5vw;
+}
+.PlayAgain_Button:hover { 
+    background-color: #ce4823;
+}
+.PlayAgain_Button:active { 
+    transform: scale(0.95);
+}
+
+.Back_StartScreen_Button {
+    background-color: #e8552b;
+    border: none;
+    border-radius: 20px;
+    width: 18vw;
+    padding: 4vh;
+    color: #ffffff;
+    font-size: 2.5vw;
+}
+.Back_StartScreen_Button:hover { 
+    background-color: #ce4823;
+}
+.Back_StartScreen_Button:active { 
+    transform: scale(0.95);
 }

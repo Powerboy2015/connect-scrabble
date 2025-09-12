@@ -10,6 +10,7 @@ function AddButton() {
     newButton.addEventListener("click", function () {
       this.parentElement.remove();
     });
+    newListItem.classList.add("player");
 
     newButton.innerHTML = "x";
 

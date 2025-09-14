@@ -25,14 +25,14 @@ player {
   margin-bottom: 20px;
   text-align: end;
   font-size: 40px;
-  padding: 20px;
+  padding: 1%;
 }
 .team2,
 player {
   background-color: rgb(182, 140, 132);
   margin-bottom: 20px;
   font-size: 40px;
-  padding: 20px;
+  padding: 1%;
 }
 
 .board {
@@ -42,7 +42,7 @@ player {
   left: 38%;
   bottom: 31%;
   height: 50vh;
-
+  
 }
 
 .boardPic {
@@ -56,28 +56,26 @@ player {
 }
 
 .letters {
-  
-  left: 51%;
-  bottom: -7%;
-  transform: translate(169%, 330%);
+ 
+  transform: translate(179%, 360%);
   font-size: 50px;
   display:grid;
   text-align: center;
   width: 21%;
   align-items: center;
-  justify-content: center;
   height: 20vh;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  align-content: center;
-
-
+  grid-template-rows: 60%;
+  
+  
 }
 
 .letter {
-  background-color: aliceblue;
+  background-color: rgb(240, 248, 255);
   width: 70px;
   height: 70px;
   border-radius: 70px;
+
   
 }
 

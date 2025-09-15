@@ -26,7 +26,7 @@ function shuffleTiles(tileBag) {
 function dealTiles(tileBag, players) {
     const playerTiles = {};
     for (const player of players) {
-        playerTiles[player] = tileBag.splice(0, 7); // Each player gets 7 tiles
+        playerTiles[player] = tileBag.splice(0, 10); // Each player gets 10 tiles
     }
     return playerTiles;
 }

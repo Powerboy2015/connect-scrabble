@@ -36,12 +36,14 @@ player {
 }
 
 .board {
-  justify-content: center;
+  
   position:fixed;
   display: flex;
-  left: 29.9%;
-  bottom: 35%;
+  left: 33%;
+  bottom: 30%;
   height: 55vh;
+  border: 10px solid black;
+  padding-bottom: 60px;
   
 }
 
@@ -66,42 +68,28 @@ player {
   height: 20vh;
   grid-template-columns: 100px 100px 100px 100px 100px;
   grid-template-rows: 60%;
+  row-gap: 20px;
+  column-gap: 20px;  
+  
   
   
 }
 
 .letter {
-  width: 70px;
-  height: 70px;
-  border-radius: 70px;
+  border-radius: 500px;
   background: #cff3ad;
   border: 6px solid #f0fce5;
-  position: relative;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   color: black;
   font-family: Arial;
   z-index: -1;
+  padding: 15px 20px;
   
 }
 
-.letter::before {
-  content: attr(data-value);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  background: #f0fce5;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  z-index: -1;
-  }
 
+
+  
 
 .clock {
   position: fixed;

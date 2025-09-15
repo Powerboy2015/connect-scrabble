@@ -12,6 +12,7 @@ function AddButton() {
     newListItem.appendChild(newButton);
     newButton.addEventListener("click", function () {
       this.parentElement.remove();
+      document.getElementById("foutmelding").innerHTML = "";
 
       localStorage.removeItem(this.value);
     });

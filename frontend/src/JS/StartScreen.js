@@ -20,7 +20,11 @@ function AddButton() {
     if (!(player in items)) {
       localStorage.setItem(player, player);
       document.getElementById("players").append(newListItem);
-    } else console.log("moet uniek zijn");
+      document.getElementById("foutmelding").innerHTML = "";
+    } else {
+      console.log("moet uniek zijn");
+      document.getElementById("foutmelding").innerHTML = "Naam moet uniek zijn";
+    }
 
     document.getElementById("nameInput").value = "";
   }

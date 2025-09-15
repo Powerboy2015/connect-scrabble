@@ -36,12 +36,14 @@ player {
 }
 
 .board {
-  justify-content: center;
+  
   position:fixed;
   display: flex;
-  left: 29.9%;
-  bottom: 35%;
+  left: 33%;
+  bottom: 30%;
   height: 55vh;
+  border: 10px solid black;
+  padding-bottom: 60px;
   
 }
 

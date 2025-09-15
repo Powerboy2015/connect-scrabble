@@ -123,16 +123,14 @@ player {
 
   display: flex;
   flex-direction: column;
+  text-align: center;
   justify-content: center;
   align-items: center;
   z-index: 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999; /*lol*/
-
-  display: none;
 }
-
+  
 #Placeholderbox {
   background-color: rgba(0,0,0,0);
-  position: relative;
   display: flex;
   text-align: center;
   flex-direction: column;

@@ -35,30 +35,23 @@ player {
   padding: 20px;
 }
 
-.board {
-  
-  position:fixed;
-  display: block;
-  left: 33%;
-  bottom: 30%;
-  height: 55vh;
-  padding-bottom: 60px;
-  
-}
+
+
 
 .boardPic {
-  height: 100%;
+  height: 50%;
   width: auto;  
   justify-content: center;
   display: flex;
-  margin-bottom: 150%;  
+  margin-bottom: 150%; 
   padding: 20px;
   border: 10px solid black;
+  transform: translate(85%,12%) ;
 }
 
 .letters {
  
-  transform: translate(167%, 360%);
+  transform: translate(49%, 340%);
   font-size: 50px;
   display:grid;
   text-align:center;
@@ -68,10 +61,7 @@ player {
   grid-template-columns: 100px 100px 100px 100px 100px;
   grid-template-rows: 60%;
   row-gap: 20px;
-  column-gap: 20px;  
-  
-  
-  
+  column-gap: 20px;    
 }
 
 

@@ -1,24 +1,26 @@
 function AddButton() {
   player = document.getElementById("nameInput").value;
-  let count = localStorage.length;
+  const items = { ...localStorage };
 
   if (player !== "") {
     newListItem = document.createElement("li");
     newButton = document.createElement("button");
     newListItem.innerHTML = player;
-    newButton.value = count;
+    newButton.value = player;
     newButton.innerHTML = "X";
 
     newListItem.appendChild(newButton);
     newButton.addEventListener("click", function () {
       this.parentElement.remove();
-      localStorage.removeItem(`player${this.value}`);
+
+      localStorage.removeItem(this.value);
     });
     newListItem.classList.add("player");
 
-    document.getElementById("players").append(newListItem);
-
-    localStorage.setItem(`player${count}`, player);
+    if (!(player in items)) {
+      localStorage.setItem(player, player);
+      document.getElementById("players").append(newListItem);
+    } else console.log("moet uniek zijn");
 
     document.getElementById("nameInput").value = "";
   }

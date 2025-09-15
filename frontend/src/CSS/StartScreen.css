@@ -110,3 +110,9 @@ body {
     width: 90%;
     height: 65%;
 }
+
+.players {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}

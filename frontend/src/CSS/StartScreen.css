@@ -2,21 +2,35 @@ body {
     background-color: #be9976;
 }
 
-#Gamename {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 6vw;
+#fullhud {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
 }
 
-#Loc_Start_Button {
+#Interactibles {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#Buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* #Loc_Start_Button {
     position: absolute;
     top: 45%;
     left: 35%;
     transform: translateX(-50%);
-}
+} */
 .Start_Button {
     background-color: #32b060;
     border: none;
@@ -35,12 +49,12 @@ body {
 }
 
 
-#Loc_HTP_Button {
+/* #Loc_HTP_Button {
     position: absolute;
     top: 65%;
     left: 35%;
     transform: translateX(-50%);
-}
+} */
 .HTP_Button {
     background-color: #e8552b;
     border: none;
@@ -59,35 +73,33 @@ body {
 }
 
 #stupid_ass_box {
-    position: absolute;
-    top: 40%;
-    left: 62%;
-    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    background-color: #727272;
+    border-radius: 30px;
+    padding: 30px;
+    max-width: 30vw;
+    max-height: 30vh;
+}
 
-    background-color: #d9d9d9;
-    border-radius: 20px;
-    width: 25vw;
-    height: 45vh;
+.playersDiv {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
 }
 
 #nameInput {
-    position: absolute;
-    top: 10%;
-    left: 5%;
-
-    width: 70%;
     padding:4%;
+    width: 80%;
     border: none;
     border-radius: 5px;
 }
 .Add_Name_Button {
-    position: absolute;
-    top: 9%;
-    left: 79%; /*Ik word ge van deze values*/
-    width: 14%; 
-    padding: 4.5%;
-
     background-color: #1ed120;
+    width: 3vw;
+    height: 4.5vh;
+    min-width: 35px;
+    min-height: 35px;
     border: none;
     border-radius: 10px;
     color: #ffffff;
@@ -99,7 +111,7 @@ body {
     transform: scale(0.9);
 }
 
-#another_stupid_box {
+/* #another_stupid_box {
     position: absolute;
     top: 28%;
     left: 50%;
@@ -108,10 +120,17 @@ body {
     background-color: #cbcbcb;
     border-radius: 5px;
     width: 90%;
-    height: 65%;
-}
+    height: 65%; 
+}*/
 
 .players {
+    padding: 25px;
+    gap: 40px;
+}
+
+
+.player {
+    background-color: #269f52;
     display: flex;
     flex-direction: row;
     gap: 40px;

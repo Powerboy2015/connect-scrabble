@@ -127,7 +127,6 @@ player {
   justify-content: center;
   align-items: center;
   z-index: 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999; /*lol*/
-  display: none;
 }
 
 #Placeholderbox {
@@ -157,7 +156,7 @@ player {
 }
 
 .PlayAgain_Button {
-    background-color: #e8552b;
+    background-color: #15c10c;
     border: none;
     border-radius: 20px;
     width: 18vw;
@@ -166,7 +165,7 @@ player {
     font-size: 2.5vw;
 }
 .PlayAgain_Button:hover { 
-    background-color: #ce4823;
+    background-color: #ce2323;
 }
 .PlayAgain_Button:active { 
     transform: scale(0.95);

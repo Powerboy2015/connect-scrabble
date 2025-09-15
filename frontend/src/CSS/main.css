@@ -114,7 +114,9 @@ player {
   text-align: center;
   justify-content: center;
   align-items: center;
-  z-index: 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999; /*lol*/
+  z-index: 9; /*lol*/
+
+  display: none;
 }
 
 #Placeholderbox {

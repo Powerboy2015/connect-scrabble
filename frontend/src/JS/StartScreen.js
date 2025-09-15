@@ -33,3 +33,15 @@ function AddButton() {
 function clearLocalStorage() {
   localStorage.clear();
 }
+
+function StartButtonClick() {
+  const items2 = { ...localStorage };
+  if (Object.keys(items2).length >= 2) {
+    window.location.href =
+      "/connect-scrabble/frontend/src/HTML/PlayScreen.html";
+  } else {
+    document.getElementById("foutmelding").innerHTML =
+      "voeg minimaal 2 spelers toe";
+    console.log(items2);
+  }
+}

@@ -36,12 +36,16 @@ function clearLocalStorage() {
 
 function StartButtonClick() {
   const items2 = { ...localStorage };
-  if (Object.keys(items2).length >= 2) {
+  if (Object.keys(items2).length >= 2 && Object.keys(items2).length <= 4) {
     window.location.href =
       "/connect-scrabble/frontend/src/HTML/PlayScreen.html";
-  } else {
+  } else if (Object.keys(items2).length < 2) {
     document.getElementById("foutmelding").innerHTML =
       "voeg minimaal 2 spelers toe";
+    console.log(items2);
+  } else if (Object.keys(items2).length > 4) {
+    document.getElementById("foutmelding").innerHTML =
+      "voeg maximaal 4 spelers toe";
     console.log(items2);
   }
 }

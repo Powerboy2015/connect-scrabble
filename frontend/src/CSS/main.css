@@ -80,7 +80,6 @@ player {
   /* Ik heb dit beetje aangepast */
 }
 
-
 .letters {
   padding-top: 10vh;
   font-size: 5vh;
@@ -108,7 +107,6 @@ player {
 }
 
 .letter {
- 
   display: flex;
   background: #cff3ad;
   border: 1vb solid #f0fce5;
@@ -124,8 +122,23 @@ player {
   font-size: 40px;
   align-items: center;
   justify-content: center;
-
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
+
+
+
+.letter:hover {
+  background-color: #055c05;
+ }
+
+.letter.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #055c05;
+  background-color: #055c05;
+}
+
 
 .clock {
   position: fixed;

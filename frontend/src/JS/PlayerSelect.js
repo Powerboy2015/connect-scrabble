@@ -41,5 +41,5 @@ function PlayerTurn() {
 
   console.log(currentPlayer.id);
 
-  document.getElementById(currentPlayer.id).style.backgroundColor = "blue";
+  document.getElementById(currentPlayer.id).style.backgroundColor = "red";
 }

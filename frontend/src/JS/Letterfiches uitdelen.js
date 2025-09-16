@@ -24,21 +24,21 @@ function shuffleTiles(tileBag) {
 }
 
 function dealTiles(tileBag, players) {
-    const sharedTiles = tileBag.splice(0, 10).map(tile => ({ letter: tile, used: false })); // Track usage
+    const sharedHand = tileBag.splice(0, 10).map(tile => ({ letter: tile, used: false })); // Shared hand
     const playerTiles = {};
     for (const player of players) {
-        playerTiles[player] = [...sharedTiles]; // Each player gets a reference to the shared tiles
+        playerTiles[player] = sharedHand; // All players reference the same shared hand
     }
-    return { playerTiles, sharedTiles };
+    return { playerTiles, sharedHand };
 }
 
-function useTile(playerTiles, player, letter, tileBag) {
-    const tile = playerTiles[player].find(tile => tile.letter === letter && !tile.used);
+function useTile(sharedHand, letter, tileBag) {
+    const tile = sharedHand.find(tile => tile.letter === letter && !tile.used);
     if (tile) {
         tile.used = true; // Mark the tile as used
         if (tileBag.length > 0) {
             const newTile = tileBag.shift(); // Draw a new tile from the tile bag
-            playerTiles[player].push({ letter: newTile, used: false }); // Add the new tile to the player's hand
+            sharedHand.push({ letter: newTile, used: false }); // Add the new tile to the shared hand
         }
         return true; // Tile successfully used
     }
@@ -49,14 +49,14 @@ function useTile(playerTiles, player, letter, tileBag) {
 const players = ['Player1', 'Player2', 'Player3', 'Player4'];
 let tileBag = createTileBag();
 tileBag = shuffleTiles(tileBag);
-const { playerTiles, sharedTiles } = dealTiles(tileBag, players);
+const { playerTiles, sharedHand } = dealTiles(tileBag, players);
 
 console.log('Tile Bag:', tileBag);
-console.log('Shared Tiles:', sharedTiles);
+console.log('Shared Hand:', sharedHand);
 console.log('Player Tiles:', playerTiles);
 
 // Example of using a tile
-console.log('Player1 uses tile A:', useTile(playerTiles, 'Player1', 'A', tileBag));
-console.log('Player2 tries to use tile A:', useTile(playerTiles, 'Player2', 'A', tileBag));
+console.log('Player1 uses tile A:', useTile(sharedHand, 'A', tileBag));
+console.log('Player2 tries to use tile A:', useTile(sharedHand, 'A', tileBag));
 console.log('Updated Tile Bag:', tileBag);
-console.log('Updated Player Tiles:', playerTiles);
+console.log('Updated Shared Hand:', sharedHand);

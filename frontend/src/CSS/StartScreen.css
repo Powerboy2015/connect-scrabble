@@ -92,10 +92,12 @@ body {
     border-radius: 30px;
     gap: 1vh;
     padding: 30px;
-    max-width: 30vw;
+    max-width: 100%;
     max-height: 30vh;
+    min-width: 15vw;
     min-height: 250px;
 }
+
 
 .playersDiv {
     display: flex;

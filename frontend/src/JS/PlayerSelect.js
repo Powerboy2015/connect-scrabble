@@ -40,6 +40,10 @@ function PlayerTurn() {
   }
 
   console.log(currentPlayer.id);
+  document.getElementById("player1").style.backgroundColor = "transparent";
+  document.getElementById("player2").style.backgroundColor = "transparent";
+  document.getElementById("player3").style.backgroundColor = "transparent";
+  document.getElementById("player4").style.backgroundColor = "transparent";
 
   document.getElementById(currentPlayer.id).style.backgroundColor = "red";
 }

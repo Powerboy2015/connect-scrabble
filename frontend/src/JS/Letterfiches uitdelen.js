@@ -24,18 +24,39 @@ function shuffleTiles(tileBag) {
 }
 
 function dealTiles(tileBag, players) {
+    const sharedHand = tileBag.splice(0, 10).map(tile => ({ letter: tile, used: false })); // Shared hand
     const playerTiles = {};
     for (const player of players) {
-        playerTiles[player] = tileBag.splice(0, 10); // Each player gets 10 tiles
+        playerTiles[player] = sharedHand; // All players reference the same shared hand
     }
-    return playerTiles;
+    return { playerTiles, sharedHand };
+}
+
+function useTile(sharedHand, letter, tileBag) {
+    const tile = sharedHand.find(tile => tile.letter === letter && !tile.used);
+    if (tile) {
+        tile.used = true; // Mark the tile as used
+        if (tileBag.length > 0) {
+            const newTile = tileBag.shift(); // Draw a new tile from the tile bag
+            sharedHand.push({ letter: newTile, used: false }); // Add the new tile to the shared hand
+        }
+        return true; // Tile successfully used
+    }
+    return false; // Tile not available
 }
 
 // Voorbeeldgebruik
 const players = ['Player1', 'Player2', 'Player3', 'Player4'];
 let tileBag = createTileBag();
 tileBag = shuffleTiles(tileBag);
-const playerTiles = dealTiles(tileBag, players);
+const { playerTiles, sharedHand } = dealTiles(tileBag, players);
 
 console.log('Tile Bag:', tileBag);
+console.log('Shared Hand:', sharedHand);
 console.log('Player Tiles:', playerTiles);
+
+// Example of using a tile
+console.log('Player1 uses tile A:', useTile(sharedHand, 'A', tileBag));
+console.log('Player2 tries to use tile A:', useTile(sharedHand, 'A', tileBag));
+console.log('Updated Tile Bag:', tileBag);
+console.log('Updated Shared Hand:', sharedHand);

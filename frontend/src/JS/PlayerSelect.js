@@ -25,6 +25,7 @@ function TimerStart() {
       clearInterval(countdown);
       document.getElementById("clock").innerHTML = 0;
       IsActive = false;
+      TimerStart();
     }
     time -= 1;
   }, 1000);
@@ -32,11 +33,13 @@ function TimerStart() {
 
 function PlayerTurn() {
   let currentPlayer = document.getElementById(`player${currenPlayerNumber}`);
-  if (currenPlayerNumber <= Object.keys(players).length) {
+  if (currenPlayerNumber < Object.keys(players).length) {
     currenPlayerNumber++;
   } else {
     currenPlayerNumber = 1;
   }
 
-  console.log(currentPlayer);
+  console.log(currentPlayer.id);
+
+  document.getElementById(currentPlayer.id).style.backgroundColor = "blue";
 }

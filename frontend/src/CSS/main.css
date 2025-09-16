@@ -55,7 +55,7 @@ player {
   align-items: center;
   height: 20vh;
   grid-template-columns: 13vb 13vb 13vb 13vb 13vb;
-  grid-template-rows: 14vh;
+  grid-template-rows: 15vh;
   border-radius: 50vh;
 }
 
@@ -93,8 +93,23 @@ player {
   font-size: 40px;
   align-items: center;
   justify-content: center;
-
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
+
+
+
+.letter:hover {
+  background-color: #055c05;
+ }
+
+.letter.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #055c05;
+  background-color: #055c05;
+}
+
 
 .clock {
   position: fixed;

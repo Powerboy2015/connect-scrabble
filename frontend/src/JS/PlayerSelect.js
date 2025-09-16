@@ -40,10 +40,15 @@ function PlayerTurn() {
   }
 
   console.log(currentPlayer.id);
-  document.getElementById("player1").style.backgroundColor = "transparent";
-  document.getElementById("player2").style.backgroundColor = "transparent";
-  document.getElementById("player3").style.backgroundColor = "transparent";
-  document.getElementById("player4").style.backgroundColor = "transparent";
+  document.getElementById("player1-select").innerHTML = "";
+  document.getElementById("player2-select").innerHTML = "";
+  document.getElementById("player3-select").innerHTML = "";
+  document.getElementById("player4-select").innerHTML = "";
 
-  document.getElementById(currentPlayer.id).style.backgroundColor = "red";
+  if (currentPlayer.id === "player2" || currentPlayer.id === "player4") {
+    document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F4";
+  }
+  if (currentPlayer.id === "player1" || currentPlayer.id === "player3") {
+    document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F5";
+  }
 }

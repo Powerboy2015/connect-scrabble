@@ -45,16 +45,18 @@ player {
   transform: translate(58vb, 10vh);
 }
 
+
 .letters {
-  transform: translate(-2vb, 69vh);
+  transform: translate(-9vb, 69vh);
   font-size: 5vh;
   display: grid;
   text-align: center;
-  width: auto;
+  width: 20vb;
   align-items: center;
   height: 20vh;
-  grid-template-columns: 10vb 10vb 10vb 10vb 10vb;
-  grid-template-rows: 15vh;
+  grid-template-columns: 13vb 13vb 13vb 13vb 13vb;
+  grid-template-rows: 14vh;
+  border-radius: 50vh;
 }
 
 .letter::before {
@@ -65,26 +67,33 @@ player {
   width: 7vb;
   height: 7vh;
   background: #f0fce5;
-  border-radius: 50%;
+  border-radius: 50vh;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
   font-weight: bold;
   z-index: -1;
 }
 
 .letter {
+ 
+  display: flex;
   background: #cff3ad;
-  border: 6px solid #f0fce5;
+  border: 1vb solid #f0fce5;
   position: relative;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: black;
   font-family: Arial;
   z-index: -1;
-  border-radius: 500px;
-  padding: 15px 20px;
+  border-radius: 500vb;
+  padding: 4vh 2vb;
+  width: 6vb;
+  height: 2vh;
+  font-size: 40px;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .clock {

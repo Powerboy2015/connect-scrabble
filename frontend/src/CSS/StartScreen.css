@@ -91,8 +91,6 @@ body {
     gap: 1vh;
     padding: 30px;
     max-width: 30vw;
-    max-height: 30vh;
-    min-height: 250px;
 }
 
 
@@ -130,7 +128,7 @@ body {
   background-color: #cbcbcb;
   border-radius: 5px;
   width: 100%;
-  min-height: 200px;
+  min-height: 25vh;
 }
 
 #playernamelistthingy {

@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="../CSS/main.css" />
   </head>
 
-  <body onload="PlayerSelect(), TimerStart()">
+  <body onload="PlayerSelect(), startGameTimer()">
     <div class="parent-div">
+      <div id="StartCountDown" class="StartCountDown">3</div>
       <div class="team1">
         <div>
           <div>
@@ -22,8 +23,8 @@
       </div>
       <div class="team2">
         <div>
-          <span class="player" id="player2">test</span>
-          <span class="selector" id="player2-select">&#x23F5</span>
+          <span class="player" id="player2"></span>
+          <span class="selector" id="player2-select"></span>
         </div>
         <div>
           <span class="player" id="player4"></span>
@@ -58,6 +59,7 @@
         <div class="letter">A</div>
       </div>
     </div>
+
     <div id="idk" class="Overlay">
       <div id="Placeholderbox">
         <img src="../images/banner.png" class="banner" />

@@ -4,6 +4,8 @@ body {
 
 .parent-div {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .team1 {
@@ -35,27 +37,56 @@ player {
   padding: 20px;
 }
 
+.helebordspul {
+  position: relative;
+  margin-top: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttonfortest {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+#gridshit {
+  display: grid;
+  gap: 1.8vh;
+  justify-content: center;
+  align-content: center;
+}
+
 .boardPic {
   height: auto;
-  width: 67vb;
-  justify-content: center;
+  width: 50vb;
   display: flex;
-  margin-bottom: 150%;
-  padding: 20px;
-  transform: translate(58vb, 10vh);
+  padding-top: 3vw;
+  /* Ik heb dit beetje aangepast */
 }
 
 .letters {
-  transform: translate(-9vb, 69vh);
+  padding-top: 10vh;
   font-size: 5vh;
   display: grid;
-  text-align: center;
-  width: 20vb;
-  align-items: center;
-  height: 20vh;
   grid-template-columns: 13vb 13vb 13vb 13vb 13vb;
   grid-template-rows: 14vh;
-  border-radius: 50vh;
+  /* ik heb dit ook een beetje aangepast, want er zat veel onnodig spul bij dat niks deed */
 }
 
 .letter::before {
@@ -91,6 +122,19 @@ player {
   font-size: 40px;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.letter:hover {
+  background-color: #055c05;
+}
+
+.letter.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #055c05;
+  background-color: #055c05;
 }
 
 .clock {

@@ -35,15 +35,14 @@ player {
   padding: 20px;
 }
 
-
 .boardPic {
   height: auto;
-  width: 67vb;  
+  width: 67vb;
   justify-content: center;
   display: flex;
-  margin-bottom: 150%; 
+  margin-bottom: 150%;
   padding: 20px;
-  transform: translate(58vb,10vh) ;
+  transform: translate(58vb, 10vh);
 }
 
 
@@ -60,8 +59,6 @@ player {
   border-radius: 50vh;
 }
 
-
-
 .letter::before {
   content: attr(data-value);
   position: absolute;
@@ -77,9 +74,7 @@ player {
   align-items: center;
   font-weight: bold;
   z-index: -1;
-  }
-
-
+}
 
 .letter {
  
@@ -110,14 +105,13 @@ player {
   border-radius: 100px;
 }
 
-
 .Overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 
   display: flex;
   flex-direction: column;
@@ -130,7 +124,7 @@ player {
 }
 
 #Placeholderbox {
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -141,7 +135,7 @@ player {
   position: absolute;
   font-size: clamp(1.5rem, 5vw, 3rem);
 }
- /*Ik word gek, ik hou dit voor nu*/
+/*Ik word gek, ik hou dit voor nu*/
 .banner {
   width: 100%;
   height: 100%;
@@ -156,33 +150,37 @@ player {
 }
 
 .PlayAgain_Button {
-    background-color: #15c10c;
-    border: none;
-    border-radius: 20px;
-    width: 18vw;
-    padding: 4vh;
-    color: #ffffff;
-    font-size: 2.5vw;
+  background-color: #15c10c;
+  border: none;
+  border-radius: 20px;
+  width: 18vw;
+  padding: 4vh;
+  color: #ffffff;
+  font-size: 2.5vw;
 }
-.PlayAgain_Button:hover { 
-    background-color: #ce2323;
+.PlayAgain_Button:hover {
+  background-color: #ce2323;
 }
-.PlayAgain_Button:active { 
-    transform: scale(0.95);
+.PlayAgain_Button:active {
+  transform: scale(0.95);
 }
 
 .Back_StartScreen_Button {
-    background-color: #e8552b;
-    border: none;
-    border-radius: 20px;
-    width: 18vw;
-    padding: 4vh;
-    color: #ffffff;
-    font-size: 2.5vw;
+  background-color: #e8552b;
+  border: none;
+  border-radius: 20px;
+  width: 18vw;
+  padding: 4vh;
+  color: #ffffff;
+  font-size: 2.5vw;
 }
-.Back_StartScreen_Button:hover { 
-    background-color: #ce4823;
+.Back_StartScreen_Button:hover {
+  background-color: #ce4823;
 }
-.Back_StartScreen_Button:active { 
-    transform: scale(0.95);
+.Back_StartScreen_Button:active {
+  transform: scale(0.95);
+}
+
+.active {
+  background-color: black;
 }

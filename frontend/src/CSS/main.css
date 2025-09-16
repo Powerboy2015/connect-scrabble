@@ -37,28 +37,25 @@ player {
 
 
 .boardPic {
-  height: 50%;
-  width: auto;  
+  height: auto;
+  width: 67vb;  
   justify-content: center;
   display: flex;
   margin-bottom: 150%; 
   padding: 20px;
-  transform: translate(95%,12%) ;
+  transform: translate(58vb,10vh) ;
 }
 
-.letters {
- 
-  transform: translate(49%, 340%);
+.letters { 
+  transform: translate(-2vb,69vh);
   font-size: 50px;
   display:grid;
   text-align:center;
-  width: 21%;
+  width: auto;
   align-items: center;
   height: 20vh;
-  grid-template-columns: 100px 100px 100px 100px 100px;
-  grid-template-rows: 60%;
-  row-gap: 20px;
-  column-gap: 20px;    
+  grid-template-columns: 10vb 10vb 10vb 10vb 10vb;
+  grid-template-rows: 15vh;
 }
 
 

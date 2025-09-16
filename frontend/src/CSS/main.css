@@ -192,3 +192,8 @@ player {
   height: 50px;
   background-color: #ffffff;
 }
+
+.selector {
+  vertical-align: middle;
+  font-size: 50px;
+}

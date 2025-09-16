@@ -39,7 +39,7 @@ function StartButtonClick() {
   const items2 = { ...localStorage };
   if (Object.keys(items2).length >= 2 && Object.keys(items2).length <= 4) {
     window.location.href =
-      "/connect-scrabble/frontend/src/HTML/PlayScreen.html";
+      "../HTML/PlayScreen.html";
   } else if (Object.keys(items2).length < 2) {
     document.getElementById("foutmelding").innerHTML =
       "voeg minimaal 2 spelers toe";

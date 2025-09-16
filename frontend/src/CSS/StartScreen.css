@@ -1,41 +1,40 @@
 body {
-    background-color: #be9976;
+  background-color: #be9976;
 }
 
 #fullhud {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    padding-top: 10vh;
-    box-sizing: border-box;
-    gap: 5%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  padding-top: 10vh;
+  box-sizing: border-box;
+  gap: 5%;
 }
 
 #Interactibles {
-    height: 100%;
-    gap: 2vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: start;
+  height: 100%;
+  gap: 2vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
 }
 
 #Buttons {
-    display: flex;
-    gap: 2vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  gap: 2vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #Gamename {
-    display: flex;
-    font-size: 5vw;
-    justify-content: center;
-    align-items: center;
-    
+  display: flex;
+  font-size: 5vw;
+  justify-content: center;
+  align-items: center;
 }
 
 /* #Loc_Start_Button {
@@ -45,22 +44,21 @@ body {
     transform: translateX(-50%);
 } */
 .Start_Button {
-    background-color: #32b060;
-    border: none;
-    border-radius: 20px;
-    width: 20vw;
-    padding: 3vh;
-    box-sizing: border-box;
-    color: #fad621;
-    font-size: 4vw;
+  background-color: #32b060;
+  border: none;
+  border-radius: 20px;
+  width: 20vw;
+  padding: 3vh;
+  box-sizing: border-box;
+  color: #fad621;
+  font-size: 4vw;
 }
 .Start_Button:hover {
-    background-color: #269f52;
+  background-color: #269f52;
 }
 .Start_Button:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
-
 
 /* #Loc_HTP_Button {
     position: absolute;
@@ -69,20 +67,20 @@ body {
     transform: translateX(-50%);
 } */
 .HTP_Button {
-    background-color: #e8552b;
-    border: none;
-    border-radius: 20px;
-    width: 18vw;
-    padding: 4vh;
-    box-sizing: border-box;
-    color: #ffffff;
-    font-size: 2.5vw;
+  background-color: #e8552b;
+  border: none;
+  border-radius: 20px;
+  width: 18vw;
+  padding: 4vh;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-size: 2.5vw;
 }
 .HTP_Button:hover {
-    background-color: #ce4823;
+  background-color: #ce4823;
 }
 .HTP_Button:active {
-    transform: scale(0.95);
+  transform: scale(0.95);
 }
 
 #stupid_ass_box {
@@ -92,77 +90,79 @@ body {
     border-radius: 30px;
     gap: 1vh;
     padding: 30px;
-    max-width: 100%;
+    max-width: 30vw;
     max-height: 30vh;
-    min-width: 15vw;
     min-height: 250px;
 }
 
 
 .playersDiv {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5vw;
 }
 
 #nameInput {
-    padding:4%;
-    width: 80%;
-    border: none;
-    border-radius: 5px;
+  padding: 4%;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
 }
 .Add_Name_Button {
-    background-color: #1ed120;
-    width: 3vw;
-    height: 4.5vh;
-    min-width: 35px;
-    min-height: 35px;
-    border: none;
-    border-radius: 10px;
-    color: #ffffff;
+  background-color: #1ed120;
+  width: 3vw;
+  height: 4.5vh;
+  min-width: 35px;
+  min-height: 35px;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
 }
 .Add_Name_Button:hover {
-    background-color: #1bb31d;
+  background-color: #1bb31d;
 }
 .Add_Name_Button:active {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 #another_stupid_box {
-    background-color: #cbcbcb;
-    border-radius: 5px;
-    width: 100%;
-    min-height: 200px;
+  background-color: #cbcbcb;
+  border-radius: 5px;
+  width: 100%;
+  min-height: 200px;
 }
 
 #playernamelistthingy {
-    text-align: center;
+  text-align: center;
 }
 
-
 #players {
-    padding: 0px 10px 0px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2vh;
+  padding: 0px 10px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2vh;
 }
 
 .player {
-    background-color: #b8b9ce;
-    border-radius: 5px;
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
+  background-color: #b8b9ce;
+  border-radius: 5px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
 
-    button {
-        background-color: #ff2e2e;
-        width: 2vw;
-        height: 2vh;
-        min-width: 20px;
-        min-height: 20px;
-        border: none;
-        border-radius: 10px;
-        color: #ffffff;
-    }
+  button {
+    background-color: #ff2e2e;
+    width: 2vw;
+    height: 2vh;
+    min-width: 20px;
+    min-height: 20px;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+  }
+}
+
+#foutmelding {
+  color: rgb(167, 0, 0);
 }

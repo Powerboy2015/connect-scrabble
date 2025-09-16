@@ -12,6 +12,7 @@ function AddButton() {
     newListItem.appendChild(newButton);
     newButton.addEventListener("click", function () {
       this.parentElement.remove();
+      document.getElementById("foutmelding").innerHTML = "";
 
       localStorage.removeItem(this.value);
     });
@@ -20,7 +21,11 @@ function AddButton() {
     if (!(player in items)) {
       localStorage.setItem(player, player);
       document.getElementById("players").append(newListItem);
-    } else console.log("moet uniek zijn");
+      document.getElementById("foutmelding").innerHTML = "";
+    } else {
+      console.log("moet uniek zijn");
+      document.getElementById("foutmelding").innerHTML = "Naam moet uniek zijn";
+    }
 
     document.getElementById("nameInput").value = "";
   }
@@ -28,4 +33,20 @@ function AddButton() {
 
 function clearLocalStorage() {
   localStorage.clear();
+}
+
+function StartButtonClick() {
+  const items2 = { ...localStorage };
+  if (Object.keys(items2).length >= 2 && Object.keys(items2).length <= 4) {
+    window.location.href =
+      "/connect-scrabble/frontend/src/HTML/PlayScreen.html";
+  } else if (Object.keys(items2).length < 2) {
+    document.getElementById("foutmelding").innerHTML =
+      "voeg minimaal 2 spelers toe";
+    console.log(items2);
+  } else if (Object.keys(items2).length > 4) {
+    document.getElementById("foutmelding").innerHTML =
+      "voeg maximaal 4 spelers toe";
+    console.log(items2);
+  }
 }

@@ -36,8 +36,6 @@ player {
 }
 
 
-
-
 .boardPic {
   height: 50%;
   width: auto;  
@@ -45,8 +43,7 @@ player {
   display: flex;
   margin-bottom: 150%; 
   padding: 20px;
-  border: 10px solid black;
-  transform: translate(85%,12%) ;
+  transform: translate(95%,12%) ;
 }
 
 .letters {

@@ -37,18 +37,18 @@ player {
 
 
 .boardPic {
-  height: 50%;
-  width: auto;  
+  height: auto;
+  width: 67vb;  
   justify-content: center;
   display: flex;
   margin-bottom: 150%; 
   padding: 20px;
-  transform: translate(95%,12%) ;
+  transform: translate(83%,12%) ;
 }
 
 .letters {
  
-  transform: translate(49%, 340%);
+  transform: translate(-19%, 340%);
   font-size: 50px;
   display:grid;
   text-align:center;

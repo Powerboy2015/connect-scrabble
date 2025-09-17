@@ -148,7 +148,7 @@ player {
   user-select: none;
   width: 6vb;
   height: 2vh;
-  transform:translateY(-13vh)
+  transform:translateY(-4vh)
 }
 
 
@@ -158,7 +158,7 @@ player {
 }
 
 .letter.selected {
-  transform: translateY(-143px);
+  transform: translateY(-60px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   color: #0b4100;
   background-color: #0b4100;

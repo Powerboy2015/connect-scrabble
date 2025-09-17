@@ -19,11 +19,15 @@ function AddButton() {
     newListItem.classList.add("player");
 
     if (!(player in items)) {
-      localStorage.setItem(player, player);
-      document.getElementById("players").append(newListItem);
-      document.getElementById("foutmelding").innerHTML = "";
+      if (Object.values(items).length <= 3) {
+        localStorage.setItem(player, player);
+        document.getElementById("players").append(newListItem);
+        document.getElementById("foutmelding").innerHTML = "";
+      } else {
+        document.getElementById("foutmelding").innerHTML =
+          "Voeg maximaal 4 spelers toe";
+      }
     } else {
-      console.log("moet uniek zijn");
       document.getElementById("foutmelding").innerHTML = "Naam moet uniek zijn";
     }
 
@@ -41,11 +45,7 @@ function StartButtonClick() {
     window.location.href = "../HTML/PlayScreen.html";
   } else if (Object.keys(items2).length < 2) {
     document.getElementById("foutmelding").innerHTML =
-      "voeg minimaal 2 spelers toe";
-    console.log(items2);
-  } else if (Object.keys(items2).length > 4) {
-    document.getElementById("foutmelding").innerHTML =
-      "voeg maximaal 4 spelers toe";
+      "Voeg minimaal 2 spelers toe";
     console.log(items2);
   }
 }

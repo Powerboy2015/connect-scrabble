@@ -12,6 +12,7 @@ export function createTileBag() {
             tileBag.push(letter);
         }
     }
+    
     return shuffleTiles(tileBag);
 }
 
@@ -22,8 +23,6 @@ function shuffleTiles(tileBag) {
     }
     return tileBag;
 }
-
-
 
 function dealTiles(tileBag, gplayers) {
     const sharedHand = tileBag.splice(0, 10).map(tile => ({ letter: tile, used: false })); // Shared hand

@@ -17,4 +17,9 @@ export default class GameData {
 
     /** @type {Array<Array<string>>} */
     static gridStatus = [];
+
+    static lastPlacement = {x:0, y:0, letter:"" };
+
+    static isTimerActive = false;
+    static countDownInterval = null;
 }

@@ -1,4 +1,5 @@
 import GameData from "./classes/GameData.js";
+import { TimerStart } from "./PlayerSelect.js";
 // let grid = [];
 // let gridstatus = [];
 // let playercolor = "red";
@@ -51,9 +52,16 @@ function dropkickchild(column) {
             // waardoor het een andere kleur krijgt, als iemand dit dus wilt veranderen, zo dat het 
             // om en om verandert van speler kan je een naam aanmaken die dan een andere css heeft bvb voor kleur??
             // mijn nederland is dood
-            
+
             GameData.gridStatus[row][column] = "iets"; // iets wordt een letter later te zijn (die komt dan in een
             // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
+            GameData.lastPlacement = {x:column, y:row, letter:"iets"};
+
+            // XXX: debug info
+            console.debug(GameData.gridStatus);
+            console.debug(GameData.grid);
+            console.debug(GameData.lastPlacement);
+            TimerStart();
             break;
         }
     }

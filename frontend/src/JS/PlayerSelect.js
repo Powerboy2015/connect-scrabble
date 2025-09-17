@@ -13,20 +13,20 @@ export function PlayerSelect() {
 }
 
 let IsActive = false;
-function TimerStart() {
-  if (IsActive) {
-    clearInterval(countdown);
+export function TimerStart() {
+  if (GameData.isTimerActive) {
+    clearInterval(GameData.countDownInterval);
   }
   let time = 15;
   PlayerTurn();
-  let countdown = setInterval(function () {
-    IsActive = true;
+  GameData.countDownInterval = setInterval(function () {
+    GameData.isTimerActive = true;
     if (time > 0) {
       document.getElementById("clock").innerHTML = time;
     } else {
-      clearInterval(countdown);
+      clearInterval(GameData.countDownInterval);
       document.getElementById("clock").innerHTML = 0;
-      IsActive = false;
+      GameData.isTimerActive = false;
       TimerStart();
     }
     time -= 1;
@@ -59,11 +59,11 @@ function PlayerTurn() {
 
 export function startGameTimer() {
   let time = 3;
-  let countdown = setInterval(function () {
+  GameData.countDownInterval = setInterval(function () {
     if (time > 0) {
       document.querySelector(".StartCountDown").innerHTML = time;
     } else {
-      clearInterval(countdown);
+      clearInterval(GameData.countDownInterval);
       document.querySelector(".StartCountDown").innerHTML = 0;
       IsActive = false;
     }

@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(196, 154, 119);
+  background-color:#687c5a;
   margin: 0;
   padding: 0;
 }
@@ -27,18 +27,20 @@ body {
 
 .team1,
 player {
-  background-color: rgb(102, 189, 188);
+  background-color: #C1121F;
   margin-bottom: 20px;
   text-align: end;
   font-size: 40px;
   padding: 20px;
+  color: #ffffff;
 }
 .team2,
 player {
-  background-color: rgb(182, 140, 132);
+  background-color: #003049;
   margin-bottom: 20px;
   font-size: 40px;
   padding: 20px;
+  color: #ffffff;
 }
 
 .helebordspul {
@@ -78,19 +80,18 @@ player {
 
 .boardPic {
   height: auto;
-  width: 50vb;
+  width: 65vb;
   display: flex;
-  padding-top: 3vw;
-  /* Ik heb dit beetje aangepast */
+  transform:translateY(-5vh)
 }
 
 .letters {
   padding-top: 10vh;
   font-size: 5vh;
   display: grid;
-  grid-template-columns: 13vb 13vb 13vb 13vb 13vb;
-  grid-template-rows: 14vh;
-  /* ik heb dit ook een beetje aangepast, want er zat veel onnodig spul bij dat niks deed */
+  grid-template-columns: 12vb 12vb 12vb 12vb 12vb;
+  grid-template-rows: 13vh;
+  
 }
 
 .letter::before {
@@ -100,7 +101,7 @@ player {
   left: 50%;
   width: 7vb;
   height: 7vh;
-  background: #f0fce5;
+  background: #cff3ad;
   border-radius: 50vh;
   transform: translate(-50%, -50%);
   display: flex;
@@ -113,34 +114,36 @@ player {
 
 .letter {
   display: flex;
-  background: #cff3ad;
-  border: 1vb solid #f0fce5;
+  background: #a0b989;
+  border: 4px solid #254b03;
   position: relative;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: black;
   font-family: Arial;
   z-index: 3;
   border-radius: 500vb;
   padding: 4vh 2vb;
-  width: 6vb;
-  height: 2vh;
   font-size: 40px;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   user-select: none;
+  width: 6vb;
+  height: 2vh;
+  transform:translateY(-13vh)
 }
 
+
 .letter:hover {
-  background-color: #055c05;
+  background-color: #0b4100;
+  color: #0b4100;
 }
 
 .letter.selected {
-  transform: translateY(-10px);
+  transform: translateY(-143px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  color: #055c05;
-  background-color: #055c05;
+  color: #0b4100;
+  background-color: #0b4100;
 }
 
 .clock {

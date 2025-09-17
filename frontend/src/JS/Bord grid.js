@@ -12,8 +12,8 @@ function makegrid(rows, columns) {
     grid = [];
     letteringrid = [];
 
-    board.style.gridTemplateColumns = `repeat(${columns}, 3vh)`;
-    board.style.gridTemplateRows = `repeat(${rows}, 3vh)`;
+    board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    board.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
 
     for (let createdrows = 0; createdrows < rows; createdrows++) {
         let row = [];

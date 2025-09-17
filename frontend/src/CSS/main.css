@@ -42,23 +42,16 @@ player {
 }
 
 .helebordspul {
-  margin-top: 10vh;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 5vh;
 }
 
 #grid {
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 #buttonsfortest {
@@ -70,14 +63,23 @@ player {
 
 #gridshit {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 5%;
+  left: 8%;
+  width: 83%;
+  height: 86%;
+
   display: grid;
-  gap: 1.8vh;
+  row-gap: 2%;
+  column-gap: 2%;
   justify-content: center;
   align-content: center;
+}
+
+.vakjes {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
 }
 
 .board {
@@ -86,15 +88,14 @@ player {
 
 .boardPic {
   height: auto;
-  width: 50vb;
-  display: flex;
-  padding-top: 3vw;
+  width: 40vw;
+  display: block;
   /* Ik heb dit beetje aangepast */
 }
 
 .letters {
-  padding-top: 10vh;
-  font-size: 5vh;
+  padding-top: 2vh;
+  font-size: 3vh;
   display: grid;
   grid-template-columns: 13vb 13vb 13vb 13vb 13vb;
   grid-template-rows: 14vh;

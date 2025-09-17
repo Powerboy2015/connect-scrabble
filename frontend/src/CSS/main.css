@@ -65,14 +65,14 @@ player {
 
 #gridshit {
   position: absolute;
-  top: 4%;
-  left: 8%;
-  width: 80%;
+  top: -1%;
+  left: 4%;
+  width: 88%;
   height: 84%;
 
   display: grid;
   row-gap: 7%;
-  column-gap: 6%;
+  column-gap: 5%;
   justify-content: center;
   align-content: center;
 }
@@ -86,7 +86,7 @@ player {
   width: 100%;
   height: 100%;
   background: #cff3ad;
-  border: 0.6vw solid #f0fce5;
+  border: 1vh solid #f0fce5;
   color: black;
   font-family: Arial;
   border-radius: 50%;

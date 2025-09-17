@@ -1,5 +1,5 @@
 body {
-  background-color: #be9976;
+  background-color: #687c5a;
 }
 
 #fullhud {
@@ -48,13 +48,13 @@ body {
     transform: translateX(-50%);
 } */
 .Start_Button {
-  background-color: #32b060;
+  background-color: #cff3ad;
   border: none;
   border-radius: 20px;
   width: 20vw;
   padding: 3vh;
   box-sizing: border-box;
-  color: #fad621;
+  color: #000000;
   font-size: 4vw;
 }
 .Start_Button:hover {
@@ -77,7 +77,7 @@ body {
   width: 18vw;
   padding: 4vh;
   box-sizing: border-box;
-  color: #ffffff;
+  color: #000000;
   font-size: 2.5vw;
 }
 .HTP_Button:hover {

@@ -49,10 +49,10 @@ function PlayerTurn() {
   document.getElementById("player3-select").innerHTML = "";
   document.getElementById("player4-select").innerHTML = "";
 
-  if (currentPlayer.id === "player2" || currentPlayer.id === "player4") {
+  if (currentPlayer.id === "player1" || currentPlayer.id === "player3") {
     document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F4";
   }
-  if (currentPlayer.id === "player1" || currentPlayer.id === "player3") {
+  if (currentPlayer.id === "player2" || currentPlayer.id === "player4") {
     document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F5";
   }
 }

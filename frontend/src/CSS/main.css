@@ -1,5 +1,5 @@
 body {
-  background-color:#687c5a;
+  background-color: #687c5a;
   margin: 0;
   padding: 0;
 }
@@ -15,21 +15,20 @@ body {
 .team1 {
   width: 300px;
   position: fixed;
-  right: 20px;
+  left: 20px;
   top: 50px;
 }
 .team2 {
   width: 300px;
   position: fixed;
-  left: 20px;
+  right: 20px;
   top: 50px;
 }
 
 .team1,
 player {
-  background-color: #C1121F;
+  background-color: #c1121f;
   margin-bottom: 20px;
-  text-align: end;
   font-size: 40px;
   padding: 20px;
   color: #ffffff;
@@ -41,6 +40,7 @@ player {
   font-size: 40px;
   padding: 20px;
   color: #ffffff;
+  text-align: end;
 }
 
 .helebordspul {
@@ -100,7 +100,7 @@ player {
   height: auto;
   width: 65vb;
   display: flex;
-  transform:translateY(-5vh)
+  transform: translateY(-5vh);
 }
 
 .letters {
@@ -109,7 +109,6 @@ player {
   display: grid;
   grid-template-columns: 12vb 12vb 12vb 12vb 12vb;
   grid-template-rows: 13vh;
-  
 }
 
 .letter::before {
@@ -127,7 +126,6 @@ player {
   align-items: center;
   font-weight: bold;
   z-index: -1;
-  
 }
 
 .letter {
@@ -148,9 +146,8 @@ player {
   user-select: none;
   width: 6vb;
   height: 2vh;
-  transform:translateY(-4vh)
+  transform: translateY(-13vh);
 }
-
 
 .letter:hover {
   background-color: #0b4100;
@@ -252,7 +249,6 @@ player {
 .active {
   background-color: black;
 }
-
 
 .selector {
   vertical-align: middle;

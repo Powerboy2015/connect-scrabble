@@ -25,7 +25,15 @@
       }
       
       button{
-        background-color:26AF5E ;color:FFD400;border-radius: 10px;width: 300px;height: 50px;font-size: 40px
+        background-color:#cff3ad ;
+        color:black;
+        border-radius: 10px;
+        width: 300px;height: 50px;
+        font-size: 40px;
+        
       }
 
-      
+      .terug button:hover {
+        background-color: #269f52;
+        
+    }

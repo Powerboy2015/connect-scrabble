@@ -36,8 +36,6 @@ function makegrid(rows, columns) {
 
 // SPELFOUT collum T-T (ik bewerk dit later lol)
 
-
-
 function dropkickchild(column) {
     for (let row = grid.length - 1; row >= 0; row--) {
         if (gridstatus[row][column] === "mt") {

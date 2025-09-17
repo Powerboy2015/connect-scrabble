@@ -1,9 +1,15 @@
 body {
   background-color: rgb(196, 154, 119);
+  margin: 0;
+  padding: 0;
 }
 
 .parent-div {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+  padding: 0;
 }
 
 .team1 {
@@ -35,28 +41,64 @@ player {
   padding: 20px;
 }
 
-.boardPic {
-  height: auto;
-  width: 67vb;
-  justify-content: center;
+.helebordspul {
+  margin-top: 10vh;
+  width: 100%;
   display: flex;
-  margin-bottom: 150%;
-  padding: 20px;
-  transform: translate(58vb, 10vh);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+#grid {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttonsfortest {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  z-index: 10;
+}
+
+#gridshit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 1.8vh;
+  justify-content: center;
+  align-content: center;
+}
+
+.board {
+  position: relative;
+}
+
+.boardPic {
+  height: auto;
+  width: 50vb;
+  display: flex;
+  padding-top: 3vw;
+  /* Ik heb dit beetje aangepast */
+}
 
 .letters {
-  transform: translate(-9vb, 69vh);
+  padding-top: 10vh;
   font-size: 5vh;
   display: grid;
-  text-align: center;
-  width: 20vb;
-  align-items: center;
-  height: 20vh;
   grid-template-columns: 13vb 13vb 13vb 13vb 13vb;
   grid-template-rows: 14vh;
-  border-radius: 50vh;
+  /* ik heb dit ook een beetje aangepast, want er zat veel onnodig spul bij dat niks deed */
 }
 
 .letter::before {
@@ -74,10 +116,10 @@ player {
   align-items: center;
   font-weight: bold;
   z-index: -1;
+  
 }
 
 .letter {
- 
   display: flex;
   background: #cff3ad;
   border: 1vb solid #f0fce5;
@@ -85,7 +127,7 @@ player {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   color: black;
   font-family: Arial;
-  z-index: -1;
+  z-index: 3;
   border-radius: 500vb;
   padding: 4vh 2vb;
   width: 6vb;
@@ -93,7 +135,20 @@ player {
   font-size: 40px;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
 
+.letter:hover {
+  background-color: #055c05;
+}
+
+.letter.selected {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #055c05;
+  background-color: #055c05;
 }
 
 .clock {
@@ -183,4 +238,31 @@ player {
 
 .active {
   background-color: black;
+}
+
+
+.selector {
+  vertical-align: middle;
+  font-size: 50px;
+}
+
+.StartCountDown {
+  position: fixed;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.241);
+  width: 110%;
+  height: 110%;
+  font-size: 200px;
+  text-align: center;
+  line-height: 400%;
+}
+
+.testButton1 {
+  position: fixed;
+  left: 0px;
+}
+
+.testButton2 {
+  position: fixed;
+  left: 200px;
 }

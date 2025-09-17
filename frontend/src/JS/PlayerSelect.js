@@ -40,6 +40,37 @@ function PlayerTurn() {
   }
 
   console.log(currentPlayer.id);
+  document.getElementById("player1-select").innerHTML = "";
+  document.getElementById("player2-select").innerHTML = "";
+  document.getElementById("player3-select").innerHTML = "";
+  document.getElementById("player4-select").innerHTML = "";
 
-  document.getElementById(currentPlayer.id).style.backgroundColor = "blue";
+  if (currentPlayer.id === "player2" || currentPlayer.id === "player4") {
+    document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F4";
+  }
+  if (currentPlayer.id === "player1" || currentPlayer.id === "player3") {
+    document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F5";
+  }
+}
+
+function startGameTimer() {
+  let time = 3;
+  countdown = setInterval(function () {
+    if (time > 0) {
+      document.querySelector(".StartCountDown").innerHTML = time;
+    } else {
+      clearInterval(countdown);
+      document.querySelector(".StartCountDown").innerHTML = 0;
+      IsActive = false;
+    }
+    time -= 1;
+  }, 1000);
+
+  setTimeout(() => {
+    document.getElementById("StartCountDown").style.display = "none";
+  }, 5000);
+
+  setTimeout(() => {
+    TimerStart();
+  }, 5000);
 }

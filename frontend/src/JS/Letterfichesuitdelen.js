@@ -23,11 +23,11 @@ function shuffleTiles(tileBag) {
     return tileBag;
 }
 
-function dealTiles(tileBag, players) {
+function dealTiles(tileBag, gplayers) {
     const sharedHand = tileBag.splice(0, 10).map(tile => ({ letter: tile, used: false })); // Shared hand
     const playerTiles = {};
-    for (const player of players) {
-        playerTiles[player] = sharedHand; // All players reference the same shared hand
+    for (const gplayer of gplayers) {
+        playerTiles[gplayer] = sharedHand; // All players reference the same shared hand
     }
     return { playerTiles, sharedHand };
 }
@@ -46,10 +46,10 @@ function useTile(sharedHand, letter, tileBag) {
 }
 
 // Voorbeeldgebruik
-const players = ['Player1', 'Player2', 'Player3', 'Player4'];
+const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
 let tileBag = createTileBag();
 tileBag = shuffleTiles(tileBag);
-const { playerTiles, sharedHand } = dealTiles(tileBag, players);
+const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
 
 console.log('Tile Bag:', tileBag);
 console.log('Shared Hand:', sharedHand);

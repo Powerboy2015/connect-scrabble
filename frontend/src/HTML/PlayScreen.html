@@ -6,23 +6,41 @@
     <link rel="stylesheet" href="../CSS/main.css" />
   </head>
 
-  <body onload="PlayerSelect()">
+  <body onload="PlayerSelect2(), startGameTimer(), PlayerSelect()">
     <div class="parent-div">
+      <button class="testButton1" onclick="makegrid(6, 7)">test</button>
+      <button class="testButton2" onclick="TimerStart()">nextPlayer</button>
+      <div id="StartCountDown" class="StartCountDown">3</div>
       <div class="team1">
         <div>
-          <div class="player" id="player1"></div>
-          <div class="player" id="player3"></div>
+          <div>
+            <span class="selector" id="player1-select"></span>
+            <span class="player" id="player1"></span>
+          </div>
+          <div>
+            <span class="selector" id="player3-select"></span>
+            <span class="player" id="player3"></span>
+          </div>
         </div>
       </div>
       <div class="team2">
-        <div class="player" id="player2"></div>
-        <div class="player" id="player4"></div>
+        <div>
+          <span class="player" id="player2"></span>
+          <span class="selector" id="player2-select"></span>
+        </div>
+        <div>
+          <span class="player" id="player4"></span>
+          <span class="selector" id="player4-select"></span>
+        </div>
       </div>
       <div id="clock" class="clock"></div>
-      <button onclick="TimerStart()" class="Start_Button">Start</button>
       <!--Placeholder timer knop-->
-      <div class="container">
+      <div class="helebordspul">
         <div class="board" id="bord1">
+          <div id="grid">
+            <div id="buttonsfortest"></div>
+            <div id="gridshit"></div>
+          </div>  
           <img
             class="boardPic"
             src="../images/schermafbeelding-1400-09-10-om-08_083224756.png"
@@ -30,7 +48,7 @@
           />
         </div>
       </div>
-      <div class="letters">
+      <div class="letters" id="fiches">
         <div class="letter">A</div>
         <div class="letter">V</div>
         <div class="letter">D</div>
@@ -43,6 +61,7 @@
         <div class="letter">A</div>
       </div>
     </div>
+
     <div id="idk" class="Overlay">
       <div id="Placeholderbox">
         <img src="../images/banner.png" class="banner" />
@@ -57,8 +76,10 @@
         >
       </div>
     </div>
-    <button onclick="PlayerSelect()"></button>
   </body>
   <script src="../JS/Timer.js"></script>
   <script src="../JS/PlayerSelect.js"></script>
+  <script src="../JS/Bord grid.js"></script>
+  <script src="../JS/fiches-select.js"></script>
+  <script src="../JS/Letterfichesuitdelen.js"></script>
 </html>

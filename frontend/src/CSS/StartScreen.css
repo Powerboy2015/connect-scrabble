@@ -32,9 +32,13 @@ body {
 
 #Gamename {
   display: flex;
-  font-size: 5vw;
+  /* font-size: 10vw; */
   justify-content: center;
   align-items: center;
+  /* color: #ffffff; */
+  img {
+    width: 60vw;
+  }
 }
 
 /* #Loc_Start_Button {

@@ -12,19 +12,19 @@ function makegrid(rows, columns) {
     grid = [];
     letteringrid = [];
 
-    board.style.gridTemplateColumns = `repeat(${columns}, 3vw)`;
-    board.style.gridTemplateRows = `repeat(${rows}, 3vw)`;
+    board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    board.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
 
     for (let createdrows = 0; createdrows < rows; createdrows++) {
         let row = [];
         let rowstatus = [];
 
         for (let createdcollums = 0; createdcollums < columns; createdcollums++) {
-            const idk = document.createElement("div");
-            idk.classList.add("idk");
-            board.appendChild(idk);
-            row.push(idk)
-            rowstatus.push("mt")
+            const vakjes = document.createElement("div");
+            vakjes.classList.add("vakjes");
+            board.appendChild(vakjes);
+            row.push(vakjes)
+            rowstatus.push("empty")
         }
         grid.push(row);
         gridstatus.push(rowstatus)
@@ -41,9 +41,13 @@ function makegrid(rows, columns) {
 
 function dropkickchild(column) {
     for (let row = grid.length - 1; row >= 0; row--) {
-        if (gridstatus[row][column] === "mt") {
-            grid[row][column].style.backgroundColor = playercolor;
-            gridstatus[row][column] = "iets";
+        if (gridstatus[row][column] === "empty") {
+            grid[row][column].classList.add("iets"); //"iets" wordt de 2e class van het lege vakje 
+            // waardoor het een andere kleur krijgt, als iemand dit dus wilt veranderen, zo dat het 
+            // om en om verandert van speler kan je een naam aanmaken die dan een andere css heeft bvb voor kleur??
+            // mijn nederland is dood
+            gridstatus[row][column] = "iets"; // iets wordt een letter later te zijn (die komt dan in een
+            // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
             break;
         }
     }

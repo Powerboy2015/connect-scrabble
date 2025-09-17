@@ -31,14 +31,22 @@ services:
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./db/words.txt:/docker-entrypoint-initdb.d/words.txt
-  redis:
-    container_name: redis-cache
-    image: redis:latest
-    ports:
-      - "6379:6379"
+  # redis:
+  #   container_name: redis-cache
+  #   image: redis:latest
+  #   ports:
+  #     - "6379:6379"
   adminer:
     image: adminer
     container_name: adminer
     restart: always
     ports:
       - "8080:8080"
+  py-backend:
+    build:
+      context: ./backend_py
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    volumes:
+      - "./backend_py/src:/app"

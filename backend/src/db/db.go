@@ -65,3 +65,9 @@ func GetWords(letters []string) ([]string, error) {
 	}
 	return words, nil
 }
+
+func CheckWord(word string) (bool, error) {
+	var exists bool
+	err := DB.QueryRow("SELECT EXISTS(SELECT 1 FROM words WHERE word=$1)", word).Scan(&exists)
+	return exists, err
+}

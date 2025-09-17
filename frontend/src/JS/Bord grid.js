@@ -1,3 +1,4 @@
+import { check } from "./checker.js";
 import GameData from "./classes/GameData.js";
 import { TimerStart } from "./PlayerSelect.js";
 // let grid = [];
@@ -48,19 +49,24 @@ export function makegrid(rows, columns) {
 function dropkickchild(column) {
     for (let row = GameData.grid.length - 1; row >= 0; row--) {
         if (GameData.gridStatus[row][column] === "empty") {
+            const _letter = GameData.getSelectedLetter;
+            GameData.grid[row][column].textContent = _letter;
             GameData.grid[row][column].classList.add("iets"); //"iets" wordt de 2e class van het lege vakje 
             // waardoor het een andere kleur krijgt, als iemand dit dus wilt veranderen, zo dat het 
             // om en om verandert van speler kan je een naam aanmaken die dan een andere css heeft bvb voor kleur??
             // mijn nederland is dood
 
-            GameData.gridStatus[row][column] = "iets"; // iets wordt een letter later te zijn (die komt dan in een
+            GameData.gridStatus[row][column] = _letter; // iets wordt een letter later te zijn (die komt dan in een
             // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
-            GameData.lastPlacement = {x:column, y:row, letter:"iets"};
+            // hallo here it is -zico
+            
+            GameData.lastPlacement = {x:column, y:row, letter:_letter};
 
             // XXX: debug info
             console.debug(GameData.gridStatus);
             console.debug(GameData.grid);
             console.debug(GameData.lastPlacement);
+            check();
             TimerStart();
             break;
         }

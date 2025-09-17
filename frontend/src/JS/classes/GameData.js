@@ -22,4 +22,16 @@ export default class GameData {
 
     static isTimerActive = false;
     static countDownInterval = null;
+
+    //TODO needs to be a single selected finch from the board
+    static selectedLetter = ["A","P","P","E","L"];
+
+    /**
+    * @returns {string} The currently selected letter from the dropdown.
+     */
+    static get getSelectedLetter() {
+        const letter = this.selectedLetter.pop() || "";
+        console.log("Selected letter:", letter);
+        return letter;
+    }
 }

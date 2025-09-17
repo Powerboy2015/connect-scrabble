@@ -1,8 +1,10 @@
-const players = { ...localStorage };
+import GameData from "./classes/GameData.js";
+
 let player = 0;
 let currenPlayerNumber = 1;
-function PlayerSelect() {
-  for (i in players) {
+export function PlayerSelect() {
+  let player = 0;
+  for (let i in GameData.playerlist) {
     player++;
     console.log(i);
     console.log(`player${player}`);
@@ -17,7 +19,7 @@ function TimerStart() {
   }
   let time = 15;
   PlayerTurn();
-  countdown = setInterval(function () {
+  let countdown = setInterval(function () {
     IsActive = true;
     if (time > 0) {
       document.getElementById("clock").innerHTML = time;
@@ -33,11 +35,13 @@ function TimerStart() {
 
 function PlayerTurn() {
   let currentPlayer = document.getElementById(`player${currenPlayerNumber}`);
-  if (currenPlayerNumber < Object.keys(players).length) {
+  if (currenPlayerNumber < Object.keys(GameData.playerlist).length) {
     currenPlayerNumber++;
   } else {
     currenPlayerNumber = 1;
   }
+
+  GameData.currentPlayer = currenPlayerNumber;;
 
   console.log(currentPlayer.id);
   document.getElementById("player1-select").innerHTML = "";
@@ -53,9 +57,9 @@ function PlayerTurn() {
   }
 }
 
-function startGameTimer() {
+export function startGameTimer() {
   let time = 3;
-  countdown = setInterval(function () {
+  let countdown = setInterval(function () {
     if (time > 0) {
       document.querySelector(".StartCountDown").innerHTML = time;
     } else {

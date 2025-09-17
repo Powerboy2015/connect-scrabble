@@ -5,14 +5,14 @@ const letterDistribution = {
     W: 2, X: 1, Y: 2, Z: 1, _: 2 // _ represents blank tiles
 };
 
-function createTileBag() {
+export function createTileBag() {
     const tileBag = [];
     for (const [letter, count] of Object.entries(letterDistribution)) {
         for (let i = 0; i < count; i++) {
             tileBag.push(letter);
         }
     }
-    return tileBag;
+    return shuffleTiles(tileBag);
 }
 
 function shuffleTiles(tileBag) {
@@ -22,6 +22,8 @@ function shuffleTiles(tileBag) {
     }
     return tileBag;
 }
+
+
 
 function dealTiles(tileBag, gplayers) {
     const sharedHand = tileBag.splice(0, 10).map(tile => ({ letter: tile, used: false })); // Shared hand
@@ -45,18 +47,18 @@ function useTile(sharedHand, letter, tileBag) {
     return false; // Tile not available
 }
 
-// Voorbeeldgebruik
-const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
-let tileBag = createTileBag();
-tileBag = shuffleTiles(tileBag);
-const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
+// // Voorbeeldgebruik
+// const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
+// let tileBag = createTileBag();
+// tileBag = shuffleTiles(tileBag);
+// const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
 
-console.log('Tile Bag:', tileBag);
-console.log('Shared Hand:', sharedHand);
-console.log('Player Tiles:', playerTiles);
+// console.log('Tile Bag:', tileBag);
+// console.log('Shared Hand:', sharedHand);
+// console.log('Player Tiles:', playerTiles);
 
-// Example of using a tile
-console.log('Player1 uses tile A:', useTile(sharedHand, 'A', tileBag));
-console.log('Player2 tries to use tile A:', useTile(sharedHand, 'A', tileBag));
-console.log('Updated Tile Bag:', tileBag);
-console.log('Updated Shared Hand:', sharedHand);
+// // Example of using a tile
+// console.log('Player1 uses tile A:', useTile(sharedHand, 'A', tileBag));
+// console.log('Player2 tries to use tile A:', useTile(sharedHand, 'A', tileBag));
+// console.log('Updated Tile Bag:', tileBag);
+// console.log('Updated Shared Hand:', sharedHand);

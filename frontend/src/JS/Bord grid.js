@@ -1,16 +1,18 @@
-let grid = [];
-let gridstatus = [];
-let playercolor = "red";
+import GameData from "./classes/GameData.js";
+// let grid = [];
+// let gridstatus = [];
+// let playercolor = "red";
 
-function makegrid(rows, columns) {
+
+export function makegrid(rows, columns) {
     const board = document.getElementById("gridshit");
     const buttonspul = document.getElementById("buttonsfortest");
 
     board.innerHTML = ""
     buttonspul.innerHTML = ""
 
-    grid = [];
-    letteringrid = [];
+    let grid = [];
+    let gridstatus = []
 
     board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
     board.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
@@ -29,6 +31,9 @@ function makegrid(rows, columns) {
         grid.push(row);
         gridstatus.push(rowstatus)
     }
+    GameData.grid = grid;
+    GameData.gridStatus = gridstatus;
+
     for (let columnbuttons = 0; columnbuttons < columns; columnbuttons++) { 
         const button = document.createElement("button");
         button.textContent = "test";
@@ -40,13 +45,14 @@ function makegrid(rows, columns) {
 // SPELFOUT collum T-T (ik bewerk dit later lol)
 
 function dropkickchild(column) {
-    for (let row = grid.length - 1; row >= 0; row--) {
-        if (gridstatus[row][column] === "empty") {
-            grid[row][column].classList.add("iets"); //"iets" wordt de 2e class van het lege vakje 
+    for (let row = GameData.grid.length - 1; row >= 0; row--) {
+        if (GameData.gridStatus[row][column] === "empty") {
+            GameData.grid[row][column].classList.add("iets"); //"iets" wordt de 2e class van het lege vakje 
             // waardoor het een andere kleur krijgt, als iemand dit dus wilt veranderen, zo dat het 
             // om en om verandert van speler kan je een naam aanmaken die dan een andere css heeft bvb voor kleur??
             // mijn nederland is dood
-            gridstatus[row][column] = "iets"; // iets wordt een letter later te zijn (die komt dan in een
+            
+            GameData.gridStatus[row][column] = "iets"; // iets wordt een letter later te zijn (die komt dan in een
             // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
             break;
         }

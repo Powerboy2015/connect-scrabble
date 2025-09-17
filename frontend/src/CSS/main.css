@@ -146,7 +146,6 @@ player {
   user-select: none;
   width: 6vb;
   height: 2vh;
-  transform: translateY(-13vh);
 }
 
 .letter:hover {

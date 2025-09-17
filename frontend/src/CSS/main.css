@@ -108,6 +108,7 @@ player {
   align-items: center;
   font-weight: bold;
   z-index: -1;
+  
 }
 
 .letter {
@@ -128,6 +129,7 @@ player {
   justify-content: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  user-select: none;
 }
 
 .letter:hover {

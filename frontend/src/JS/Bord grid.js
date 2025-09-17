@@ -42,8 +42,12 @@ function makegrid(rows, columns) {
 function dropkickchild(column) {
     for (let row = grid.length - 1; row >= 0; row--) {
         if (gridstatus[row][column] === "empty") {
-            grid[row][column].style.backgroundColor = playercolor;
-            gridstatus[row][column] = "iets"; // iets wordt een letter later te zijn
+            grid[row][column].classList.add("iets"); //"iets" wordt de 2e class van het lege vakje 
+            // waardoor het een andere kleur krijgt, als iemand dit dus wilt veranderen, zo dat het 
+            // om en om verandert van speler kan je een naam aanmaken die dan een andere css heeft bvb voor kleur??
+            // mijn nederland is dood
+            gridstatus[row][column] = "iets"; // iets wordt een letter later te zijn (die komt dan in een
+            // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
             break;
         }
     }

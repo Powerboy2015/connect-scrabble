@@ -6,11 +6,14 @@ function makegrid(rows, columns) {
     const board = document.getElementById("gridshit");
     const buttonspul = document.getElementById("buttonsfortest");
 
+    board.innerHTML = ""
+    buttonspul.innerHTML = ""
+
     grid = [];
     letteringrid = [];
 
-    board.style.gridTemplateColumns = `repeat(${columns}, 2.4vw)`;
-    board.style.gridTemplateRows = `repeat(${rows}, 2.4vw)`;
+    board.style.gridTemplateColumns = `repeat(${columns}, 3vw)`;
+    board.style.gridTemplateRows = `repeat(${rows}, 3vw)`;
 
     for (let createdrows = 0; createdrows < rows; createdrows++) {
         let row = [];

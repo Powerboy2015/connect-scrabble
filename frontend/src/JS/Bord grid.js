@@ -12,19 +12,19 @@ function makegrid(rows, columns) {
     grid = [];
     letteringrid = [];
 
-    board.style.gridTemplateColumns = `repeat(${columns}, 3vw)`;
-    board.style.gridTemplateRows = `repeat(${rows}, 3vw)`;
+    board.style.gridTemplateColumns = `repeat(${columns}, 3vh)`;
+    board.style.gridTemplateRows = `repeat(${rows}, 3vh)`;
 
     for (let createdrows = 0; createdrows < rows; createdrows++) {
         let row = [];
         let rowstatus = [];
 
         for (let createdcollums = 0; createdcollums < columns; createdcollums++) {
-            const idk = document.createElement("div");
-            idk.classList.add("idk");
-            board.appendChild(idk);
-            row.push(idk)
-            rowstatus.push("mt")
+            const vakjes = document.createElement("div");
+            vakjes.classList.add("vakjes");
+            board.appendChild(vakjes);
+            row.push(vakjes)
+            rowstatus.push("empty")
         }
         grid.push(row);
         gridstatus.push(rowstatus)
@@ -41,9 +41,9 @@ function makegrid(rows, columns) {
 
 function dropkickchild(column) {
     for (let row = grid.length - 1; row >= 0; row--) {
-        if (gridstatus[row][column] === "mt") {
+        if (gridstatus[row][column] === "empty") {
             grid[row][column].style.backgroundColor = playercolor;
-            gridstatus[row][column] = "iets";
+            gridstatus[row][column] = "iets"; // iets wordt een letter later te zijn
             break;
         }
     }

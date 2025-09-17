@@ -42,7 +42,6 @@ player {
 }
 
 .helebordspul {
-  position: relative;
   margin-top: 10vh;
   width: 100%;
   display: flex;
@@ -52,7 +51,6 @@ player {
 }
 
 #grid {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -63,17 +61,27 @@ player {
   justify-content: center;
 }
 
-#buttonfortest {
+#buttonsfortest {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+  z-index: 10;
 }
 
 #gridshit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: grid;
   gap: 1.8vh;
   justify-content: center;
   align-content: center;
+}
+
+.board {
+  position: relative;
 }
 
 .boardPic {

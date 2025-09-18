@@ -10,13 +10,6 @@ body {
   
 }
 
-button{
-    background-color: #687c5a;
-    border-radius: 20px;
-    color: white;
-
-}
-
 
 #login{
     border-style: solid;
@@ -40,12 +33,32 @@ h1{
     
 }
 
-#pass{
+.input{
     background-color: #687c5a;
     color: white;
+    height: 3vh;
+    width: 23vb;
+    font-size: 2vh;
+    border: none;
+    border-radius: 10px;
 }
 
-#email{
+.aanmeldknop{
     background-color: #687c5a;
+    border-radius: 20px;
     color: white;
+    width: 23vb;
+    font-size: 2vb;
+    margin-bottom: 3px
+
+}
+
+.registreerknop{
+    background-color: #687c5a;
+    border-radius: 20px;
+    color: white;
+    width: 23vb;
+    font-size: 2vb;
+
+    
 }

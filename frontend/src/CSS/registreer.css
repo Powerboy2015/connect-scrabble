@@ -1,0 +1,54 @@
+body {
+  background-color: #687c5a;
+  color: white;
+  width: 400px;
+  height: 750px;
+  margin-left: 40%;
+  margin-top: 5%;
+}
+
+button{
+    background-color: #cff3ad;
+    border-radius: 20px;
+    
+}
+
+#registreer{
+    border-style: solid;
+    border-width: 5px;
+    border-color:#cff3ad ;
+    border-radius: 10px;
+    padding: 10px;
+    width: 210px;
+    height: 550px;
+    font-size: 25px;
+    background-color: #cff3ad;
+    color: black;
+    position: relative;
+    left: 19%;
+    
+}
+
+#pass{
+    background-color: #687c5a;
+    color: white;
+}
+
+#email{
+    background-color: #687c5a;
+    color: white;
+}
+
+#lname{
+    background-color: #687c5a;
+    color: white;
+}
+
+#fname{
+    background-color: #687c5a;
+    color: white;
+}
+#bdate{
+    background-color: #687c5a;
+    color: white;
+}

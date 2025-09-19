@@ -12,7 +12,6 @@ export function createTileBag() {
             tileBag.push(letter);
         }
     }
-    
     return shuffleTiles(tileBag);
 }
 
@@ -46,18 +45,40 @@ function useTile(sharedHand, letter, tileBag) {
     return false; // Tile not available
 }
 
-// // Voorbeeldgebruik
-// const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
-// let tileBag = createTileBag();
-// tileBag = shuffleTiles(tileBag);
-// const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
+function useTileAndUpdate(letter, tileBag, sharedHand) {
+  if (useTile(sharedHand, letter, tileBag)) {
+    populateLetterhand(sharedHand); // Update de HTML na het gebruik van een tegel
+  }
+}
 
-// console.log('Tile Bag:', tileBag);
-// console.log('Shared Hand:', sharedHand);
-// console.log('Player Tiles:', playerTiles);
+document.addEventListener('DOMContentLoaded', () => {
+  // Functie om de letterhand-container te vullen
+  function populateLetterhand(sharedHand) {
+    const container = document.getElementById('fiches');
+    console.log(container);
+    if (!container) {
+      console.error('Element with id "letterhand-container" not found.');
+      return;
+    }
+    console.log('Element with id "letterhand-container" found:', container); // Debugging
+    container.innerHTML = ''; // Maak de container leeg
 
-// // Example of using a tile
-// console.log('Player1 uses tile A:', useTile(sharedHand, 'A', tileBag));
-// console.log('Player2 tries to use tile A:', useTile(sharedHand, 'A', tileBag));
-// console.log('Updated Tile Bag:', tileBag);
-// console.log('Updated Shared Hand:', sharedHand);
+    sharedHand.forEach(tile => {
+      const letterDiv = document.createElement('div');
+      letterDiv.className = 'letter';
+      letterDiv.textContent = tile.letter; // Gebruik de letter van het tile-object
+      container.appendChild(letterDiv);
+    });
+  }
+
+  // Roep de functie aan wanneer de pagina geladen is
+  setTimeout(() => {
+    const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
+    let tileBag = createTileBag();
+    tileBag = shuffleTiles(tileBag);
+    const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
+
+    // Vul de letterhand-container met de juiste sharedHand
+    populateLetterhand(sharedHand);
+  }, 100); // Wacht 100 milliseconden
+});

@@ -9,6 +9,8 @@ export default class GameData {
     /** @type {Array<string>} */
     static fichesBag = [];
 
+    static sharedHand = [];
+
     /** @type {number} */
     static currentPlayer = 0;
 

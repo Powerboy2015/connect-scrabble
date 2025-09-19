@@ -38,7 +38,7 @@ export function makegrid(rows, columns) {
 
     for (let columnbuttons = 0; columnbuttons < columns; columnbuttons++) { 
         const button = document.createElement("button");
-        button.textContent = "test";
+        button.classList.add("dropbutton");
         button.onclick = () => dropkickchild(columnbuttons);
         buttonspul.appendChild(button);
     }

@@ -1,0 +1,50 @@
+    
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #687c5a;
+    }
+
+    .profiel-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #cff3ad;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .profiel-foto {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    p {
+      color: #000000;
+    }
+
+    .profiel-info {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    .profiel-info p {
+      margin: 5px 0;
+    }
+
+    button{
+       background: #cff3ad;
+       border-radius: 40px; 
+       width:10vb;
+       height: 4vh;
+       font-size: 1.7vh;
+        
+    }

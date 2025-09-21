@@ -12,24 +12,58 @@ export function PlayerSelect() {
   }
 }
 
+
+//Ik heb een functie gemaakt die de timer naast de persoon showed, maar de timer
+//is voor een rede 1 persoon verder de heletijd en ik kan dit niet fixen T-T
+function clockvis(playernum) {
+  const totalPlayers = Object.keys(GameData.playerlist).length;
+
+  for (let i = 1; i <= totalPlayers; i++) {
+    const clockthingy = document.getElementById(`clock${i}`);
+    if (i === playernum) {
+      clockthingy.style.display = "flex"; 
+    } else {
+      clockthingy.style.display = "none";
+      clockthingy.innerHTML = "";
+    }
+  }
+}
+
+
 let IsActive = false;
 export function TimerStart() {
   if (GameData.isTimerActive) {
     clearInterval(GameData.countDownInterval);
+    GameData.countDownInterval = null;
+
   }
   let time = 15;
   PlayerTurn();
-  GameData.countDownInterval = setInterval(function () {
-    GameData.isTimerActive = true;
-    if (time > 0) {
-      document.getElementById("clock").innerHTML = time;
-    } else {
-      clearInterval(GameData.countDownInterval);
-      document.getElementById("clock").innerHTML = 0;
-      GameData.isTimerActive = false;
-      TimerStart();
-    }
+
+  const activeClock = document.getElementById(`clock${currenPlayerNumber}`);
+  if (activeClock) activeClock.innerHTML = time;
+
+  GameData.isTimerActive = true;
+  GameData.countDownInterval = setInterval(() => {
     time -= 1;
+
+    if (activeClock) {
+      activeClock.innerHTML = Math.max(0, time);
+    }
+
+    if (time <= 0) {
+      clearInterval(GameData.countDownInterval);
+      GameData.countDownInterval = null;
+      GameData.isTimerActive = false;
+
+      setTimeout(() => {
+        if (activeClock) {
+          activeClock.innerHTML = "";
+          activeClock.style.display = "none";
+        }
+        TimerStart();
+      }, 250);
+    }
   }, 1000);
 }
 
@@ -41,7 +75,7 @@ function PlayerTurn() {
     currenPlayerNumber = 1;
   }
 
-  GameData.currentPlayer = currenPlayerNumber;;
+  GameData.currentPlayer = currenPlayerNumber;
 
   console.log(currentPlayer.id);
   document.getElementById("player1-select").innerHTML = "";
@@ -55,6 +89,8 @@ function PlayerTurn() {
   if (currentPlayer.id === "player2" || currentPlayer.id === "player4") {
     document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F5";
   }
+
+  clockvis(currenPlayerNumber);
 }
 
 export function startGameTimer() {

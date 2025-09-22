@@ -1,6 +1,7 @@
 import { check } from "./checker.js";
 import GameData from "./classes/GameData.js";
-import { TimerStart } from "./PlayerSelect.js";
+import { PlayerTurn, TimerStart } from "./PlayerSelect.js";
+import { useTileAndUpdate } from "./Letterfichesuitdelen.js";
 // let grid = [];
 // let gridstatus = [];
 // let playercolor = "red";
@@ -41,6 +42,7 @@ export function makegrid(rows, columns) {
         button.classList.add("dropbutton");
         button.onclick = () => dropkickchild(columnbuttons);
         buttonspul.appendChild(button);
+        
     }
 }
 
@@ -66,8 +68,10 @@ function dropkickchild(column) {
             console.debug(GameData.gridStatus);
             console.debug(GameData.grid);
             console.debug(GameData.lastPlacement);
+            useTileAndUpdate(_letter, GameData.fichesBag, GameData.sharedHand);
             check();
-            TimerStart();
+            GameData.Timer.restart();
+            PlayerTurn();
             break;
         }
     }

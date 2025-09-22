@@ -1,3 +1,5 @@
+import { PlayerSelect2 } from "./fiches-select.js";
+
 // Letterfiches uitdelen voor Scrabble
 const letterDistribution = {
     A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1,
@@ -12,6 +14,7 @@ export function createTileBag() {
             tileBag.push(letter);
         }
     }
+    
     return shuffleTiles(tileBag);
 }
 
@@ -45,40 +48,35 @@ function useTile(sharedHand, letter, tileBag) {
     return false; // Tile not available
 }
 
-function useTileAndUpdate(letter, tileBag, sharedHand) {
+export function useTileAndUpdate(letter, tileBag, sharedHand) {
   if (useTile(sharedHand, letter, tileBag)) {
     populateLetterhand(sharedHand); // Update de HTML na het gebruik van een tegel
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
   // Functie om de letterhand-container te vullen
-  function populateLetterhand(sharedHand) {
+  export function populateLetterhand(sharedHand) {
     const container = document.getElementById('fiches');
-    console.log(container);
     if (!container) {
       console.error('Element with id "letterhand-container" not found.');
       return;
     }
-    console.log('Element with id "letterhand-container" found:', container); // Debugging
     container.innerHTML = ''; // Maak de container leeg
 
     sharedHand.forEach(tile => {
       const letterDiv = document.createElement('div');
       letterDiv.className = 'letter';
-      letterDiv.textContent = tile.letter; // Gebruik de letter van het tile-object
+      letterDiv.textContent = tile.letter;
+      if (tile.used) {
+        return; // Skip rendering used tiles
+      }
+      // letterDiv.addEventListener('click', () => {
+      //   if (!tile.used) {
+      //     tile.used = true; // Mark the tile as used
+      //     populateLetterhand(sharedHand); // Re-render the hand
+      //   }
+      // });
       container.appendChild(letterDiv);
     });
+    PlayerSelect2();
   }
-
-  // Roep de functie aan wanneer de pagina geladen is
-  setTimeout(() => {
-    const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
-    let tileBag = createTileBag();
-    tileBag = shuffleTiles(tileBag);
-    const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
-
-    // Vul de letterhand-container met de juiste sharedHand
-    populateLetterhand(sharedHand);
-  }, 100); // Wacht 100 milliseconden
-});

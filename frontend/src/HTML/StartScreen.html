@@ -5,14 +5,49 @@
     <title>Super coole main menu StartScreen</title>
     <link rel="stylesheet" href="../CSS/StartScreen.css" />
   </head>
-  <body onload="clearLocalStorage()">
+  <body onload="clearLocalStorage(), welcome()">
     <div id="fullhud">
-      <div id="Gamename">
-        <img
-              src="../images/firetitle.gif"
-              alt="Scrabble op een rij"
-            />
+      <div id="all_account_stuff">
+        <div id="account_button">
+          <button class="profile_button" onclick="check_if_logged_in()">
+            <img src="../images/profilefacelol.jpg" alt="Profile" />
+          </button>
         </div>
+        <div id="welcome"></div>
+        <div class="blur" id="profile_overlay">
+          <div class="profile_page">
+            <p>hier komt shit van je profile</p>
+            <a
+              href="http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/Loginscreen.html"
+              >login</a
+            >
+
+            <button
+              class="close-btn"
+              onclick="close_overlay('profile_overlay')"
+            >
+              X
+            </button>
+          </div>
+        </div>
+        <div class="blur" id="login_overlay">
+          <div class="login_page">
+            <h1>HOIHIHIHIOIHO</h1>
+            <a href="../HTML/Loginscreen.html">
+              <button class="login_button">Login</button>
+            </a>
+            <a href="../HTML/Registreerscreen.html">
+              <button class="register_button">registrereren</button>
+            </a>
+            <button class="close-btn" onclick="close_overlay('login_overlay')">
+              X
+            </button>
+          </div>
+        </div>
+      </div>
+      <div id="Gamename">
+        <img src="../images/firetitle.gif" alt="Scrabble op een rij" />
+      </div>
       <div id="Interactibles">
         <div id="Buttons">
           <button class="Start_Button" onclick="StartButtonClick()">

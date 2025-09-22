@@ -7,26 +7,30 @@ async function postRegisterScreen() {
   const birthDate = document.getElementById("bdate").value;
   const password = document.getElementById("pass").value;
 
-  const options = {
-    method: "POST",
+  if (!firstName || !lastName || !email || !birthDate || !password) {
+    document.getElementById("errorMessage").innerHTML = "Vul alle velden in";
+  } else {
+    const options = {
+      method: "POST",
 
-    headers: {
-      "Content-Type": "application/json",
-    },
+      headers: {
+        "Content-Type": "application/json",
+      },
 
-    body: JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      birthDate: birthDate,
-      password: password,
-      gender: "test",
-    }),
-  };
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        birthDate: birthDate,
+        password: password,
+      }),
+    };
 
-  response = await fetch(url, options);
+    response = await fetch(url, options);
 
-  const data = await response.json();
+    const data = await response.json();
 
-  console.log(data);
+    window.location =
+      "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/Loginscreen.html";
+  }
 }

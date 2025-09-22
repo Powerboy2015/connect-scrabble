@@ -1,4 +1,4 @@
 import GameState from './classes/GameState.js';
 
-const gamestate = new GameState;
+const gamestate = new GameState();
 gamestate.startGame();

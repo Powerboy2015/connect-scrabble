@@ -1,3 +1,5 @@
+import Timer from "../Timer.js";
+
 /**
  * An Object that can be used to store and interact with the game.
  * In here we save our important data that we need to access globally.
@@ -9,6 +11,7 @@ export default class GameData {
     /** @type {Array<string>} */
     static fichesBag = [];
 
+    /** @type {Array<{letter: string, used: boolean}>} */
     static sharedHand = [];
 
     /** @type {number} */
@@ -25,15 +28,23 @@ export default class GameData {
     static isTimerActive = false;
     static countDownInterval = null;
 
-    //TODO needs to be a single selected finch from the board
-    static selectedLetter = ["A","P","P","E","L"];
+    // Currently selected letter from the shared hand
+    static selectedLetter = "";
+
+    static Timer = new Timer;
 
     /**
-    * @returns {string} The currently selected letter from the dropdown.
+     * Dynamically fetches the next available letter from the shared hand.
+     * Removes the letter from the shared hand and returns it.
+     * @returns {string} The next selected letter.
      */
     static get getSelectedLetter() {
-        const letter = this.selectedLetter.pop() || "";
-        console.log("Selected letter:", letter);
+        const letter = this.selectedLetter;
+        this.selectedLetter = ""; 
         return letter;
+    }
+
+    static updateBackend() {
+
     }
 }

@@ -26,21 +26,17 @@ export default class GameData {
     static isTimerActive = false;
     static countDownInterval = null;
 
+    // Currently selected letter from the shared hand
+    static selectedLetter = "";
+
     /**
      * Dynamically fetches the next available letter from the shared hand.
      * Removes the letter from the shared hand and returns it.
      * @returns {string} The next selected letter.
      */
     static get getSelectedLetter() {
-        if (this.sharedHand.length > 0) {
-            const tile = this.sharedHand.find(tile => !tile.used); // Find the first unused tile
-            if (tile) {
-                tile.used = true; // Mark the tile as used
-                console.log("Selected letter:", tile.letter);
-                return tile.letter;
-            }
-        }
-        console.warn("No unused letters available in shared hand.");
-        return "";
+        const letter = this.selectedLetter;
+        this.selectedLetter = ""; 
+        return letter;
     }
 }

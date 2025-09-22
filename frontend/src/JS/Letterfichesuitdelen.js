@@ -1,3 +1,5 @@
+import { PlayerSelect2 } from "./fiches-select.js";
+
 // Letterfiches uitdelen voor Scrabble
 const letterDistribution = {
     A: 9, B: 2, C: 2, D: 4, E: 12, F: 2, G: 3, H: 2, I: 9, J: 1, K: 1,
@@ -46,7 +48,7 @@ function useTile(sharedHand, letter, tileBag) {
     return false; // Tile not available
 }
 
-function useTileAndUpdate(letter, tileBag, sharedHand) {
+export function useTileAndUpdate(letter, tileBag, sharedHand) {
   if (useTile(sharedHand, letter, tileBag)) {
     populateLetterhand(sharedHand); // Update de HTML na het gebruik van een tegel
   }
@@ -74,4 +76,5 @@ function useTileAndUpdate(letter, tileBag, sharedHand) {
       // });
       container.appendChild(letterDiv);
     });
+    PlayerSelect2();
   }

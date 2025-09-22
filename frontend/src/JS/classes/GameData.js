@@ -9,6 +9,7 @@ export default class GameData {
     /** @type {Array<string>} */
     static fichesBag = [];
 
+    /** @type {Array<{letter: string, used: boolean}>} */
     static sharedHand = [];
 
     /** @type {number} */
@@ -25,15 +26,21 @@ export default class GameData {
     static isTimerActive = false;
     static countDownInterval = null;
 
-    //TODO needs to be a single selected finch from the board
-    static selectedLetter = ["A","P","P","E","L"];
-
     /**
-    * @returns {string} The currently selected letter from the dropdown.
+     * Dynamically fetches the next available letter from the shared hand.
+     * Removes the letter from the shared hand and returns it.
+     * @returns {string} The next selected letter.
      */
     static get getSelectedLetter() {
-        const letter = this.selectedLetter.pop() || "";
-        console.log("Selected letter:", letter);
-        return letter;
+        if (this.sharedHand.length > 0) {
+            const tile = this.sharedHand.find(tile => !tile.used); // Find the first unused tile
+            if (tile) {
+                tile.used = true; // Mark the tile as used
+                console.log("Selected letter:", tile.letter);
+                return tile.letter;
+            }
+        }
+        console.warn("No unused letters available in shared hand.");
+        return "";
     }
 }

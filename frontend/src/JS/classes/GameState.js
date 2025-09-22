@@ -1,6 +1,6 @@
 import { makegrid } from '../Bord grid.js';
 import { PlayerSelect2 } from '../fiches-select.js';
-import { createTileBag, dealTiles } from '../Letterfichesuitdelen.js';
+import { createTileBag, dealTiles, populateLetterhand } from '../Letterfichesuitdelen.js';
 import { PlayerSelect, startGameTimer } from '../PlayerSelect.js';
 import GameData from './GameData.js';
 
@@ -14,7 +14,8 @@ export default class GameState {
         console.log('Gamestate initialized with players:', GameData.playerlist);
         console.log('Initial fiches bag:', GameData.fichesBag);
         const {playerTiles, player} = dealTiles(GameData.fichesBag,[1]);
-        GameData.sharedHand = playerTiles[1]; 
+        GameData.sharedHand = playerTiles[1];
+        populateLetterhand(GameData.sharedHand);
         console.log('Dealing fiches to players...', GameData.sharedHand);
         PlayerSelect();
         PlayerSelect2();

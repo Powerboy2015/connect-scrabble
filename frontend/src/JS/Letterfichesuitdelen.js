@@ -12,6 +12,7 @@ export function createTileBag() {
             tileBag.push(letter);
         }
     }
+    
     return shuffleTiles(tileBag);
 }
 
@@ -51,34 +52,26 @@ function useTileAndUpdate(letter, tileBag, sharedHand) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
   // Functie om de letterhand-container te vullen
-  function populateLetterhand(sharedHand) {
+  export function populateLetterhand(sharedHand) {
     const container = document.getElementById('fiches');
-    console.log(container);
     if (!container) {
       console.error('Element with id "letterhand-container" not found.');
       return;
     }
-    console.log('Element with id "letterhand-container" found:', container); // Debugging
     container.innerHTML = ''; // Maak de container leeg
 
     sharedHand.forEach(tile => {
       const letterDiv = document.createElement('div');
       letterDiv.className = 'letter';
-      letterDiv.textContent = tile.letter; // Gebruik de letter van het tile-object
+      letterDiv.textContent = tile.letter;
+      letterDiv.style.opacity = tile.used ? '0.5' : '1'; // Dim used tiles
+      // letterDiv.addEventListener('click', () => {
+      //   if (!tile.used) {
+      //     tile.used = true; // Mark the tile as used
+      //     populateLetterhand(sharedHand); // Re-render the hand
+      //   }
+      // });
       container.appendChild(letterDiv);
     });
   }
-
-  // Roep de functie aan wanneer de pagina geladen is
-  setTimeout(() => {
-    const gplayers = ['Player1', 'Player2', 'Player3', 'Player4'];
-    let tileBag = createTileBag();
-    tileBag = shuffleTiles(tileBag);
-    const { playerTiles, sharedHand } = dealTiles(tileBag, gplayers);
-
-    // Vul de letterhand-container met de juiste sharedHand
-    populateLetterhand(sharedHand);
-  }, 100); // Wacht 100 milliseconden
-});

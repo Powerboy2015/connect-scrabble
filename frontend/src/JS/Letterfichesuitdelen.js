@@ -67,7 +67,9 @@ export function useTileAndUpdate(letter, tileBag, sharedHand) {
       const letterDiv = document.createElement('div');
       letterDiv.className = 'letter';
       letterDiv.textContent = tile.letter;
-      letterDiv.style.opacity = tile.used ? '0.5' : '1'; // Dim used tiles
+      if (tile.used) {
+        return; // Skip rendering used tiles
+      }
       // letterDiv.addEventListener('click', () => {
       //   if (!tile.used) {
       //     tile.used = true; // Mark the tile as used

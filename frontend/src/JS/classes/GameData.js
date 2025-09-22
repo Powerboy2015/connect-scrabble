@@ -1,3 +1,5 @@
+import Timer from "../Timer.js";
+
 /**
  * An Object that can be used to store and interact with the game.
  * In here we save our important data that we need to access globally.
@@ -29,6 +31,8 @@ export default class GameData {
     // Currently selected letter from the shared hand
     static selectedLetter = "";
 
+    static Timer = new Timer;
+
     /**
      * Dynamically fetches the next available letter from the shared hand.
      * Removes the letter from the shared hand and returns it.
@@ -38,5 +42,9 @@ export default class GameData {
         const letter = this.selectedLetter;
         this.selectedLetter = ""; 
         return letter;
+    }
+
+    static updateBackend() {
+
     }
 }

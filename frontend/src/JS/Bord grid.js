@@ -1,6 +1,6 @@
 import { check } from "./checker.js";
 import GameData from "./classes/GameData.js";
-import { TimerStart } from "./PlayerSelect.js";
+import { PlayerTurn, TimerStart } from "./PlayerSelect.js";
 import { useTileAndUpdate } from "./Letterfichesuitdelen.js";
 // let grid = [];
 // let gridstatus = [];
@@ -70,7 +70,8 @@ function dropkickchild(column) {
             console.debug(GameData.lastPlacement);
             useTileAndUpdate(_letter, GameData.fichesBag, GameData.sharedHand);
             check();
-            TimerStart();
+            GameData.Timer.restart();
+            PlayerTurn();
             break;
         }
     }

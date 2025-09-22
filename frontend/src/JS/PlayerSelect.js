@@ -1,7 +1,8 @@
 import GameData from "./classes/GameData.js";
+import Timer from "./Timer.js";
 
 let player = 0;
-let currenPlayerNumber = 1;
+let currenPlayerNumber = 0;
 export function PlayerSelect() {
   let player = 0;
   for (let i in GameData.playerlist) {
@@ -10,19 +11,6 @@ export function PlayerSelect() {
     console.log(`player${player}`);
     document.getElementById(`player${player}`).innerHTML = i;
   }
-}
-
-function clockvis(playernum) {
-  const cocks = document.querySelectorAll(".clock");
-  
-  cocks.forEach((cock, index) => {
-    if (index + 1 === playernum) {
-      cock.style.display = "flex";
-    }
-    else{
-      cock.style.display = "none";
-    }
-  })
 }
 
 
@@ -58,16 +46,14 @@ export function TimerStart() {
 }
 
 
-function PlayerTurn() {
-  let currentPlayer = document.getElementById(`player${currenPlayerNumber}`);
-    // clockvis(currenPlayerNumber);
-
+export function PlayerTurn() {
   if (currenPlayerNumber < Object.keys(GameData.playerlist).length) {
     currenPlayerNumber++;
   } else {
     currenPlayerNumber = 1;
   }
-
+  
+  let currentPlayer = document.getElementById(`player${currenPlayerNumber}`);
   GameData.currentPlayer = currenPlayerNumber;
 
   console.log(currentPlayer.id);
@@ -87,22 +73,16 @@ function PlayerTurn() {
 }
 
 export function startGameTimer() {
-  let time = 3;
-  GameData.countDownInterval = setInterval(function () {
-    if (time > 0) {
-      document.querySelector(".StartCountDown").innerHTML = time;
-    } else {
-      clearInterval(GameData.countDownInterval);
-      document.querySelector(".StartCountDown").innerHTML = 0;
-    }
-    time -= 1;
-  }, 1000);
+  const startTimer = new Timer(3);
+  startTimer.displayFunc = (time) => {
+    document.querySelector(".StartCountDown").innerHTML = time;
+  }
 
-  setTimeout(() => {
-    document.getElementById("StartCountDown").style.display = "none";
-  }, 5000);
-
-  setTimeout(() => {
-    TimerStart();
-  }, 5000);
+  startTimer.finishFunc = () => {
+    document.querySelector(".StartCountDown").style.display = "none";
+    PlayerTurn();
+    GameData.Timer.start();
+  }
+  
+  startTimer.start();
 }

@@ -17,17 +17,7 @@
         <div class="blur" id="profile_overlay">
           <div class="profile_page">
             <p>hier komt shit van je profile</p>
-            <a
-              href="http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/Loginscreen.html"
-              >login</a
-            >
-
-            <button
-              class="close-btn"
-              onclick="close_overlay('profile_overlay')"
-            >
-              X
-            </button>
+            <button class="close-btn" onclick="close_overlay('profile_overlay')">X</button>
           </div>
         </div>
         <div class="blur" id="login_overlay">
@@ -39,9 +29,7 @@
             <a href="../HTML/Registreerscreen.html">
               <button class="register_button">registrereren</button>
             </a>
-            <button class="close-btn" onclick="close_overlay('login_overlay')">
-              X
-            </button>
+            <button class="close-btn" onclick="close_overlay('login_overlay')">X</button>
           </div>
         </div>
       </div>
@@ -50,12 +38,23 @@
       </div>
       <div id="Interactibles">
         <div id="Buttons">
-          <button class="Start_Button" onclick="StartButtonClick()">
-            Start
-          </button>
+          <div class="somethingstartbutton">
+            <button class="Start_Button">Start</button>
+            <div class="startmenu">
+              <!-- Nu ik een andere knop heb gemaakt voor de start ding moet je even de check 
+              voor spelers naar de singleplayer knop veranderen (ik ben er te lui voor)-->
+              <a href="../HTML/PlayScreen.html">
+                <button onclick="StartSingleplayer()">Singleplayer</button> 
+              </a>
+              <!-- deze href naar de pagina die luca heeft gemaakt voor matchmaking -->
+              </a href=""> 
+                <button onclick="StartMultiplayer()">Multiplayer</button>
+              </a>
+            </div>
+          </div>
           <a href="../HTML/Howtoplay.html">
-            <button class="HTP_Button">Spelregels</button></a
-          >
+            <button class="HTP_Button">Spelregels</button>
+          </a>
         </div>
         <div id="stupid_ass_box">
           <div class="playersDiv">

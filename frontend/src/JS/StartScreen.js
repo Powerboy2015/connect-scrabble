@@ -71,7 +71,7 @@ function TimerStart() {
 }
 
 // pas dit aan zodat je ander scherm kan zien
-let loggedin = true;
+let loggedin = false;
 
 function check_if_logged_in() {
   if (loggedin) {

@@ -139,17 +139,72 @@ body {
   border: none;
   border-radius: 20px;
   width: 20vw;
-  padding: 3vh;
-  box-sizing: border-box;
+  padding: 2.5vh;
   color: #000000;
   font-size: 4vw;
+  transition: all 0.2s ease;
 }
-.Start_Button:hover {
+/* .Start_Button:hover {
+  background-color: #269f52;
+} */
+.somethingstartbutton:hover .Start_Button {
+  border-radius: 20px 20px 0 0;
+  padding-bottom: 2.5vh; 
+}
+
+.somethingstartbutton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.startmenu {
+  position: absolute;
+  top: 90%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+
+  background-color: #dff9c6;
+  border: 2px solid #269f52;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  width: 100%;
+
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  /* transition: max-height 0.2s ease, opacity 0.2s ease; */
+  z-index: 5;
+
+  button {
+    background-color: #cff3ad;
+    border: none;
+    border-radius: 12px;
+    padding: 1vh 2vw;
+    font-size: 1.5vw;
+  }
+}
+.startmenu button:hover {
   background-color: #269f52;
 }
-.Start_Button:active {
+
+.startmenu button:active {
   transform: scale(0.95);
 }
+.somethingstartbutton:hover .startmenu {
+  max-height: 200px;
+  opacity: 1;
+
+  /* lol */
+  animation: funnyanimation 0.8s ease forwards;
+}
+
 
 /* #Loc_HTP_Button {
     position: absolute;
@@ -157,12 +212,15 @@ body {
     left: 35%;
     transform: translateX(-50%);
 } */
+
+
 .HTP_Button {
   background-color: #e8552b;
   border: none;
   border-radius: 20px;
   width: 18vw;
-  padding: 4vh;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
   box-sizing: border-box;
   color: #000000;
   font-size: 2.5vw;

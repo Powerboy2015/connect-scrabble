@@ -1,82 +1,66 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="../CSS/registreer.css">
+<link rel="stylesheet" href="../CSS/registreer.css" />
 <html>
-
-<head>
+  <head>
     <title>registreer scherm</title>
-    
+  </head>
 
-</head>
+  <body>
+    <h1>Scrabble op een rij registreer</h1>
 
-<body>
-  <h1>Scrabble op een rij registreer</h1>  
-
-<form>
     <div id="registreer">
-        
-        <div>  
-            <label for="fname">Naam:</label>
-            <input type="text" class="input" id="fname" required>
-        </div>
+      <div>
+        <label for="fname">Naam:</label>
+        <input type="text" class="input" id="fname" required />
+      </div>
 
-        <br>
-        <div> 
+      <br />
+      <div>
+        <label for="lname">Achternaam:</label>
+        <input type="text" class="input" id="lname" />
+      </div>
 
-            <label for="lname">Achternaam:</label>
-            <input type="text" class="input" id="lname" required>
-        </div>
+      <br />
 
-        <br>
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" class="input" id="email" />
+      </div>
 
-        <div>  
-            <label for="email">Email:</label>
-            <input type="text"  class="input" id="email" required>
-        </div>
+      <br />
 
-        <br>
+      <div>
+        <label for="bdate">Geboren:</label>
+        <input type="date" class="input" id="bdate" name="bdate" />
+      </div>
 
-        <div>
-            <label for="bdate">Geboren:</label>
-         <input type="date" class="input" id="bdate" name="bdate" required>
-        </div>
+      <br />
 
-        <br>
-      
-        <div>
-            <label for="pass">Wachtwoord:</label>
-         <input type="password" class="input" id="pass" name="pass" required>
-        </div>
+      <div>
+        <label for="pass">Wachtwoord:</label>
+        <input type="password" class="input" id="pass" name="pass" required />
+      </div>
 
-        <br>
+      <br />
 
-        <div>
-            <label for="title">Geslascht:</label>
+      <div>
+        <label for="title">Geslascht:</label>
 
-            <label for="Man">Man</label>
-            <input type="radio" id="Man" name="title" value="Man">
+        <label for="Man">Man</label>
+        <input type="radio" id="Man" name="title" value="Man" />
 
-            <label for="Vrouw">Vrouw</label>
-            <input type="radio" id="Vrouw" name="title" value="Vrouw">
+        <label for="Vrouw">Vrouw</label>
+        <input type="radio" id="Vrouw" name="title" value="Vrouw" />
 
-            <label for="Ander">Ander</label>
-            <input type="radio" id="Ander" name="title" value="Ander">
-
-
-        </div>
-        <br>
-        <div>
-            <a href="https://www.youtube.com/shorts/SXHMnicI6Pg">
-             <button>Registreer</button>
-            </a>
-        </div>
+        <label for="Ander">Ander</label>
+        <input type="radio" id="Ander" name="title" value="Ander" />
+      </div>
+      <br />
+      <div>
+        <button onclick="postRegisterScreen()">Registreer</button>
+      </div>
     </div>
-    
-</form>
-     
-   
+  </body>
 
-
-
-</body>
-
+  <script src="../JS/Registreerscreen.js"></script>
 </html>

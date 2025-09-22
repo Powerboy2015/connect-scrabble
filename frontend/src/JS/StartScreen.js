@@ -69,3 +69,20 @@ function TimerStart() {
     time -= 1;
   }, 1000);
 }
+
+// pas dit aan zodat je ander scherm kan zien
+let loggedin = true;
+
+
+function check_if_logged_in() {
+  if (loggedin) {
+    document.getElementById("profile_overlay").style.display = "flex";
+  }
+  else {
+    document.getElementById("login_overlay").style.display = "flex";
+  }
+}
+
+function close_overlay(page) {
+  document.getElementById(page).style.display = "none";
+}

@@ -42,9 +42,15 @@ def getUser(email, password):
     person = Persons.query.get_or_404(email)
 
     if password == person.password:
-        return jsonify("succes")
+        return jsonify({
+            'firstName': person.firstName,
+            'lastName': person.lastName,
+            'email': person.email,
+            'birthDate': person.birthDate,
+            'password': person.password,
+        })
     else:
-        return jsonify({"status": "incorrect username/password combination"}), 400
+        return jsonify({"failed"}), 400
 
 
 @app.route("/create", methods=["POST"])

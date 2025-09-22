@@ -4,14 +4,19 @@ async function login() {
 
   const link = `http://127.0.0.1:5001/get/${email}/${password}`;
 
-  const response = await fetch(link);
+  try {
+    const response = await fetch(link);
 
-  const data = await response.json();
-
-  console.log(data);
-
-  if (data === "succes") {
-    window.location =
-      "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html";
+    if (!response.ok) {
+      if (response.status === 404) {
+        document.getElementById("error").innerHTML = "gebruiker bestaad niet";
+      }
+    } else {
+      const data = await response.json();
+      window.location = `http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html#${data.firstName}`;
+      console.log(data);
+    }
+  } catch (err) {
+    document.getElementById("error").innerHTML = "Incorrect wachtwoord";
   }
 }

@@ -1,54 +1,38 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="../CSS/loginscreen.css">
+<link rel="stylesheet" href="../CSS/loginscreen.css" />
 <html>
-
-<head>
+  <head>
     <title>Log in scherm</title>
-    
+  </head>
 
-</head>
+  <body>
+    <h1>Scrabble op een rij log in</h1>
 
-<body>
-  <h1>Scrabble op een rij log in</h1>  
-
-<form>
     <div id="login">
+      <div>
+        <label for="email">Email:</label>
+        <input type="text" class="input" id="email" />
+      </div>
 
-        <div>
-            <label for="email">Email:</label>
-            <input type="text" class="input" id="email" required>
-        </div>
+      <br />
 
-        <br>
+      <div>
+        <label for="pass">Wachtwoord:</label>
+        <input type="password" class="input" id="pass" name="pass" />
+      </div>
 
-        <div>
-            <label for="pass">Wachtwoord:</label>
-         <input type="password" class="input" id="pass" name="pass" required>
-        </div>
-        
-        <br>
+      <br />
 
-        <div>
-            <button class="registreerknop" onclick="window.location.href='https://www.youtube.com/shorts/SXHMnicI6Pg'">
-                Login
-            </button>
-        </div>
-        
-        <div>
-            <button class="registreerknop" onclick="window.location.href='https://www.youtube.com/shorts/SXHMnicI6Pg'">
-                Registreer
-            </button>
-        </div>
+      <div>
+        <button onclick="login()" class="registreerknop">Login</button>
+      </div>
 
+      <div>
+        <a href="./Registreerscreen.html">
+          <button class="registreerknop">Registreer</button>
+        </a>
+      </div>
     </div>
-
-    
-</form>
-     
-   
-
-
-
-</body>
-
+  </body>
+  <script src="../JS/loginscherm.js"></script>
 </html>

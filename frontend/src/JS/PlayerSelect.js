@@ -12,21 +12,17 @@ export function PlayerSelect() {
   }
 }
 
-
-//Ik heb een functie gemaakt die de timer naast de persoon showed, maar de timer
-//is voor een rede 1 persoon verder de heletijd en ik kan dit niet fixen T-T
 function clockvis(playernum) {
-  const totalPlayers = Object.keys(GameData.playerlist).length;
-
-  for (let i = 1; i <= totalPlayers; i++) {
-    const clockthingy = document.getElementById(`clock${i}`);
-    if (i === playernum) {
-      clockthingy.style.display = "flex"; 
-    } else {
-      clockthingy.style.display = "none";
-      clockthingy.innerHTML = "";
+  const cocks = document.querySelectorAll(".clock");
+  
+  cocks.forEach((cock, index) => {
+    if (index + 1 === playernum) {
+      cock.style.display = "flex";
     }
-  }
+    else{
+      cock.style.display = "none";
+    }
+  })
 }
 
 
@@ -35,40 +31,37 @@ export function TimerStart() {
   if (GameData.isTimerActive) {
     clearInterval(GameData.countDownInterval);
     GameData.countDownInterval = null;
-
   }
+
   let time = 15;
+  clockvis(currenPlayerNumber);
   PlayerTurn();
 
-  const activeClock = document.getElementById(`clock${currenPlayerNumber}`);
-  if (activeClock) activeClock.innerHTML = time;
+  if (IsActive){
+    return;
+  }
 
-  GameData.isTimerActive = true;
   GameData.countDownInterval = setInterval(() => {
-    time -= 1;
-
-    if (activeClock) {
-      activeClock.innerHTML = Math.max(0, time);
+    IsActive = true;
+    let clockspul = document.getElementById("clock" + currenPlayerNumber)
+    if (time > 0) {
+      clockspul.innerHTML = time;
     }
 
-    if (time <= 0) {
+    else {
       clearInterval(GameData.countDownInterval);
-      GameData.countDownInterval = null;
-      GameData.isTimerActive = false;
-
-      setTimeout(() => {
-        if (activeClock) {
-          activeClock.innerHTML = "";
-          activeClock.style.display = "none";
-        }
-        TimerStart();
-      }, 250);
+      clockspul.innerHTML = "0";
+      IsActive = false;
     }
+    time -= 1;
   }, 1000);
 }
 
+
 function PlayerTurn() {
   let currentPlayer = document.getElementById(`player${currenPlayerNumber}`);
+    // clockvis(currenPlayerNumber);
+
   if (currenPlayerNumber < Object.keys(GameData.playerlist).length) {
     currenPlayerNumber++;
   } else {
@@ -85,12 +78,12 @@ function PlayerTurn() {
 
   if (currentPlayer.id === "player1" || currentPlayer.id === "player3") {
     document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F4";
+
   }
   if (currentPlayer.id === "player2" || currentPlayer.id === "player4") {
     document.getElementById(`${currentPlayer.id}-select`).innerHTML = "&#x23F5";
   }
-
-  clockvis(currenPlayerNumber);
+  
 }
 
 export function startGameTimer() {
@@ -101,7 +94,6 @@ export function startGameTimer() {
     } else {
       clearInterval(GameData.countDownInterval);
       document.querySelector(".StartCountDown").innerHTML = 0;
-      IsActive = false;
     }
     time -= 1;
   }, 1000);

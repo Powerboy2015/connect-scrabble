@@ -9,9 +9,9 @@ WORKDIR /app/src
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /app/server
 
 # Final stage
-FROM alpine:latest
+FROM alpine:latest 
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app/server .
-EXPOSE 8081
+EXPOSE 8080
 CMD ["./server"]

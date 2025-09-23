@@ -1,5 +1,5 @@
 fastapi
-uvicorn[standard]
+gunicorn[standard]
 flask
 flask_cors
 flask_sqlalchemy

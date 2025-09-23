@@ -7,7 +7,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
 db = SQLAlchemy(app)
 
 CORS(app, resources={r"*":{
-    "origins": ["http://127.0.0.1:5500"]
+    "origins": ["*"]
 }})
 
 

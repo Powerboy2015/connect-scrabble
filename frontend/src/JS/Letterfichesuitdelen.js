@@ -40,25 +40,25 @@ function useTile(sharedHand, letter, tileBag) {
     if (tile) {
         tile.used = true; // Mark the tile as used
         if (tileBag.length > 0) {
-            const newTile = tileBag.shift(); // Draw a new tile from the tile bag
-            sharedHand.push({ letter: newTile, used: false }); // Add the new tile to the shared hand
+            const newTile = tileBag.shift(); // Draw a new fiche from the fiche bag
+            sharedHand.push({ letter: newTile, used: false }); // Add the new fiche to the shared hand
         }
-        return true; // Tile successfully used
+        return true; // fiche successfully used
     }
-    return false; // Tile not available
+    return false; // fiche not available
 }
 
 export function useTileAndUpdate(letter, tileBag, sharedHand) {
   if (useTile(sharedHand, letter, tileBag)) {
-    populateLetterhand(sharedHand); // Update de HTML na het gebruik van een tegel
+    populateLetterhand(sharedHand); // Update HTML after using a fiche
   }
 }
 
-  // Functie om de letterhand-container te vullen
+  // Functie om de fiches-container te vullen
   export function populateLetterhand(sharedHand) {
     const container = document.getElementById('fiches');
     if (!container) {
-      console.error('Element with id "letterhand-container" not found.');
+      console.error('Element with id "fiches-container" not found.');
       return;
     }
     container.innerHTML = ''; // Maak de container leeg

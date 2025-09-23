@@ -13,10 +13,12 @@ async function login() {
       }
     } else {
       const data = await response.json();
-      window.location = `http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html#${data.firstName}`;
-      console.log(data);
+      sessionStorage.setItem("email", data.email);
+      sessionStorage.setItem("password", data.password);
+      window.location =
+        "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html";
     }
   } catch (err) {
-    document.getElementById("error").innerHTML = "Incorrect wachtwoord";
+    console.log(err);
   }
 }

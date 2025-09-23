@@ -36,7 +36,6 @@ def get():
         })
     return jsonify(all)
 
-
 @app.route("/get/<string:email>/<string:password>", methods=["GET"])
 def getUser(email, password):
     person = Persons.query.get_or_404(email)

@@ -1,22 +1,27 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="../CSS/profilepage.css">
+<link rel="stylesheet" href="../CSS/profilepage.css" />
 <html>
-<head>
-<button>Terug</button>
-<button>Bewerken</button>
-</head>
-<body>
+  <head>
+    <a href="./StartScreen.html"><button>Terug</button></a>
+    <button>Bewerken</button>
+  </head>
+  <body onload="getProfileData()">
+    <div class="profiel-container">
+      <img src="../images/pfp.png" alt="Profielfoto" class="profiel-foto" />
+      <h1>Naam</h1>
 
-  <div class="profiel-container">
-    <img src="../images/pfp.png" alt="Profielfoto" class="profiel-foto">
-    <h1>Naam</h1>
-    
-    <div class="profiel-info">
-      <p><strong>Naam:</strong>Naam </p>
-      <p><strong>Leeftijd:</strong>Leeftijd </p>
-      <p><strong>Hobbies:</strong>Hobbies </p>
+      <div class="profiel-info">
+        <div>
+          <div class="type">Naam:</div>
+          <div class="value" id="name">test</div>
+        </div>
+        <div>
+          <div class="type">Leeftijd:</div>
+          <div class="value" id="age">test</div>
+        </div>
+      </div>
     </div>
-  </div>
+  </body>
 
-</body>
+  <script src="../JS/profilepage.js"></script>
 </html>

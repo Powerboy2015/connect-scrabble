@@ -86,7 +86,12 @@ function close_overlay(page) {
 }
 
 function welcome() {
-  document.getElementById(
-    "welcome"
-  ).innerHTML = `Welcome: ${window.location.hash.substring(1)}`;
+  let loggedIn = window.location.hash.substring(1);
+
+  if (loggedIn) {
+    document.getElementById(
+      "welcome"
+    ).innerHTML = `Welcome: ${window.location.hash.substring(1)}`;
+  }
+  return;
 }

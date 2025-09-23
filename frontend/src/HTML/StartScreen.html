@@ -5,7 +5,7 @@
     <title>Super coole main menu StartScreen</title>
     <link rel="stylesheet" href="../CSS/StartScreen.css" />
   </head>
-  <body onload="clearLocalStorage(), welcome()">
+  <body onload="clearLocalStorage()">
     <div id="fullhud">
       <div id="all_account_stuff">
         <div id="account_button">
@@ -30,6 +30,7 @@
             <a href="../HTML/Registreerscreen.html">
               <button class="register_button">registrereren</button>
             </a>
+            <button onclick="showProfileButton()" class="register_button">Profile</button>
             <button class="close-btn" onclick="close_overlay('login_overlay')">X</button>
           </div>
         </div>
@@ -76,4 +77,5 @@
   </body>
   <script src="../JS/StartScreen.js"></script>
   <script src="../JS/PlayerSelect.js"></script>
+  <script src="../JS/profilepage.js "></script>
 </html>

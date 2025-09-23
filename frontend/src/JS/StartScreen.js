@@ -84,14 +84,3 @@ function check_if_logged_in() {
 function close_overlay(page) {
   document.getElementById(page).style.display = "none";
 }
-
-function welcome() {
-  let loggedIn = window.location.hash.substring(1);
-
-  if (loggedIn) {
-    document.getElementById(
-      "welcome"
-    ).innerHTML = `Welcome: ${window.location.hash.substring(1)}`;
-  }
-  return;
-}

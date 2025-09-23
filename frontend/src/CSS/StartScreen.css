@@ -179,7 +179,7 @@ body {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  /* transition: max-height 0.2s ease, opacity 0.2s ease; */
+  transition: max-height 0.2s ease, opacity 0.2s ease;
   z-index: 5;
 
   button {
@@ -202,7 +202,7 @@ body {
   opacity: 1;
 
   /* lol */
-  animation: funnyanimation 0.8s ease forwards;
+  /* animation: funnyanimation 0.8s ease forwards; */
 }
 
 

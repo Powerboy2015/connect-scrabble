@@ -1,4 +1,4 @@
-import { check } from "./checker.js";
+import { check, checkForWords } from "./checker.js";
 import GameData from "./classes/GameData.js";
 import { PlayerTurn, TimerStart } from "./PlayerSelect.js";
 import { useTileAndUpdate } from "./Letterfichesuitdelen.js";
@@ -48,15 +48,15 @@ export function makegrid(rows, columns) {
 
 // SPELFOUT collum T-T (ik bewerk dit later lol)
 
-function dropkickchild(column) {
+async function dropkickchild(column) {
+    const _letter = GameData.getSelectedLetter;
+
+    if (!(await check())) return;
+
     for (let row = GameData.grid.length - 1; row >= 0; row--) {
         if (GameData.gridStatus[row][column] === "empty") {
-            const _letter = GameData.getSelectedLetter;
             GameData.grid[row][column].textContent = _letter;
-            GameData.grid[row][column].classList.add("iets"); //"iets" wordt de 2e class van het lege vakje 
-            // waardoor het een andere kleur krijgt, als iemand dit dus wilt veranderen, zo dat het 
-            // om en om verandert van speler kan je een naam aanmaken die dan een andere css heeft bvb voor kleur??
-            // mijn nederland is dood
+            GameData.grid[row][column].classList.add("iets");
 
             GameData.gridStatus[row][column] = _letter; // iets wordt een letter later te zijn (die komt dan in een
             // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
@@ -64,12 +64,13 @@ function dropkickchild(column) {
             
             GameData.lastPlacement = {x:column, y:row, letter:_letter};
 
+
             // XXX: debug info
             console.debug(GameData.gridStatus);
             console.debug(GameData.grid);
             console.debug(GameData.lastPlacement);
             useTileAndUpdate(_letter, GameData.fichesBag, GameData.sharedHand);
-            check();
+            checkForWords();
             GameData.Timer.restart();
             PlayerTurn();
             break;

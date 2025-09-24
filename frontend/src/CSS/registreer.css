@@ -11,7 +11,6 @@ button{
     background-color: #687c5a;
     border-radius: 20px;
     color: white;
-    margin-left: 8%;
     height: 4vh;
     width: 19vb;
     font-size: 3vb;
@@ -19,20 +18,32 @@ button{
 }
 
 #registreer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
     border-style: solid;
     border-width: 5px;
     border-color:#cff3ad ;
     border-radius: 10px;
     padding: 10px;
     width: 220px;
-    height: 560px;
+    height: 520px;
     font-size: 25px;
     background-color: #cff3ad;
     color: black;
     position: relative;
     left: 19%;
-    
-    
+}
+
+#errorMessage {
+    position: absolute;
+    top: 80%;
+}
+
+#button {
+    margin-top: 15px;
 }
 
 .input{

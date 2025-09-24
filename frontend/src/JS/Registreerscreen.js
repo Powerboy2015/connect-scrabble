@@ -26,11 +26,17 @@ async function postRegisterScreen() {
       }),
     };
 
-    response = await fetch(url, options);
+    try {
+      response = await fetch(url, options);
 
-    const data = await response.json();
+      const data = await response.json();
+    } catch (err) {
+      console.log(err);
+    }
 
-    window.location =
-      "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/Loginscreen.html";
+    if (response.ok) {
+      window.location =
+        "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/Loginscreen.html";
+    }
   }
 }

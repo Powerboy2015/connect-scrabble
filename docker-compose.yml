@@ -16,7 +16,7 @@ services:
     container_name: go-backend
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "8081:8081"
     volumes:

@@ -11,9 +11,11 @@ function sendMessage(_socket)
 {
     if (_socket.readyState === _socket.OPEN) {
         _socket.send(JSON.stringify({
-            action: "join",
-            lobbyId: "12345"
-        }))
+            Action: "JoinRoom",
+            Payload: {
+                Room_code: "XZ5JK"
+            }
+        })); 
     } else {
         setTimeout(() => {
             sendMessage(_socket)

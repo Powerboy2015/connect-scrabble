@@ -18,6 +18,9 @@ class Persons(db.Model):
     birthDate = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
 
+class Friends(db.Model):
+    user = db.Column
+
 with app.app_context():
     db.create_all()
 
@@ -50,6 +53,18 @@ def getUser(email, password):
         })
     else:
         return jsonify({"failed"}), 400
+    
+
+@app.route("/delete/<string:email>", methods=["DELETE"])
+def deleteUser(email):
+    person = Persons.query.get_or_404(email)
+
+    db.session.delete(person)
+    db.session.commit()
+
+    return jsonify({"message": "deleted"})
+
+
 
 
 @app.route("/create", methods=["POST"])

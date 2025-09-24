@@ -6,7 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"example.com/m/v2/db"
+	"zochi.com/m/v2/db"
+	"zochi.com/m/v2/multiplayer"
 )
 
 type WordRequest struct {
@@ -73,33 +74,33 @@ func checkWordHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
-	if (req.Word == "") {
+	if req.Word == "" {
 		http.Error(w, "Missing word parameter", http.StatusBadRequest)
 		return
 	}
 
-	found,err := db.CheckWord(req.Word);
+	found, err := db.CheckWord(req.Word)
 	if err != nil {
 		http.Error(w, "Failed to check word", http.StatusInternalServerError)
 		return
 	}
-	
+
 	response := CheckWordRequest{Found: found}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
 
 func withCORS(h http.HandlerFunc) http.HandlerFunc {
-    return func(w http.ResponseWriter, r *http.Request) {
-        w.Header().Set("Access-Control-Allow-Origin", "*")
-        w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
-        w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-        if r.Method == http.MethodOptions {
-            w.WriteHeader(http.StatusOK)
-            return
-        }
-        h(w, r)
-    }
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		h(w, r)
+	}
 }
 
 func main() {
@@ -111,9 +112,7 @@ func main() {
 	// Routes
 	http.HandleFunc("/api/v1/findWord", withCORS(findWordHandler))
 	http.HandleFunc("/api/v1/checkWord", withCORS(checkWordHandler))
-
-
-
+	http.HandleFunc("/online", withCORS(multiplayer.Connect))
 
 	// Start server
 	fmt.Println("Backend is running on port 8081")

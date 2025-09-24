@@ -1,15 +1,22 @@
 import GameData from "./classes/GameData.js";
+import { PlayerSelect2, isSelected } from "./fiches-select.js";
 
 export async function check() {
-    const {x,y,letter} = GameData.lastPlacement;
+    const {letter} = GameData.lastPlacement;
     // Check if the last placement is valid
-    if (letter !== "empty") {
+    if (letter !== "empty" && isSelected()) {
         console.log("Last placement is valid:", GameData.lastPlacement);
+        return true;
     } else {
         console.log("No valid last placement to check.");
-        return;
+        return false;
     }
+}
 
+export async function checkForWords() {
+
+    const { x, y, letter } = GameData.lastPlacement;
+    if (!letter || letter === "empty") return;
 
     //check if 4 letters are on the board in a row
     let directions = [

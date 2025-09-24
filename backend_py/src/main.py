@@ -18,8 +18,6 @@ class Persons(db.Model):
     birthDate = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
 
-class Friends(db.Model):
-    user = db.Column
 
 with app.app_context():
     db.create_all()

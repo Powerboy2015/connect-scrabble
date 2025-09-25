@@ -3,17 +3,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="../CSS/Friendsscreen.css" />
   </head>
   <body onload="myFriends()">
-    <div>
-      <h2>search friends:</h2>
-      <input id="friendSearchInput" type="text" />
-      <button onclick="searchFriends()">search</button>
-      <ul id="searchResult"></ul>
-    </div>
-    <div>
-      <h2>my friends:</h2>
-      <ul id="myFriends"></ul>
+    <div id="all">
+      <div id="searchfriends">
+        <h2>search friends</h2>
+        <div id="search">
+          <input id="friendSearchInput" type="text" />
+          <button id="friendSearchButton" onclick="searchFriends()">search</button>
+        </div>
+        <ul id="searchResult"></ul>
+      </div>
+      <div id="friendlist">
+        <h2>my friends:</h2>
+        <ul id="myFriends"></ul>
+      </div>
     </div>
   </body>
 

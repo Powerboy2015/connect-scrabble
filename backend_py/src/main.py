@@ -38,7 +38,7 @@ with app.app_context():
 
 #get all friends in db voor test
 @app.route("/getFriends", methods=["GET"])
-def getFriends():
+def getALlFriends():
     items = Friends.query.all()
     all = []
     for item in items:
@@ -47,6 +47,34 @@ def getFriends():
             "friendId": item.friendId
         })
     return jsonify(all)
+
+#get all friends from user...
+@app.route("/getFriends/<int:id>", methods=["GET"])
+def getFriends(id):
+    items = Friends.query.all()
+    all = []
+    for item in items:
+        if item.personId == id:
+            all.append({
+                "personId": item.personId,
+                "friendId": item.friendId
+            })
+    return jsonify(all)
+
+
+
+#get alle users die de search term in hun voornaam of achternaam hebben
+@app.route("/searchFriend/<string:search>", methods=["GET"])
+def searchFriend(search):
+    items = Persons.query.all()
+    all = []
+    for item in items:
+        if search in item.firstName or search in items.lastName:
+            all.append({
+                'firstname': item.firstName
+            })
+    return jsonify(all)
+
 
 #get alle users in db voor test
 @app.route("/get", methods=["GET"])

@@ -3,15 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Wachten op andere</title>
+  <title>Startknop</title> 
 </head>
 <body>
   <div id="alles">
     <div class="lobby-container">
       <div class="spinner"></div>
-      <h1>Wachten op andere</h1>
-    </div>
-   
+      <h1>Wachten op anderen</h1>
+      <div class="startbutton">
+       <button style=
+        "height: 50px;
+        width: 150px; 
+        justify-self: center;
+        background-color: black;
+        color: white;
+        font-size: 20px;"
+      
+        
+        id="startbutton">Start</button>
+       </div>
   
+   
     <div id="speler-lijst" class="speler-lijst">
         <div class="player joined">
           <div class="avatar">1</div>
@@ -28,11 +40,14 @@
         <div class="player empty">
           <div class="avatar">?</div>
           <p>wachten...</p>
+
+        
         </div> 
     </div>
   </div>  
 
 
   <script type="module" src="../js/lobby/index.js"></script>
+  <script src="../js/lobby/Startknop.js"></script>
 </body>
 </html>

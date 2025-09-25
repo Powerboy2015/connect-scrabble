@@ -1,5 +1,5 @@
 body {
-  height: 100vh;
+  height: 97vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +24,16 @@ body {
   border-radius: 50%;
   animation: spin 2s linear infinite;
 }
+
+
+.startbutton{
+display:flex 
+center;
+  
+
+}
+
+
 
 @keyframes spin {
   to { transform: rotate(360deg); }

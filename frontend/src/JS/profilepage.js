@@ -40,3 +40,30 @@ async function getProfileData() {
     console.error(error.message);
   }
 }
+
+async function deleteCurrentUser() {
+  const user = sessionStorage.getItem("email");
+
+  console.log(user);
+
+  const url = `http://127.0.0.1:5001/delete/${user}`;
+
+  const options = {
+    method: "DELETE",
+  };
+
+  try {
+    const request = fetch(url, options);
+
+    const response = await request;
+
+    const result = await response.json();
+
+    console.log(result);
+
+    window.location =
+      "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html";
+  } catch (err) {
+    console.log(err);
+  }
+}

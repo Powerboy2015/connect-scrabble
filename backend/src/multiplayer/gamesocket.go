@@ -10,7 +10,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
-	"zochi.com/m/v2/multiplayer/lobby"
 )
 
 type Action string
@@ -41,6 +40,8 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
+
+	ws.WriteJSON(JsonResp{"ok": true, "message": "client connected successfully."})
 
 	// deferring closing, meaning it closes later when we are doing with using the connection within this funtion.
 	defer ws.Close()
@@ -82,7 +83,6 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 			resp := JsonResp{"ok": true, "message": "user had joined room "}
 			ws.WriteJSON(resp)
 			fmt.Println(p.Payload)
-			lobby.Create()
 			break
 
 		default:

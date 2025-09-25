@@ -1,5 +1,1 @@
 package lobby
-
-func Create() {
-
-}

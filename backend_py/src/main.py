@@ -56,7 +56,6 @@ def getFriends(id):
     for item in items:
         if item.personId == id:
             all.append({
-                "personId": item.personId,
                 "friendId": item.friendId
             })
     return jsonify(all)
@@ -67,11 +66,14 @@ def getFriends(id):
 @app.route("/searchFriend/<string:search>", methods=["GET"])
 def searchFriend(search):
     items = Persons.query.all()
+    friends = Friends.query.all()
     all = []
     for item in items:
-        if search in item.firstName or search in items.lastName:
+        if search in item.firstName:
             all.append({
-                'firstname': item.firstName
+                'firstname': item.firstName,
+                'lastname': item.lastName,
+                'id': item.id
             })
     return jsonify(all)
 
@@ -100,6 +102,7 @@ def getUser(email, password):
 
     if password == person.password:
         return jsonify({
+            "id": person.id,
             'firstName': person.firstName,
             'lastName': person.lastName,
             'email': person.email,

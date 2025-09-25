@@ -141,5 +141,15 @@ def addFriend(personId, friendId):
     db.session.commit()
     return jsonify({"status": "ok"}), 200
 
+
+#verwijder friend ...persoon verwijderd ...vriend
+@app.route("/removeFriend/<int:personId>/<int:friendId>", methods=["DELETE"])
+def removeFriend(personId, friendId): 
+    friendship = Friends.query.filter_by(personId=personId, friendId=friendId).first_or_404()
+
+    db.session.delete(friendship)
+    db.session.commit()
+    return jsonify({"status": "ok"}), 200
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

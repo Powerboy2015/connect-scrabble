@@ -23,7 +23,7 @@ export default class MultiplayerConnection {
     
 
     constructor() {
-        const url = new URL("ws://192.168.2.100:8081/online");
+        const url = new URL("ws://145.89.105.99:8081/online");
         // checks if there is a session id to be set.
         const sessionID = window.sessionStorage.getItem("sessionID");
         const userHash = this.hashLoggedUser();

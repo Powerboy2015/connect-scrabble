@@ -114,6 +114,22 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 		case ShowLobby:
 			displayLobby(*client)
 
+		case "SendLobbyMessage":
+			message, ok := p.Payload["message"].(string)
+			if !ok {
+				resp := JsonResp{"ok": false, "message": "invalid message format", "Action": "noEvent"}
+				client.Conn.WriteJSON(resp)
+				continue
+			}
+			err := connManager.SendLobbyMessage("JSX85K", []byte(message))
+			if err != nil {
+				resp := JsonResp{"ok": false, "message": err.Error(), "Action": "noEvent"}
+				client.Conn.WriteJSON(resp)
+			} else {
+				resp := JsonResp{"ok": true, "message": "message sent to lobby", "Action": "LobbyMessageSent"}
+				client.Conn.WriteJSON(resp)
+			}
+
 		default:
 			resp := JsonResp{"ok": false, "message": "action does not exist", "Action": "noEvent"}
 			client.Conn.WriteJSON(resp)

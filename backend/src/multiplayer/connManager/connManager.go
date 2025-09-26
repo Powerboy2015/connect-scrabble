@@ -8,6 +8,8 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+type JsonResp map[string]interface{}
+
 type LobbyManager struct {
 	clients map[string]*Client          //all clients
 	lobbies map[string]map[*Client]bool //clients that are in a lobby
@@ -29,6 +31,9 @@ var Manager = &LobbyManager{
 // gives each client a UUID
 func AddClient(conn *websocket.Conn, username string) *Client {
 	_userid := uuid.New().String()
+	if username == "" {
+		username = "Anonymous"
+	}
 	_client := Client{
 		ID:       _userid,
 		HashName: username,
@@ -72,4 +77,15 @@ func GetLobbyPlayers(_roomcode string) (map[*Client]bool, error) {
 		return Manager.lobbies[_roomcode], nil
 	}
 	return nil, fmt.Errorf("room %s not found", _roomcode)
+}
+
+func SendLobbyMessage(_roomcode string, _message []byte) error {
+	_clients, err := GetLobbyPlayers(_roomcode)
+	if err != nil {
+		return err
+	}
+	for client := range _clients {
+		client.Conn.WriteJSON(JsonResp{"ok": true, "message": "new message in lobby", "Payload": JsonResp{"message": string(_message)}, "Action": "NewLobbyMessage"})
+	}
+	return nil
 }

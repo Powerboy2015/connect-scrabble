@@ -30,7 +30,7 @@ body {
     display: flex;
     width: 90%;
     height: 55%;
-    background-color: rgb(70, 174, 82);
+    background-color: #cff3ad;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@ body {
     display: flex;
     width: 90%;
     height: 33%;
-    background-color: rgb(70, 174, 82);
+    background-color: #cff3ad;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -52,7 +52,7 @@ body {
     height: 100%;
     width: 80%;
     border-radius: 10px;
-    background-color: aliceblue;
+    background-color: #687c5a;
 }
 
 #search {
@@ -82,7 +82,7 @@ body {
     height: 90%;
     width: 80%;
     border-radius: 10px;
-    background-color: aliceblue;
+    background-color: #687c5a;
 }
 
 #friendlist {
@@ -91,7 +91,7 @@ body {
     flex-direction: column;
     width: 60%;
     height: 90%;
-    background-color: rgb(70, 174, 82);
+    background-color: #cff3ad;
     border-radius: 10px;
 }
 
@@ -102,6 +102,6 @@ body {
     display: flex;
     align-content: flex-start;
     flex-wrap: wrap;
-    background-color: aliceblue;
+    background-color: #687c5a;
     border-radius: 10px;
 }

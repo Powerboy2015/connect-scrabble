@@ -3,7 +3,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../CSS/main.css" />
+    <link rel="stylesheet" href="../CSS/onlinegame.css" />
   </head>
 
   <!-- <body onload="PlayerSelect2(), startGameTimer(), PlayerSelect()"> -->
@@ -81,7 +81,17 @@
         >
       </div>
     </div>
-  </body>
+    <div class="chat-container" id="chatContainer">
+    <div class="chat-messages" id="chatMessages">
+      <div class="message"><span>Speler 1:</span> Hello!</div>
+      <div class="message"><span>Speler 2:</span> Yo</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Stuur bericht..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</body>
   <!-- <script type="module" src="../js/gameloop.js"></script> -->
   <!-- <script src="../JS/Timer.js"></script>
   <script src="../JS/PlayerSelect.js"></script>

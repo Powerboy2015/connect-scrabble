@@ -11,20 +11,48 @@ body {
     background-color: #687c5a;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     border-radius: 10px;
 }
 
+#searchAndRequests {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    width: 35%;
+    height: 100%;
+}
+
 #searchfriends {
     display: flex;
-    width: 30%;
-    height: 90%;
+    width: 90%;
+    height: 55%;
     background-color: rgb(70, 174, 82);
     border-radius: 10px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#friendrequestbox {
+    display: flex;
+    width: 90%;
+    height: 33%;
+    background-color: rgb(70, 174, 82);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#friendRequest {
+    height: 100%;
+    width: 80%;
+    border-radius: 10px;
+    background-color: aliceblue;
 }
 
 #search {
@@ -52,7 +80,7 @@ body {
 
 #searchResult {
     height: 90%;
-    width: 90%;
+    width: 80%;
     border-radius: 10px;
     background-color: aliceblue;
 }
@@ -69,7 +97,7 @@ body {
 
 
 #myFriends {
-    width: 95%;
+    width: 90%;
     height: 90%;
     display: flex;
     align-content: flex-start;

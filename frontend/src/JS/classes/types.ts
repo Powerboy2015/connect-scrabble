@@ -1,4 +1,4 @@
 type Message = {
     Action: string,
-    Payload: {}
+    Payload: Record<string,any>
 }

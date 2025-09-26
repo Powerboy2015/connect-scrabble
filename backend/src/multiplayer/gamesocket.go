@@ -47,8 +47,16 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	userID := query.Get("uuid")
 	userHash := query.Get("userHash")
-	user := encryption.DecodeUser(userHash)
-	fmt.Println(user)
+	fmt.Println("userhash: ", userHash)
+	var user encryption.User
+	if userHash != "" {
+		user = encryption.DecodeUser(userHash)
+	} else {
+		user = encryption.User{
+			Username: "anonymous",
+			Password: "undefined",
+		}
+	}
 
 	var client *connManager.Client
 	if userID == "" {

@@ -31,9 +31,6 @@ var Manager = &LobbyManager{
 // gives each client a UUID
 func AddClient(conn *websocket.Conn, username string) *Client {
 	_userid := uuid.New().String()
-	if username == "" {
-		username = "Anonymous"
-	}
 	_client := Client{
 		ID:       _userid,
 		HashName: username,

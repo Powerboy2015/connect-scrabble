@@ -44,7 +44,7 @@ top: -10px;
 button:hover{
   background-color: #607153;
   color: black;
-  cursor: finger;
+  cursor: pointer;
 }
 
 

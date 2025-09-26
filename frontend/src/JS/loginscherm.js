@@ -9,7 +9,7 @@ async function login() {
 
     if (!response.ok) {
       if (response.status === 404) {
-        document.getElementById("error").innerHTML = "gebruiker bestaad niet";
+        document.getElementById("error").innerHTML = "gebruiker bestaat niet";
       }
     } else {
       const data = await response.json();

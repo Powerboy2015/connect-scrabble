@@ -10,6 +10,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	"zochi.com/m/v2/encryption"
+	connManager "zochi.com/m/v2/multiplayer/connManager"
 )
 
 type Action string
@@ -17,10 +19,11 @@ type Action string
 const (
 	UpdateGame Action = "UpdateGame"
 	JoinLobby  Action = "JoinLobby"
+	ShowLobby  Action = "ShowLobby"
 )
 
 type Message struct {
-	Action  Action                 `json:"action"`
+	Action  Action                 `json:"Action"`
 	Payload map[string]interface{} `json:"payload"`
 }
 
@@ -41,13 +44,34 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ws.WriteJSON(JsonResp{"ok": true, "message": "client connected successfully."})
+	query := r.URL.Query()
+	userID := query.Get("uuid")
+	userHash := query.Get("userHash")
+	user := encryption.DecodeUser(userHash)
+	fmt.Println(user)
+
+	var client *connManager.Client
+	if userID == "" {
+		client = connManager.AddClient(ws, user.Username)
+		client.Conn.WriteJSON(JsonResp{"ok": true, "message": "new client connected successfully to server", "Payload": JsonResp{"id": client.ID}, "Action": "NewUserConnected"})
+	} else {
+		client, err = connManager.RejoinClient(userID, ws)
+		if err != nil {
+			// Client not found, create a new one
+			client = connManager.AddClient(ws, user.Username)
+			client.Conn.WriteJSON(JsonResp{"ok": true, "message": "UUID was not found, rejoined as new client to server", "Payload": JsonResp{"id": client.ID}, "Action": "NewUserConnected"})
+		} else {
+			// Client found and reconnected
+			client.Conn.WriteJSON(JsonResp{"ok": true, "message": "client reconnected successfully to server", "Payload": JsonResp{"id": client.ID}, "Action": "UserConnected"})
+		}
+
+	}
 
 	// deferring closing, meaning it closes later when we are doing with using the connection within this funtion.
 	defer ws.Close()
 
 	for {
-		msgType, msg, err := ws.ReadMessage()
+		msgType, msg, err := client.Conn.ReadMessage()
 		if err != nil {
 			fmt.Println("read error: ", err)
 			break
@@ -65,7 +89,7 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 
 			resp := JsonResp{"ok": false, "message": "invalid json"}
 			// Echo the received bytes back to the client. WriteMessage expects a []byte.
-			if err := ws.WriteJSON(resp); err != nil {
+			if err := client.Conn.WriteJSON(resp); err != nil {
 				// catches any response errors.
 				fmt.Println("write error: ", err)
 			}
@@ -80,16 +104,20 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 		case UpdateGame:
 
 		case JoinLobby:
-			resp := JsonResp{"ok": true, "message": "user had joined room "}
-			ws.WriteJSON(resp)
+			connManager.JoinLobby("JSX85K", client)
 			fmt.Println(p.Payload)
-			break
+
+			// response message
+			resp := JsonResp{"ok": true, "message": "user has joined room ", "Action": "LobbyJoined"}
+			client.Conn.WriteJSON(resp)
+
+		case ShowLobby:
+			displayLobby(*client)
 
 		default:
-			resp := JsonResp{"ok": false, "message": "action does not exist"}
-			ws.WriteJSON(resp)
+			resp := JsonResp{"ok": false, "message": "action does not exist", "Action": "noEvent"}
+			client.Conn.WriteJSON(resp)
 		}
 
 	}
-
 }

@@ -25,15 +25,10 @@ body {
   animation: spin 2s linear infinite;
 }
 
-
-.startbutton{
-display:flex 
-center;
-  
-
+.startbutton {
+  display: flex;
+  justify-content: center;
 }
-
-
 
 @keyframes spin {
   to { transform: rotate(360deg); }

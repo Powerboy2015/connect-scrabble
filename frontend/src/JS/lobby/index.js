@@ -1,14 +1,24 @@
-import MultiplayerConnection from "../classes/MultiplayerConnection.js";
+async function startSocket()
+{
+    let socket = new WebSocket("ws://localhost:8081/online");
+    console.log(socket);
+    sendMessage(socket);
 
-const socket = new MultiplayerConnection;
-
-// Ensures that newly conencted users have their UUID saved in cookies.
-socket.registerHandler("NewUserConnected",(/** @type {Message}*/ mesg) => {
-    const UUID = mesg.Payload.id
-    window.sessionStorage.setItem("sessionID",UUID)
-})
+}
 
 
-socket.sendMessage({Action:"JoinLobby", Payload:{
-    roomCode:"JSX205J"
-}})
+function sendMessage(_socket)
+{
+    if (_socket.readyState === _socket.OPEN) {
+        _socket.send(JSON.stringify({
+            action: "join",
+            lobbyId: "12345"
+        }))
+    } else {
+        setTimeout(() => {
+            sendMessage(_socket)
+        },500)
+    }
+}
+
+startSocket();

@@ -1,0 +1,425 @@
+body {
+  background-color: #687c5a;
+  margin: 0;
+  padding: 0;
+}
+
+.parent-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+  padding: 0;
+}
+
+.team1 {
+  width: 300px;
+  position: fixed;
+  left: 20px;
+  top: 50px;
+}
+
+.team2 {
+  width: 300px;
+  position: fixed;
+  right: 20px;
+  top: 50px;
+}
+
+.team1,
+player {
+  background-color: #c1121f;
+  margin-bottom: 20px;
+  font-size: 40px;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.team2,
+player {
+  background-color: #003049;
+  margin-bottom: 20px;
+  font-size: 40px;
+  padding: 20px;
+  color: #ffffff;
+  text-align: end;
+}
+
+.helebordspul {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7vh;
+}
+
+#grid {
+  width: 100%;
+  height: 100%;
+}
+
+#buttonsfortest {
+  position: absolute;
+  top: -10%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.7%;
+  z-index: 10;
+}
+
+.dropbutton {
+  position: relative;
+  width: 12.5%;
+
+  /* opacity: 0.7; */
+  /* dit is voor testen */
+
+  background: none;
+  border: none;
+}
+
+.dropbutton::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/red arrow lol.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.dropbutton:hover::before {
+  opacity: 1;
+}
+
+#gridshit {
+  position: absolute;
+  top: -1%;
+  left: 4%;
+  width: 88%;
+  height: 84%;
+
+  display: grid;
+  row-gap: 6%;
+  column-gap: 4%;
+  justify-content: center;
+  align-content: center;
+}
+
+.vakjes {
+  width: 100%;
+  height: 100%;
+}
+
+.iets {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #cff3ad;
+  border: 1vh solid #a0b989;
+  color: black;
+  font-size: 3.8vh;
+  font-family: Arial;
+  border-radius: 50%;
+
+}
+
+/* @keyframes fallingorsomething {
+  from {
+    
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.board {
+  position: relative;
+} */
+/* Man idk how this animation shi works T-T */
+
+.boardPic {
+  height: auto;
+  width: 65vb;
+  display: flex;
+  transform: translateY(-5vh);
+}
+
+.letters {
+  top: -15%;
+  font-size: 3vh;
+  display: grid;
+  grid-template-columns: 12vb 12vb 12vb 12vb 12vb;
+  grid-template-rows: 13vh;
+}
+
+.letter::before {
+  content: attr(data-value);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7vb;
+  height: 7vh;
+  background: #cff3ad;
+  border-radius: 50vh;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  z-index: -1;
+}
+
+.letter {
+  display: flex;
+  background: #a0b989;
+  border: 4px solid #254b03;
+  position: relative;
+  color: black;
+  font-family: Arial;
+  z-index: 3;
+  border-radius: 500vb;
+  padding: 4vh 2vb;
+  font-size: 40px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  width: 6vb;
+  height: 2vh;
+}
+
+.letter:hover {
+  background-color: #0b4100;
+  color: #0b4100;
+}
+
+.letter.selected {
+  transform: translateY(-20px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #0b4100;
+  background-color: #0b4100;
+}
+
+.Imgoinginsane {
+  display: flex;
+  flex-direction: row;
+}
+
+.Imgoinginsane2 {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+
+.clock {
+  font-size: 24px;
+  margin-left: 10px;
+  color: green;
+  font-weight: bold;
+  position: relative;
+
+  width: 80px;
+  height: 80px;
+  border: 3px solid green;
+  border-radius: 50%;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  /*lol*/
+
+  display: none;
+}
+
+#Placeholderbox {
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#WinText {
+  position: absolute;
+  font-size: clamp(1.5rem, 5vw, 3rem);
+}
+
+/*Ik word gek, ik hou dit voor nu*/
+.banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.Buttons {
+  display: flex;
+  flex-direction: normal;
+  gap: 1vw;
+}
+
+.PlayAgain_Button {
+  background-color: #15c10c;
+  border: none;
+  border-radius: 20px;
+  width: 18vw;
+  padding: 4vh;
+  color: #ffffff;
+  font-size: 2.5vw;
+}
+
+.PlayAgain_Button:hover {
+  background-color: #ce2323;
+}
+
+.PlayAgain_Button:active {
+  transform: scale(0.95);
+}
+
+.Back_StartScreen_Button {
+  background-color: #e8552b;
+  border: none;
+  border-radius: 20px;
+  width: 18vw;
+  padding: 4vh;
+  color: #ffffff;
+  font-size: 2.5vw;
+}
+
+.Back_StartScreen_Button:hover {
+  background-color: #ce4823;
+}
+
+.Back_StartScreen_Button:active {
+  transform: scale(0.95);
+}
+
+.active {
+  background-color: black;
+}
+
+.selector {
+  vertical-align: middle;
+  font-size: 50px;
+}
+
+.StartCountDown {
+  position: fixed;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.241);
+  width: 110%;
+  height: 110%;
+  font-size: 200px;
+  text-align: center;
+  line-height: 400%;
+}
+
+.testButton1 {
+  position: fixed;
+  left: 0px;
+}
+
+.testButton2 {
+  position: fixed;
+  left: 200px;
+}
+
+.toggle-chat-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 20px;
+}
+
+
+.chat-container {
+  position: fixed;
+  bottom: 70px;
+  left: 20px;
+  width: 300px;
+  max-height: 400px;
+  background: rgba(0, 0, 0, 0.699);
+  border-radius: 10px;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+  font-size: 20px;
+  z-index: 9999;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #555 #222;
+}
+
+.chat-input {
+  display: flex;
+  border-top: 1px solid #444;
+
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: #333;
+  color: #fff;
+  border-radius: 0 0 0 8px;
+}
+
+.chat-input button {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 0 0 8px 0;
+  font-size: 18px;
+}
+
+.chat-input button:hover {
+  background: #666;
+}
+
+.message span {
+  font-weight: bold;
+  color: #6cf;
+
+}

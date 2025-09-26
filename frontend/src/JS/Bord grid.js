@@ -52,6 +52,7 @@ async function dropkickchild(column) {
     const _letter = GameData.getSelectedLetter;
 
     if (!(await check())) return;
+    // dit is de check die zeker maakt dat er geen fish wordt geplaatst
 
     for (let row = GameData.grid.length - 1; row >= 0; row--) {
         if (GameData.gridStatus[row][column] === "empty") {

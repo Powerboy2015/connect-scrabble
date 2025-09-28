@@ -13,8 +13,6 @@ export async function check() {
     }
 }
 
-// Ik heb je check functie opgesplitst in 2 functies, want ik kon niet een makkelijker manier vinden dan dit voor de check
-
 export async function checkForWords() {
 
     const { x, y, letter } = GameData.lastPlacement;

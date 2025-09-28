@@ -20,44 +20,9 @@ async function searchFriends() {
   });
 }
 
-let currentFriends = [];
-
-async function myFriends() {
-  const id = sessionStorage.getItem("id");
-  const url = `http://127.0.0.1:5001/getFriends/${id}`;
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    console.error("Kon vrienden niet ophalen:", response.statusText);
-    return;
-  }
-
-  const result = await response.json();
-
-  currentFriends = [];
-  const ul = document.getElementById("myFriends");
-  ul.innerHTML = "";
-
-  result.forEach((item) => {
-    const fid = String(item.friendId).trim();
-    currentFriends.push(fid);
-
-    const li = document.createElement("li");
-    li.textContent = fid;
-    ul.append(li);
-  });
-
-  return result;
-}
-
 async function addFriend(friendId) {
   const personId = sessionStorage.getItem("id");
   const friendIdString = String(friendId);
-
-  if (currentFriends.includes(friendIdString)) {
-    console.log(`Friend ${friendIdString} staat al in je lijst.`);
-    return;
-  }
 
   if (friendIdString === String(personId)) {
     console.log("Je kunt jezelf niet als vriend toevoegen.");
@@ -75,46 +40,62 @@ async function addFriend(friendId) {
   const result = await response.json();
   console.log(result);
 
-  currentFriends.push(friendIdString);
   const li = document.createElement("li");
   li.innerHTML = friendIdString;
   document.getElementById("myFriends").append(li);
 }
 
-async function friendRequests() {
-  const url = "http://127.0.0.1:5001/getFriends";
+async function myFriends() {
+  const id = sessionStorage.getItem("id");
+  const url = `http://127.0.0.1:5001/getUserFriends/${id}`;
 
   const request = await fetch(url);
 
   const response = await request.json();
 
+  console.log(response);
+
   response.forEach((item) => {
-    const currentPlayer = Number(sessionStorage.getItem("id"));
+    li = document.createElement("li");
+    li.append(item.to_user);
 
-    if (item.friendId === currentPlayer) {
-      li = document.createElement("li");
-      btnA = document.createElement("button");
-      btnD = document.createElement("button");
-      btnA.innerHTML = "accept";
-      btnD.innerHTML = "deny";
-
-      btnA.addEventListener("click", () => approveRequest(item.personId));
-
-      li.append(item.personId);
-      li.append(btnA, btnD);
-
-      document.getElementById("friendRequest").append(li);
-    }
+    document.getElementById("myFriends").append(li);
   });
 }
 
-async function approveRequest(approvedId) {
-  const currentPlayer = sessionStorage.getItem("id");
-  const url = `http://127.0.0.1:5001/addFriend/${currentPlayer}/${approvedId}`;
+async function friendRequests() {
+  const id = sessionStorage.getItem("id");
+  const url = `http://127.0.0.1:5001/friendRequests/${id}`;
 
-  const request = await fetch(url, { method: "POST" });
+  const request = await fetch(url);
 
   const response = await request.json();
+  console.log(response);
+  response.forEach((item) => {
+    li = document.createElement("li");
+    btn = document.createElement("button");
+
+    li.append(item.from_user);
+    li.append(btn);
+
+    btn.addEventListener("click", () => {
+      acceptFriend(item.request_id);
+    });
+
+    document.getElementById("friendRequest").append(li);
+
+    console.log(item.from_user);
+  });
+}
+
+async function acceptFriend(request_id) {
+  const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
+
+  console.log(request_id);
+
+  request = await fetch(url, { method: "POST" });
+
+  response = await request.json();
 
   console.log(response);
 }

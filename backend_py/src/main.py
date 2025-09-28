@@ -64,6 +64,15 @@ def getFriends(id):
     return jsonify(all)
 
 
+@app.route("/emailToId/<string:email>", methods=["GET"])
+def getId(email):
+    person = Persons.query.filter_by(email=email).first()
+    all = {
+        "id": person.id
+
+    }
+    return jsonify(all)
+
 
 #get alle users die de search term in hun voornaam of achternaam hebben
 @app.route("/searchFriend/<string:search>", methods=["GET"])
@@ -76,7 +85,8 @@ def searchFriend(search):
             all.append({
                 'firstname': item.firstName,
                 'lastname': item.lastName,
-                'id': item.id
+                'id': item.id,
+                'email': item.email
             })
     return jsonify(all)
 
@@ -98,10 +108,30 @@ def get():
         })
     return jsonify(all)
 
+
+@app.route("/get/<int:id>", methods=["GET"]) 
+def get_email(id):
+    person = Persons.query.filter_by(id=id).first()
+    if not person:
+        return {"error": "No person found"}, 404
+
+
+    return {            'id': person.id,
+            'firstName': person.firstName,
+            'lastName': person.lastName,
+            'email': person.email,
+            'birthDate': person.birthDate,
+            'password': person.password,
+            
+            }
+
+    
+
+
 # get email/wachtwoord voor alle data van die user
-@app.route("/get/<string:email>/<string:password>", methods=["GET"])
-def getUser(email, password):
-    person = Persons.query.get_or_404(email)
+@app.route("/get/<int:id>/<string:password>", methods=["GET"])
+def getUser(id, password):
+    person = Persons.query.get_or_404(id)
 
     if password == person.password:
         return jsonify({
@@ -208,3 +238,4 @@ def removeFriend(id1, id2):
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
+

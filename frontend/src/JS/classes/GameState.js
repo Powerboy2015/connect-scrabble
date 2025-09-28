@@ -68,35 +68,3 @@ class TeamData {
     }
 }
 
-function TeamClassSetup() {
-    const tileBag = createTileBag();
-    const PlayerAmount = Object.keys(GameData.playerlist).length;
-    const players = Object.values(GameData.playerlist);
-    console.log('player amount:',PlayerAmount)
-
-    let team1, team2;
-    // fuck you ik ga het op deze stomme manier doen (idk als dit ook nodig is lol)
-    if (PlayerAmount == 2) {
-        team1 = new TeamData(tileBag, players[0]);
-        team2 = new TeamData(tileBag, players[1]);
-    }
-    else if (PlayerAmount == 3) {
-        team1 = new TeamData(tileBag, [players[0], players[2]]);
-        team2 = new TeamData(tileBag, players[1]);
-    }
-    else if (PlayerAmount == 4) {
-        team1 = new TeamData(tileBag, [players[0], players[2]]);
-        team2 = new TeamData(tileBag, [players[1], players[3]]);
-    }
-    else {
-        console.log("wtf")
-    }
-
-    console.log('team1:', team1?.ficheshand, team1.players);
-    console.log('team2:', team2?.ficheshand, team2.players);
-}
-
-
-
-
-TeamClassSetup()

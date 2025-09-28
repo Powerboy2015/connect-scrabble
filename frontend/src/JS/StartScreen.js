@@ -70,11 +70,15 @@ function TimerStart() {
   }, 1000);
 }
 
-// pas dit aan zodat je ander scherm kan zien
-let loggedin = false;
+// Ik weet niet zeker als dit werkt want 
+function loggedin() {
+  const id = sessionStorage.getItem("id");
+  const password = sessionStorage.getItem("password");
+  return id !== null && password !== null;
+}
 
 function check_if_logged_in() {
-  if (loggedin) {
+  if (loggedin()) {
     document.getElementById("profile_overlay").style.display = "flex";
   } else {
     document.getElementById("login_overlay").style.display = "flex";

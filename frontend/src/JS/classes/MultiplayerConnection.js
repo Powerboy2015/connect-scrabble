@@ -3,7 +3,7 @@ import encrypter from "./Encrypter.js";
 export default class MultiplayerConnection {
 
     /** @type {WebSocket} */
-    socket;
+    static socket;
     
     // Action handlers mapped by action name
     actionHandlers = {
@@ -23,7 +23,7 @@ export default class MultiplayerConnection {
     
 
     constructor() {
-        const url = new URL("ws://192.168.2.100:8081/online");
+        const url = new URL("ws://145.89.107.30:8081/online");
         // checks if there is a session id to be set.
         const sessionID = window.sessionStorage.getItem("sessionID");
         const userHash = this.hashLoggedUser();
@@ -62,6 +62,17 @@ export default class MultiplayerConnection {
         }
         this.socket.send(JSON.stringify(_message))
     }
+
+    static sendMessage(_message = {}) {
+        if(MultiplayerConnection.socket.readyState !== MultiplayerConnection.socket.OPEN)
+        {
+            console.log("waiting for socket to open...");
+            return setTimeout(() => {
+                MultiplayerConnection.sendMessage(_message);
+            },500)
+        }
+        MultiplayerConnection.socket.send(JSON.stringify(_message))
+    }
     
     /**
      * Register a new action handler or override an existing one
@@ -93,7 +104,7 @@ export default class MultiplayerConnection {
         const isFilled = !!password && !!username;
 
         if (!isFilled) {
-            console.error("user not logged in!");
+            console.error("user not logged in! Not supposed to happen but allowing anonymous user.");
             return "";
         }
 

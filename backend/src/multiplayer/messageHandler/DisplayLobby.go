@@ -20,9 +20,9 @@ func DisplayLobby(_client utility.Client, p utility.Message) {
 	}
 
 	// Extract client IDs from the map to make it serializable for frontend
-	playerList := make([]string, 0, len(clientmap))
+	playerList := make([]utility.JsonResp, 0, len(clientmap))
 	for playerClient := range clientmap {
-		playerList = append(playerList, playerClient.HashName)
+		playerList = append(playerList, utility.JsonResp{"id": playerClient.ID, "name": playerClient.HashName})
 	}
 
 	// Create response with player list

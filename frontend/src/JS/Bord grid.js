@@ -65,15 +65,40 @@ async function dropkickchild(column) {
             GameData.lastPlacement = {x:column, y:row, letter:_letter};
 
 
-            // XXX: debug info
-            console.debug(GameData.gridStatus);
-            console.debug(GameData.grid);
-            console.debug(GameData.lastPlacement);
-            useTileAndUpdate(_letter, GameData.fichesBag, GameData.sharedHand);
-            checkForWords();
-            GameData.Timer.restart();
-            PlayerTurn();
+
             break;
+        }
+    }
+}
+
+async function executeTurn(_column) {
+    const _letter = GameData.getSelectedLetter;
+
+    // does something with mukdembu's check
+    if (!(await check())) return;
+    checkForWords();
+    useTileAndUpdate(_letter, GameData.fichesBag, GameData.sharedHand);
+    reloadGrid(_column,_letter);
+    GameData.Timer.restart();
+    PlayerTurn();
+
+    // XXX: debug info
+    console.debug(GameData.gridStatus);
+    console.debug(GameData.grid);
+    console.debug(GameData.lastPlacement);
+}
+
+function reloadGrid(column,_letter) {
+    for (let row = GameData.grid.length - 1; row >= 0; row--) {
+        if (GameData.gridStatus[row][column] === "empty") {
+            GameData.grid[row][column].textContent = _letter;
+            GameData.grid[row][column].classList.add("iets");
+
+            GameData.gridStatus[row][column] = _letter; // iets wordt een letter later te zijn (die komt dan in een
+            // lijst waar zico misschien iets kan maken waardoor het checkt naast de vakjes bij het nieuwe letter ofzo)
+            // hallo here it is -zico
+            
+            GameData.lastPlacement = {x:column, y:row, letter:_letter};
         }
     }
 }

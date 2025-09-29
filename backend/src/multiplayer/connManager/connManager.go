@@ -19,6 +19,32 @@ var Manager = &LobbyManager{
 	lobbies: make(map[string]map[*utility.Client]bool),
 }
 
+func HandleClientDisconnection(_client *utility.Client) {
+	// Find and remove client from any lobbies they're in
+	for roomCode, lobby := range Manager.lobbies {
+		if _, inLobby := lobby[_client]; inLobby {
+			// Remove client from lobby
+
+			// If lobby is empty, consider removing it
+			if len(lobby) == 0 {
+				delete(Manager.lobbies, roomCode)
+			} else {
+				// Notify other clients in the lobby about the disconnection
+				for client := range lobby {
+					if client != _client && client.Conn != nil {
+						client.Send <- utility.JsonResp{
+							"ok":      true,
+							"message": "player disconnected",
+							"Payload": utility.JsonResp{"id": _client.ID},
+							"Action":  "PlayerDisconnected",
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 // adds an incoming connection to the connected client list
 // gives each client a UUID
 func AddClient(conn *websocket.Conn, username string) *utility.Client {
@@ -83,4 +109,60 @@ func SendLobbyMessage(_roomcode string, _message []byte, _client *utility.Client
 		client.Send <- utility.JsonResp{"ok": true, "message": "new message in lobby", "Payload": utility.JsonResp{"message": string(_message), "sendBy": _client.HashName}, "Action": "NewLobbyMessage"}
 	}
 	return nil
+}
+
+// handles sending the game update to all players in the lobby.
+func SendGameUpdate(_roomcode string, _message utility.GameDataObject) error {
+	_clients, err := GetLobbyPlayers(_roomcode)
+	if err != nil {
+		return err
+	}
+
+	//Handle jsonify of object
+	for client := range _clients {
+		client.Send <- utility.JsonResp{"ok": true, "message": "game update", "Payload": _message, "Action": "GameUpdate"}
+	}
+	return nil
+}
+
+func CheckLobbyReadiness(_roomcode string) (bool, error) {
+	_clients, err := GetLobbyPlayers(_roomcode)
+	if err != nil {
+		return false, err
+	}
+
+	// Check if there are at least 2 players
+	// if len(_clients) < 2 {
+	// 	return false, fmt.Errorf("not enough players in room %s", _roomcode)
+	// }
+
+	// Check if all clients are connected
+	allConnected := true
+	playerNames := []string{}
+
+	for client := range _clients {
+		if client.Conn == nil {
+			allConnected = false
+			break
+		}
+		playerNames = append(playerNames, client.HashName)
+	}
+
+	// If all clients are connected, send ready signal
+	if allConnected {
+		for client := range _clients {
+			client.Send <- utility.JsonResp{
+				"ok":      true,
+				"message": "all players connected",
+				"Payload": utility.JsonResp{
+					"players": playerNames,
+					"count":   len(_clients),
+				},
+				"Action": "GameReady",
+			}
+		}
+		return true, nil
+	}
+
+	return false, fmt.Errorf("not all players in room %s are connected", _roomcode)
 }

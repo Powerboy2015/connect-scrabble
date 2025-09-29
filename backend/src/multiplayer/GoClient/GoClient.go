@@ -1,3 +1,4 @@
+// Responsible for handling client sending and receiving.
 package GoClient
 
 import (
@@ -47,9 +48,17 @@ func clientReader(_client *utility.Client) {
 	}
 }
 
+func IsClientConnected(_client *utility.Client) bool {
+	return _client != nil && _client.Conn != nil
+}
+
 // Receives incoming messages, checks if they're the right message type and adds them to the Receive channel.
 func clientReceiver(_client *utility.Client) {
-	defer _client.Conn.Close()
+	defer func() {
+		_client.Conn.Close()
+		// Find and remove client from any lobbies they're in
+		connManager.HandleClientDisconnection(_client)
+	}()
 
 	for {
 		msgType, message, err := _client.Conn.ReadMessage()
@@ -99,11 +108,18 @@ func clientHandler(_client *utility.Client) {
 
 		case utility.JoinLobby:
 			connManager.JoinLobby("JSX85K", _client)
-			fmt.Println(p.Payload)
 
 			// response message
 			resp := utility.JsonResp{"ok": true, "message": "user has joined room ", "Action": "LobbyJoined"}
 			_client.Send <- resp
+
+			isReady, err := connManager.CheckLobbyReadiness("JSX85K")
+			if err != nil {
+				log.Printf("Lobby not ready: %v", err)
+			} else if isReady {
+				log.Printf("Lobby is ready to start game!")
+				// Here you could trigger game start logic
+			}
 
 		case utility.ShowLobby:
 			messagehandler.DisplayLobby(*_client, p)
@@ -128,6 +144,31 @@ func clientHandler(_client *utility.Client) {
 				resp := utility.JsonResp{"ok": true, "message": "message sent to lobby", "Action": "LobbyMessageSent"}
 				_client.Send <- resp
 
+			}
+
+		case utility.UpdateGameState:
+			var gameData utility.GameDataObject
+			gameDataBytes, err := json.Marshal(p.Payload)
+			if err != nil {
+				resp := utility.JsonResp{"ok": false, "message": "invalid game data format", "Action": "noEvent"}
+				_client.Send <- resp
+				continue
+			}
+			err = json.Unmarshal(gameDataBytes, &gameData)
+			if err != nil {
+				resp := utility.JsonResp{"ok": false, "message": "invalid game data format", "Action": "noEvent"}
+				_client.Send <- resp
+				continue
+			}
+
+			err = connManager.SendGameUpdate("JSX85K", gameData)
+			if err != nil {
+				resp := utility.JsonResp{"ok": false, "message": err.Error(), "Action": "noEvent"}
+				_client.Send <- resp
+
+			} else {
+				resp := utility.JsonResp{"ok": true, "message": "game state updated", "Action": "GameStateUpdated"}
+				_client.Send <- resp
 			}
 
 			// If no action can be found, return a noEvent.

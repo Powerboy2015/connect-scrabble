@@ -26,6 +26,20 @@ const (
 	JoinLobby        Action = "JoinLobby"
 	ShowLobby        Action = "ShowLobby"
 	SendLobbyMessage Action = "SendLobbyMessage"
+	UpdateGameState  Action = "UpdateGameState"
 )
 
 type JsonResp map[string]interface{}
+
+type GameDataObject struct {
+	FichesBag     []string
+	SharedHand    []letter
+	CurrentPlayer int
+	// Grid          [][]html.Node
+	GridStatus [][]string
+}
+
+type letter struct {
+	Letter string `json:"letter"`
+	Used   bool   `json:"used"`
+}

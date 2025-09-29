@@ -8,6 +8,10 @@ import Timer from "../Timer.js";
 export default class GameData {
     static playerlist = { ...localStorage };
 
+    // Holds the value of where in the array the player currently is.
+    /** @type {number} */
+    static ThisPlayerSpot;
+
     /** @type {Array<string>} */
     static fichesBag = [];
 
@@ -44,7 +48,21 @@ export default class GameData {
         return letter;
     }
 
-    static updateBackend() {
+    static json() {
+        return {
+            // playerlist: this.playerlist,
+            FichesBag: this.fichesBag,
+            SharedHand: this.sharedHand,
+            CurrentPlayer: this.currentPlayer,
+            GridStatus: this.gridStatus,
+            // lastPlacement: this.lastPlacement,
+            // isTimerActive: this.isTimerActive,
+            // selectedLetter: this.selectedLetter
+        };
+    }
 
+    // Checks if it's the current players's turn.
+    static isPlayerTurn() {
+        return this.currentPlayer == this.ThisPlayerSpot;
     }
 }

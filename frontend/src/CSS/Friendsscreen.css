@@ -97,13 +97,14 @@ body {
 #myFriends {
   width: 95%;
   height: 90%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 1rem;
   background-color: #687c5a;
   border-radius: 10px;
   list-style-type: none;
-  padding: 0%;
-  column-gap: 1.76vh;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .friend {
@@ -112,8 +113,9 @@ body {
   justify-content: center;
   background-color: aqua;
   border-radius: 10px;
-  width: 32%;
-  height: 15%;
+  padding: 1rem;
+  min-height: 80px;
+  font-weight: bold;
 }
 
 .removeBtn {

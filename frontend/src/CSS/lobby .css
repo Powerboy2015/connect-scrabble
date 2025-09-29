@@ -42,9 +42,9 @@ top: -10px;
 }
 
 button:hover{
-  background-color: #607153;
+  background-color: #607153; /*hoi*/
   color: black;
-  cursor: pointer;
+  cursor: pointer; 
 }
 
 

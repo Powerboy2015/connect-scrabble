@@ -125,8 +125,6 @@ def get_email(id):
             
             }
 
-    
-
 
 # get email/wachtwoord voor alle data van die user
 @app.route("/get/<int:id>/<string:password>", methods=["GET"])
@@ -211,6 +209,24 @@ def getFriendRequests(user_id):
 
     return jsonify(result), 200
 
+
+# get user outgoing friendrequest
+@app.route("/friendRequestsOutgoing/<int:user_id>", methods=["GET"])
+def getFriendRequestsOut(user_id):
+    requests = Friends.query.filter_by(id1=user_id, status="pending").all()
+
+    result = [
+        {
+            "request_id": r.id,
+            "from_user": r.id1,
+            "to_user": r.id2,
+            "status": r.status
+        }
+        for r in requests
+    ]
+
+    return jsonify(result), 200
+
 #get friends van user met id
 @app.route("/getUserFriends/<int:user_id>", methods=["GET"])
 def getUserFriends(user_id):
@@ -242,4 +258,3 @@ def removeFriend(id1, id2):
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
-

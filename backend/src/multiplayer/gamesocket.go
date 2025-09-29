@@ -8,7 +8,13 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	"zochi.com/m/v2/encryption"
+	goClient "zochi.com/m/v2/multiplayer/GoClient"
+	connManager "zochi.com/m/v2/multiplayer/connManager"
+	"zochi.com/m/v2/utility"
 )
+
+var p utility.Message
 
 // used in order to upgrade the connection from a https request to a websocket connection.
 var upgrader = websocket.Upgrader{
@@ -16,6 +22,7 @@ var upgrader = websocket.Upgrader{
 	// allowing all conncetion types. We do the original cors checking before already
 }
 
+// XXX Entryfunction for websockets. Upgrades HTTP request and log user into the websocket.
 func Connect(w http.ResponseWriter, r *http.Request) {
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -23,30 +30,40 @@ func Connect(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// deferring closing, meaning it closes later when we are doing with using the connection within this funtion.
-	defer ws.Close()
+	// gathers given querys
+	query := r.URL.Query()
+	userID := query.Get("uuid")
+	userHash := query.Get("userHash")
 
-	for {
-		_, msg, err := ws.ReadMessage()
-		if err != nil {
-			fmt.Println("read error: ", err)
-			break
-		}
-
-		// replacement for return functionality. Basically the "execute the code" point.
-		fmt.Printf("received message: %s\n", msg)
-
-		response, err := HandleMessages(msg)
-		if err != nil {
-			fmt.Println("could not handle incoming message: ", err)
-		}
-
-		// Echo the received bytes back to the client. WriteMessage expects a []byte.
-		if err := ws.WriteMessage(websocket.TextMessage, response); err != nil {
-			// catches any response errors.
-			fmt.Println("write error: ", err)
-			break
+	// checks if an user is give, otherwise logs you in as anonymous
+	var user encryption.User
+	if userHash != "" {
+		user = encryption.DecodeUser(userHash)
+	} else {
+		user = encryption.User{
+			Username: "anonymous",
+			Password: "undefined",
 		}
 	}
+
+	// This part checks if the user was logged in before and if not, gives it a new UUID and handle.
+	var client *utility.Client
+	if userID == "" {
+		client = connManager.AddClient(ws, user.Username)
+		client.Conn.WriteJSON(utility.JsonResp{"ok": true, "message": "new client connected successfully to server", "Payload": utility.JsonResp{"id": client.ID}, "Action": "NewUserConnected"})
+	} else {
+		client, err = connManager.RejoinClient(userID, ws)
+		if err != nil {
+			// Client not found, create a new one
+			client = connManager.AddClient(ws, user.Username)
+			client.Conn.WriteJSON(utility.JsonResp{"ok": true, "message": "UUID was not found, rejoined as new client to server", "Payload": utility.JsonResp{"id": client.ID}, "Action": "NewUserConnected"})
+		} else {
+			// Client found and reconnected
+			client.Conn.WriteJSON(utility.JsonResp{"ok": true, "message": "client reconnected successfully to server", "Payload": utility.JsonResp{"id": client.ID}, "Action": "UserConnected"})
+		}
+	}
+
+	// connects to the message handlers & receivers.
+	goClient.Connect(client)
 
 }

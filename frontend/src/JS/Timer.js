@@ -14,13 +14,15 @@ export default class Timer {
     /** @type {(time: number) => void} */
     displayFunc = null;
 
-        /** @type {() => void} */
+    /** @type {() => void} */
     finishFunc = null;
+
+    /** @type {() => void} */
+    restartFunc = null;
 
     constructor(_TimerSec = 15) {
         this.TimeSec = _TimerSec;
     }
-
 
     /**
      *  Starts the timer, also fires the display function every second if set.
@@ -31,13 +33,12 @@ export default class Timer {
         this.isRunning = true;
         this.timer = this.TimeSec;
         this.intervalId = setInterval(() => {
-
             // if a display function is set, call it with the current timer value.
-            if (this.displayFunc){
+            if (this.displayFunc) {
                 this.displayFunc(this.timer);
             }
 
-            this.timer--;        
+            this.timer--;
             if (this.timer < 0) {
                 this.stop();
 
@@ -46,7 +47,6 @@ export default class Timer {
                     this.finishFunc();
                 }
             }
-
         }, 1000);
     }
 
@@ -56,18 +56,16 @@ export default class Timer {
     stop() {
         clearInterval(this.intervalId);
         this.isRunning = false;
-        this.timer = this.TimeSec
+        this.timer = this.TimeSec;
     }
 
     restart() {
-        this.stop();
-        document.getElementById("clock" + GameData.currentPlayer).style.display = "none";
-        this.start();
+        this.restartFunc?.();
     }
 
     /**
      * sets the function that will be called every second with the current time.
-     * @param {(time: number) => void} func 
+     * @param {(time: number) => void} func
      */
     setDisplayFunction(func) {
         this.displayFunc = func;
@@ -75,9 +73,13 @@ export default class Timer {
 
     /**
      * sets the function that will be called when the timer finishes.
-     * @param {() => void} func 
+     * @param {() => void} func
      */
     setFinishFunction(func) {
         this.finishFunc = func;
+    }
+
+    setRestartFunction(func) {
+        this.restartFunc = func;
     }
 }

@@ -4,6 +4,19 @@ body {
   padding: 0;
 }
 
+.NoPlayScreen{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background-color: rgba(128, 128, 128, 0.356);
+  display: none;
+  &.isactive {
+    display: block;
+  }
+
+}
+
 .parent-div {
   display: flex;
   flex-direction: column;
@@ -314,7 +327,7 @@ player {
 
 .StartCountDown {
   position: fixed;
-  z-index: 9;
+  z-index: 22;
   background-color: rgba(0, 0, 0, 0.241);
   width: 110%;
   height: 110%;

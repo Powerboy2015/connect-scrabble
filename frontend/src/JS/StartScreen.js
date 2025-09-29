@@ -81,7 +81,16 @@ function loggedin() {
   return id !== null && password !== null;
 }
 
-function check_if_logged_in() {
+function logout_and_friends() {
+  const buttons = document.querySelectorAll(".profile_button_hide");
+  if (loggedin()) {
+    buttons.forEach(btn => btn.style.display = "flex");
+  } else {
+    buttons.forEach(btn => btn.style.display = "none");
+  }
+}
+
+function profilebutton() {
   if (loggedin()) {
     window.location.href = "../HTML/profilepage.html";
   } else {

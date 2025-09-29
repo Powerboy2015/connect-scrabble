@@ -63,7 +63,7 @@ def getFriends(id):
             })
     return jsonify(all)
 
-
+# email to id
 @app.route("/emailToId/<string:email>", methods=["GET"])
 def getId(email):
     person = Persons.query.filter_by(email=email).first()
@@ -108,7 +108,7 @@ def get():
         })
     return jsonify(all)
 
-
+# get alle info voor user met id
 @app.route("/get/<int:id>", methods=["GET"]) 
 def get_email(id):
     person = Persons.query.filter_by(id=id).first()
@@ -181,7 +181,7 @@ def addFriend(id1, id2):
     db.session.commit()
     return jsonify({"status": "request_sent"}), 200
 
-
+#accept friendrequest met request id
 @app.route("/acceptFriend/<int:request_id>", methods=["POST"])
 def acceptFriend(request_id):
     friend_request = Friends.query.get(request_id)
@@ -192,6 +192,7 @@ def acceptFriend(request_id):
     db.session.commit()
     return jsonify({"status": "accepted"}), 200
 
+#get friend requests van user met id 
 @app.route("/friendRequests/<int:user_id>", methods=["GET"])
 def getFriendRequests(user_id):
     requests = Friends.query.filter_by(id2=user_id, status="pending").all()
@@ -208,6 +209,7 @@ def getFriendRequests(user_id):
 
     return jsonify(result), 200
 
+#get friends van user met id
 @app.route("/getUserFriends/<int:user_id>", methods=["GET"])
 def getUserFriends(user_id):
     request1 = Friends.query.filter_by(id1=user_id, status="accepted").all()

@@ -29,8 +29,8 @@ class Persons(db.Model):
 
 class Friends(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id1 = db.Column(db.Integer, db.ForeignKey('persons.id'))
-    id2 = db.Column(db.Integer, db.ForeignKey('persons.id'))
+    id1 = db.Column(db.Integer, db.ForeignKey('persons.id', ondelete="CASCADE"))
+    id2 = db.Column(db.Integer, db.ForeignKey('persons.id', ondelete="CASCADE"))
     status = db.Column(db.String)
 
 

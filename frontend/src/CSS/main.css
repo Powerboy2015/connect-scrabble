@@ -265,6 +265,7 @@ player {
 #WinText {
   position: absolute;
   font-size: clamp(1.5rem, 5vw, 3rem);
+  top: 220px
 }
 /*Ik word gek, ik hou dit voor nu*/
 .banner {

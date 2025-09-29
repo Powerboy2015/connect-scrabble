@@ -140,8 +140,12 @@ function showBanner(word) {
     const winText = document.getElementById("WinText");
 
     if (banner && winText) {
-        winText.textContent = `Winnaar: ${word}`;
-        banner.style.display = "flex"; // Show the banner
+        // Haal de huidige speler op uit GameData
+        const currentPlayer = GameData.playerlist[GameData.currentPlayer] || "Onbekende speler";
+
+        // Toon de winnende speler en het woord
+        winText.textContent = `Winnaar: ${currentPlayer} "${word}"`;
+        banner.style.display = "flex"; // Toon de banner
     } else {
         console.error("Banner or WinText element not found.");
     }

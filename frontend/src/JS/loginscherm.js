@@ -24,7 +24,7 @@ async function login() {
       sessionStorage.setItem("id", data.id);
       sessionStorage.setItem("password", data.password);
       window.location =
-        "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html";
+        "http://127.0.0.1/HTML/StartScreen.html";
     }
   } catch (err) {
     console.log(err);

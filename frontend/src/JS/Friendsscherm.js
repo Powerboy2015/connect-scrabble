@@ -43,6 +43,7 @@ async function addFriend(friendId) {
 
   const li = document.createElement("li");
   li.innerHTML = friendIdString;
+  li.className = "friend";
 }
 
 async function myFriends() {

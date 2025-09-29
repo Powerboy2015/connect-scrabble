@@ -83,7 +83,7 @@ function loggedin() {
 
 function check_if_logged_in() {
   if (loggedin()) {
-    document.getElementById("profile_overlay").style.display = "flex";
+    window.location.href = "../HTML/profilepage.html";
   } else {
     document.getElementById("login_overlay").style.display = "flex";
   }

@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  padding-top: 10vh;
+  padding-top: 2vh;
   box-sizing: border-box;
   gap: 5%;
 }
@@ -377,6 +377,47 @@ body {
   display: flex;
   justify-content: center;
 
+}
+
+.online_knp{
+  border: #000000 solid 1px;
+  border-radius: 5px;
+  width: 10%;
+  min-height: 25vh;
+  background-color:#cff3ad ;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.make_room{
+  background-color: #687c5a;
+  border-radius: 4px;
+  height: 40px;
+  width: 160px;
+  font-size: 20px;
+}
+
+.join_room{
+  background-color: #687c5a;
+  border-radius: 4px;
+  height: 40px;
+  width: 160px;
+  font-size: 20px;
+}
+
+.room_knop{
+ border: #000000 solid 1px; 
+ justify-content: center;
+ display: flex;
+ align-items: center;
+ 
+}
+
+.profile_button_hide {
+  display: none;
 }
 
 .online_knp{

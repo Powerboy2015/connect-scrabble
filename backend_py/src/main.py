@@ -57,7 +57,7 @@ def getFriends(id):
     items = Friends.query.all()
     all = []
     for item in items:
-        if item.id1 == id:
+        if item.id1 == id and item.status == "accepted":
             all.append({
                 "id2": item.id2
             })
@@ -189,6 +189,17 @@ def acceptFriend(request_id):
         return jsonify({"error": "Request not found"}), 404
 
     friend_request.status = "accepted"
+    db.session.commit()
+    return jsonify({"status": "accepted"}), 200
+
+#decline friend request
+@app.route("/declineFriend/<int:request_id>", methods=["POST"])
+def declineFriend(request_id):
+    friend_request = Friends.query.get(request_id)
+    if not friend_request:
+        return jsonify({"error": "Request not found"}), 404
+
+    friend_request.status = "declined"
     db.session.commit()
     return jsonify({"status": "accepted"}), 200
 

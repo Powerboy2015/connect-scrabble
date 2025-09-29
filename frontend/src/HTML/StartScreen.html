@@ -5,11 +5,11 @@
     <title>Super coole main menu StartScreen</title>
     <link rel="stylesheet" href="../CSS/StartScreen.css" />
   </head>
-  <body onload="clearLocalStorage()">
+  <body onload="clearLocalStorage(); loggedin(); logout_and_friends();">  
     <div id="fullhud">
       <div id="all_account_stuff">
         <div id="account_button">
-          <button class="profile_button" onclick="check_if_logged_in()">
+          <button class="profile_button" onclick="profilebutton()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="50"
@@ -25,7 +25,7 @@
               />
             </svg>
           </button>
-          <button onclick="clearSessionStorage()" class="profile_button">
+          <button onclick="clearSessionStorage(), window.location.reload();" class="profile_button profile_button_hide">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="50"
@@ -46,7 +46,7 @@
             </svg>
           </button>
           <a href="./Friendsschreen.html">
-            <button class="profile_button">
+            <button class="profile_button profile_button_hide">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="50"

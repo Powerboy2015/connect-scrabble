@@ -41,7 +41,6 @@ async function addFriend(friendId) {
 
   const li = document.createElement("li");
   li.innerHTML = friendIdString;
-  li.className = "friend";
 }
 
 async function myFriends() {
@@ -54,6 +53,7 @@ async function myFriends() {
   response.forEach((item) => {
     let friendId = "";
     const li = document.createElement("li");
+    li.className = "friend";
 
     if (item.from_user === id) {
       friendId = item.to_user;

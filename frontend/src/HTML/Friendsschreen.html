@@ -6,19 +6,28 @@
     <link rel="stylesheet" href="../CSS/Friendsscreen.css" />
   </head>
   <body onload="myFriends(), friendRequests()">
-    <div>
-      <h2>search friends:</h2>
-      <input id="friendSearchInput" type="text" />
-      <button onclick="searchFriends()">search</button>
-      <ul id="searchResult"></ul>
-      <div class="VerzoekBestaatAl"></div>
-    </div>
-    <div>
-      <h2>my friends:</h2>
-      <ul id="myFriends"></ul>
-
-      <h2>my friend requests</h2>
-      <ul id="friendRequest"></ul>
+    <div id="all">
+      <div id="searchAndRequests">
+        <div id="searchfriends">
+          <h2>search friends</h2>
+          <div id="search">
+            <input id="friendSearchInput" type="text" />
+            <button id="friendSearchButton" onclick="searchFriends()">
+              search
+            </button>
+          </div>
+          <ul id="searchResult"></ul>
+          <div class="VerzoekBestaatAl"></div>
+        </div>
+        <div id="friendrequestbox">
+          <h2>my friend requests</h2>
+          <ul id="friendRequest"></ul>
+        </div>
+      </div>
+      <div id="friendlist">
+        <h2>my friends:</h2>
+        <ul id="myFriends"></ul>
+      </div>
     </div>
   </body>
 

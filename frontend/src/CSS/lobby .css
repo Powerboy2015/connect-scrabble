@@ -25,10 +25,31 @@ body {
   animation: spin 2s linear infinite;
 }
 
-.startbutton {
-  display: flex;
-  justify-content: center;
+
+button{
+display:flex ;
+height: 50px;
+width: 300px; 
+justify-self: center;
+background-color:#687c5a;
+color:black;
+font-size: 25px;
+text-align: center;
+border-radius: 10px;
+border: none;
+position: relative;
+top: -10px;
 }
+
+button:hover{
+  background-color: #607153; /*hoi*/
+  color: black;
+  cursor: pointer; 
+}
+
+
+  
+
 
 @keyframes spin {
   to { transform: rotate(360deg); }

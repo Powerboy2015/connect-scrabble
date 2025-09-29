@@ -1,7 +1,8 @@
 async function searchFriends() {
   document.getElementById("searchResult").innerHTML = "";
   const search = document.getElementById("friendSearchInput").value;
-  const url = `http://127.0.0.1:5001/searchFriend/${search}`;
+  console.log(search.toLowerCase());
+  const url = `http://127.0.0.1:5001/searchFriend/${search.toLowerCase()}`;
 
   const response = await fetch(url);
 

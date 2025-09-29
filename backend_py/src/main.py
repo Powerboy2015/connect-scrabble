@@ -29,8 +29,9 @@ class Persons(db.Model):
 
 class Friends(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    personId = db.Column(db.Integer, db.ForeignKey('persons.id'))
-    friendId = db.Column(db.Integer, db.ForeignKey('persons.id'))
+    id1 = db.Column(db.Integer, db.ForeignKey('persons.id'))
+    id2 = db.Column(db.Integer, db.ForeignKey('persons.id'))
+    status = db.Column(db.String)
 
 
 with app.app_context():
@@ -43,8 +44,10 @@ def getALlFriends():
     all = []
     for item in items:
         all.append({
-            "personId": item.personId,
-            "friendId": item.friendId
+            "id": item.id,
+            "id1": item.id1,
+            "id2": item.id2,
+            "status": item.status
         })
     return jsonify(all)
 
@@ -54,12 +57,21 @@ def getFriends(id):
     items = Friends.query.all()
     all = []
     for item in items:
-        if item.personId == id:
+        if item.id1 == id:
             all.append({
-                "friendId": item.friendId
+                "id2": item.id2
             })
     return jsonify(all)
 
+# email to id
+@app.route("/emailToId/<string:email>", methods=["GET"])
+def getId(email):
+    person = Persons.query.filter_by(email=email).first()
+    all = {
+        "id": person.id
+
+    }
+    return jsonify(all)
 
 
 #get alle users die de search term in hun voornaam of achternaam hebben
@@ -73,7 +85,8 @@ def searchFriend(search):
             all.append({
                 'firstname': item.firstName,
                 'lastname': item.lastName,
-                'id': item.id
+                'id': item.id,
+                'email': item.email
             })
     return jsonify(all)
 
@@ -95,10 +108,30 @@ def get():
         })
     return jsonify(all)
 
+# get alle info voor user met id
+@app.route("/get/<int:id>", methods=["GET"]) 
+def get_email(id):
+    person = Persons.query.filter_by(id=id).first()
+    if not person:
+        return {"error": "No person found"}, 404
+
+
+    return {            'id': person.id,
+            'firstName': person.firstName,
+            'lastName': person.lastName,
+            'email': person.email,
+            'birthDate': person.birthDate,
+            'password': person.password,
+            
+            }
+
+    
+
+
 # get email/wachtwoord voor alle data van die user
-@app.route("/get/<string:email>/<string:password>", methods=["GET"])
-def getUser(email, password):
-    person = Persons.query.get_or_404(email)
+@app.route("/get/<int:id>/<string:password>", methods=["GET"])
+def getUser(id, password):
+    person = Persons.query.get_or_404(id)
 
     if password == person.password:
         return jsonify({
@@ -137,18 +170,69 @@ def create_account():
     return jsonify({"status": "ok"}), 201
 
 # addFriend, persoon... voegt persoon... toe als vriend.
-@app.route("/addFriend/<int:personId>/<int:friendId>", methods=["POST"])
-def addFriend(personId, friendId):
-    friend = Friends(personId = personId, friendId = friendId)
-    db.session.add(friend)
+@app.route("/addFriend/<int:id1>/<int:id2>", methods=["POST"])
+def addFriend(id1, id2):
+    existing = Friends.query.filter_by(id1=id1, id2=id2).first()
+    if existing:
+        return jsonify({"error": "Vriendschapsverzoek bestaat al"}), 400
+
+    friend_request = Friends(id1=id1, id2=id2, status="pending")
+    db.session.add(friend_request)
     db.session.commit()
-    return jsonify({"status": "ok"}), 200
+    return jsonify({"status": "request_sent"}), 200
+
+#accept friendrequest met request id
+@app.route("/acceptFriend/<int:request_id>", methods=["POST"])
+def acceptFriend(request_id):
+    friend_request = Friends.query.get(request_id)
+    if not friend_request:
+        return jsonify({"error": "Request not found"}), 404
+
+    friend_request.status = "accepted"
+    db.session.commit()
+    return jsonify({"status": "accepted"}), 200
+
+#get friend requests van user met id 
+@app.route("/friendRequests/<int:user_id>", methods=["GET"])
+def getFriendRequests(user_id):
+    requests = Friends.query.filter_by(id2=user_id, status="pending").all()
+
+    result = [
+        {
+            "request_id": r.id,
+            "from_user": r.id1,
+            "to_user": r.id2,
+            "status": r.status
+        }
+        for r in requests
+    ]
+
+    return jsonify(result), 200
+
+#get friends van user met id
+@app.route("/getUserFriends/<int:user_id>", methods=["GET"])
+def getUserFriends(user_id):
+    request1 = Friends.query.filter_by(id1=user_id, status="accepted").all()
+    request2 = Friends.query.filter_by(id2=user_id, status="accepted").all()
+    requests = request1 + request2
+
+    result = [
+        {
+            "request_id": r.id,
+            "from_user": r.id1,
+            "to_user": r.id2,
+            "status": r.status
+        }
+        for r in requests
+    ]
+
+    return jsonify(result), 200
 
 
 #verwijder friend ...persoon verwijderd ...vriend
-@app.route("/removeFriend/<int:personId>/<int:friendId>", methods=["DELETE"])
-def removeFriend(personId, friendId): 
-    friendship = Friends.query.filter_by(personId=personId, friendId=friendId).first_or_404()
+@app.route("/removeFriend/<int:id1>/<int:id2>", methods=["DELETE"])
+def removeFriend(id1, id2): 
+    friendship = Friends.query.filter_by(id1=id1, id2=id2).first_or_404()
 
     db.session.delete(friendship)
     db.session.commit()

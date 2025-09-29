@@ -11,7 +11,7 @@ async function searchFriends() {
     const newListItem = document.createElement("li");
     const newButton = document.createElement("button");
     console.log(item);
-    newListItem.append(`${item.firstname} ${item.lastname}`);
+    newListItem.append(`${item.firstname} ${item.lastname} (${item.email})`);
 
     newButton.addEventListener("click", () => addFriend(item.id));
 
@@ -20,47 +20,13 @@ async function searchFriends() {
   });
 }
 
-let currentFriends = [];
-
-async function myFriends() {
-  const id = sessionStorage.getItem("id");
-  const url = `http://127.0.0.1:5001/getFriends/${id}`;
-
-  const response = await fetch(url);
-  if (!response.ok) {
-    console.error("Kon vrienden niet ophalen:", response.statusText);
-    return;
-  }
-
-  const result = await response.json();
-
-  currentFriends = [];
-  const ul = document.getElementById("myFriends");
-  ul.innerHTML = "";
-
-  result.forEach((item) => {
-    const fid = String(item.friendId).trim();
-    currentFriends.push(fid);
-
-    const li = document.createElement("li");
-    li.textContent = fid;
-    ul.append(li);
-  });
-
-  return result;
-}
-
 async function addFriend(friendId) {
   const personId = sessionStorage.getItem("id");
   const friendIdString = String(friendId);
 
-  if (currentFriends.includes(friendIdString)) {
-    console.log(`Friend ${friendIdString} staat al in je lijst.`);
-    return;
-  }
-
   if (friendIdString === String(personId)) {
-    console.log("Je kunt jezelf niet als vriend toevoegen.");
+    document.querySelector(".VerzoekBestaatAl").innerHTML =
+      "Je kunt jezelf niet als vriend toevoegen.";
     return;
   }
 
@@ -68,53 +34,99 @@ async function addFriend(friendId) {
   const response = await fetch(url, { method: "POST" });
 
   if (!response.ok) {
-    console.error("Toevoegen mislukt:", response.status, response.statusText);
-    return;
+    document.querySelector(".VerzoekBestaatAl").innerHTML =
+      "Toevoegen mislukt, vriendschapsverzoek is al verstuurt";
   }
 
   const result = await response.json();
   console.log(result);
 
-  currentFriends.push(friendIdString);
   const li = document.createElement("li");
   li.innerHTML = friendIdString;
-  document.getElementById("myFriends").append(li);
+}
+
+async function myFriends() {
+  const id = Number(sessionStorage.getItem("id"));
+  const url = `http://127.0.0.1:5001/getUserFriends/${id}`;
+
+  const request = await fetch(url);
+  const response = await request.json();
+
+  console.log(response);
+
+  response.forEach((item) => {
+    let friendId = "";
+    const li = document.createElement("li");
+
+    if (item.from_user === id) {
+      friendId = item.to_user;
+    } else {
+      friendId = item.from_user;
+    }
+
+    console.log(friendId);
+
+    async function getUserName(fid) {
+      const url = `http://127.0.0.1:5001/get/${fid}`;
+      try {
+        const request = await fetch(url);
+        const response = await request.json();
+        li.append(
+          `${response.firstName} ${response.lastName} (${response.email})`
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getUserName(friendId);
+    document.getElementById("myFriends").append(li);
+  });
 }
 
 async function friendRequests() {
-  const url = "http://127.0.0.1:5001/getFriends";
+  const id = sessionStorage.getItem("id");
+  const url = `http://127.0.0.1:5001/friendRequests/${id}`;
 
   const request = await fetch(url);
 
   const response = await request.json();
-
+  console.log(response);
   response.forEach((item) => {
-    const currentPlayer = Number(sessionStorage.getItem("id"));
+    li = document.createElement("li");
+    btn = document.createElement("button");
 
-    if (item.friendId === currentPlayer) {
-      li = document.createElement("li");
-      btnA = document.createElement("button");
-      btnD = document.createElement("button");
-      btnA.innerHTML = "accept";
-      btnD.innerHTML = "deny";
+    async function getUserinfo(item) {
+      const link = `http://127.0.0.1:5001/get/${item}`;
 
-      btnA.addEventListener("click", () => approveRequest(item.personId));
+      const request = await fetch(link);
 
-      li.append(item.personId);
-      li.append(btnA, btnD);
-
-      document.getElementById("friendRequest").append(li);
+      const response = await request.json();
+      console.log(response.firstName);
+      li.append(
+        `${response.firstName} ${response.lastName}(${response.email})`
+      );
+      li.append(btn);
     }
+
+    getUserinfo(item.from_user);
+
+    btn.addEventListener("click", () => {
+      acceptFriend(item.request_id);
+    });
+
+    document.getElementById("friendRequest").append(li);
   });
 }
 
-async function approveRequest(approvedId) {
-  const currentPlayer = sessionStorage.getItem("id");
-  const url = `http://127.0.0.1:5001/addFriend/${currentPlayer}/${approvedId}`;
+async function acceptFriend(request_id) {
+  const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
 
-  const request = await fetch(url, { method: "POST" });
+  console.log(request_id);
 
-  const response = await request.json();
+  request = await fetch(url, { method: "POST" });
+
+  response = await request.json();
 
   console.log(response);
 }

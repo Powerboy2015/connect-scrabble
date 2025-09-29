@@ -18,3 +18,4 @@ alert ('het spel is gestart'); //na aanklikken startknop moet later weggehaald w
 
 
 
+

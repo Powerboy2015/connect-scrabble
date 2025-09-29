@@ -5,21 +5,28 @@
     <title>Document</title>
     <link rel="stylesheet" href="../CSS/Friendsscreen.css" />
   </head>
-  <body onload="myFriends()">
+  <body onload="myFriends(), friendRequests()">
     <div id="all">
-      <div id="searchfriends">
-        <h2>search friends</h2>
-        <div id="search">
-          <input id="friendSearchInput" type="text" />
-          <button id="friendSearchButton" onclick="searchFriends()">search</button>
+      <div id="searchAndRequests">
+        <div id="searchfriends">
+          <h2>search friends</h2>
+          <div id="search">
+            <input id="friendSearchInput" type="text" />
+            <button id="friendSearchButton" onclick="searchFriends()">
+              search
+            </button>
+          </div>
+          <ul id="searchResult"></ul>
+          <div class="VerzoekBestaatAl"></div>
         </div>
-        <ul id="searchResult"></ul>
+        <div id="friendrequestbox">
+          <h2>my friend requests</h2>
+          <ul id="friendRequest"></ul>
+        </div>
       </div>
       <div id="friendlist">
         <h2>my friends:</h2>
         <ul id="myFriends"></ul>
-        <h2>my friend requests</h2>
-        <ul id="friendRequest"></ul>
       </div>
     </div>
   </body>

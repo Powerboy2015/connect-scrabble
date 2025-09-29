@@ -8,7 +8,6 @@ import (
 
 	"zochi.com/m/v2/db"
 	"zochi.com/m/v2/multiplayer"
-	gameManager "zochi.com/m/v2/multiplayer/connManager"
 )
 
 type WordRequest struct {
@@ -26,8 +25,6 @@ type CheckWordRequest struct {
 type WordResponse struct {
 	Words []string `json:"words"`
 }
-
-var manager = gameManager.Manager
 
 func findWordHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -107,8 +104,6 @@ func withCORS(h http.HandlerFunc) http.HandlerFunc {
 }
 
 func main() {
-
-	fmt.Println(manager)
 	// closes application when db connection fails
 	if !db.Connect() {
 		log.Fatal("Database connection failed")

@@ -141,7 +141,7 @@ body {
 }
 
 #Interactibles {
-  height: 100%;
+
   gap: 2vw;
   display: flex;
   flex-direction: row;

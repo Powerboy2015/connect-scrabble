@@ -29,8 +29,8 @@ class Persons(db.Model):
 
 class Friends(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id1 = db.Column(db.Integer, db.ForeignKey('persons.id'))
-    id2 = db.Column(db.Integer, db.ForeignKey('persons.id'))
+    id1 = db.Column(db.Integer, db.ForeignKey('persons.id', ondelete="CASCADE"))
+    id2 = db.Column(db.Integer, db.ForeignKey('persons.id', ondelete="CASCADE"))
     status = db.Column(db.String)
 
 
@@ -261,11 +261,18 @@ def getUserFriends(user_id):
 #verwijder friend ...persoon verwijderd ...vriend
 @app.route("/removeFriend/<int:id1>/<int:id2>", methods=["DELETE"])
 def removeFriend(id1, id2): 
-    friendship = Friends.query.filter_by(id1=id1, id2=id2).first_or_404()
+    friendship = Friends.query.filter(
+        ((Friends.id1 == id1) & (Friends.id2 == id2)) |
+        ((Friends.id1 == id2) & (Friends.id2 == id1))
+    ).first()
+
+    if not friendship:
+        return jsonify({"error": "Vriendschap niet gevonden"}), 404
 
     db.session.delete(friendship)
     db.session.commit()
     return jsonify({"status": "ok"}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

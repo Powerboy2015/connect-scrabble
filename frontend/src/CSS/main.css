@@ -281,22 +281,6 @@ player {
   gap: 1vw;
 }
 
-.PlayAgain_Button {
-  background-color: #15c10c;
-  border: none;
-  border-radius: 20px;
-  width: 18vw;
-  padding: 4vh;
-  color: #ffffff;
-  font-size: 2.5vw;
-}
-.PlayAgain_Button:hover {
-  background-color: #ce2323;
-}
-.PlayAgain_Button:active {
-  transform: scale(0.95);
-}
-
 .Back_StartScreen_Button {
   background-color: #e8552b;
   border: none;

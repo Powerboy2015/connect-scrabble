@@ -158,7 +158,7 @@ async function acceptFriend(request_id) {
 }
 
 async function declineFriend(request_id) {
-  const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
+  const url = `http://127.0.0.1:5001/declineFriend/${request_id}`;
 
   request = await fetch(url, { method: "POST" });
 

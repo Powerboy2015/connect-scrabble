@@ -353,3 +353,28 @@ body {
 #foutmelding {
   color: rgb(255, 37, 37);
 }
+
+.login_button{
+  background-color: #687c5a;
+  border-radius: 4px;
+
+}
+
+.register_button{
+  background-color: #687c5a;
+  border-radius: 4px;
+
+}
+
+.close-btn{
+  background-color: #687c5a;
+  border-radius: 4px;
+  width: 40px;
+  
+}
+
+.knop{
+  display: flex;
+  justify-content: center;
+  
+}

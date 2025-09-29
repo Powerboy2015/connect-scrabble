@@ -352,6 +352,7 @@ body {
 
 #foutmelding {
   color: rgb(255, 37, 37);
+  font-size: 25px;
 }
 
 .login_button{

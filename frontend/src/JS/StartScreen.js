@@ -39,6 +39,10 @@ function clearLocalStorage() {
   localStorage.clear();
 }
 
+function clearSessionStorage() {
+  sessionStorage.clear();
+}
+
 function StartButtonClick() {
   const items2 = { ...localStorage };
   if (Object.keys(items2).length >= 2 && Object.keys(items2).length <= 4) {
@@ -70,7 +74,7 @@ function TimerStart() {
   }, 1000);
 }
 
-// Ik weet niet zeker als dit werkt want 
+// Ik weet niet zeker als dit werkt want
 function loggedin() {
   const id = sessionStorage.getItem("id");
   const password = sessionStorage.getItem("password");

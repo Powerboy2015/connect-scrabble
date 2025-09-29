@@ -1,15 +1,13 @@
 function showProfileButton() {
   window.location =
     "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/profilepage.html";
-
-  console.log("test");
 }
 
 async function getProfileData() {
-  const email = sessionStorage.getItem("email");
+  const id = sessionStorage.getItem("id");
   const password = sessionStorage.getItem("password");
 
-  const url = `http://127.0.0.1:5001/get/${email}/${password}`;
+  const url = `http://127.0.0.1:5001/get/${id}/${password}`;
 
   try {
     const response = await fetch(url);
@@ -42,24 +40,20 @@ async function getProfileData() {
 }
 
 async function deleteCurrentUser() {
-  const user = sessionStorage.getItem("email");
-
-  console.log(user);
+  const user = sessionStorage.getItem("id");
 
   const url = `http://127.0.0.1:5001/delete/${user}`;
 
-  const options = {
-    method: "DELETE",
-  };
-
   try {
-    const request = fetch(url, options);
+    const request = fetch(url, { method: "DELETE" });
 
     const response = await request;
 
     const result = await response.json();
 
     console.log(result);
+
+    sessionStorage.clear();
 
     window.location =
       "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html";

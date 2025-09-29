@@ -10,7 +10,6 @@ async function searchFriends() {
   result.forEach((item) => {
     const newListItem = document.createElement("li");
     const newButton = document.createElement("button");
-    console.log(item);
     newListItem.append(`${item.firstname} ${item.lastname} (${item.email})`);
 
     newButton.addEventListener("click", () => addFriend(item.id));
@@ -39,11 +38,9 @@ async function addFriend(friendId) {
   }
 
   const result = await response.json();
-  console.log(result);
 
   const li = document.createElement("li");
   li.innerHTML = friendIdString;
-  li.className = "friend";
 }
 
 async function myFriends() {
@@ -53,19 +50,16 @@ async function myFriends() {
   const request = await fetch(url);
   const response = await request.json();
 
-  console.log(response);
-
   response.forEach((item) => {
     let friendId = "";
     const li = document.createElement("li");
+    li.className = "friend";
 
     if (item.from_user === id) {
       friendId = item.to_user;
     } else {
       friendId = item.from_user;
     }
-
-    console.log(friendId);
 
     async function getUserName(fid) {
       const url = `http://127.0.0.1:5001/get/${fid}`;
@@ -85,6 +79,44 @@ async function myFriends() {
   });
 }
 
+async function getUserinfo(item) {
+  const link = `http://127.0.0.1:5001/get/${item}`;
+
+  const request = await fetch(link);
+
+  const response = await request.json();
+  li.append(`${response.firstName} ${response.lastName}(${response.email})`);
+  li.append(btn);
+}
+
+async function getUserinfoOut(item) {
+  console.log(item);
+  const link = `http://127.0.0.1:5001/get/${item}`;
+
+  const request = await fetch(link);
+
+  const response = await request.json();
+  li.append(
+    `${response.firstName} ${response.lastName}(${response.email})(outgoing)`
+  );
+}
+
+async function friendRequestOut() {
+  const id = sessionStorage.getItem("id");
+
+  const url = `http://127.0.0.1:5001/friendRequestsOutgoing/${id}`;
+
+  const request = await fetch(url);
+
+  const response = await request.json();
+
+  response.forEach((item) => {
+    li = document.createElement("li");
+    getUserinfoOut(item.to_user);
+    document.getElementById("friendRequest").append(li);
+  });
+}
+
 async function friendRequests() {
   const id = sessionStorage.getItem("id");
   const url = `http://127.0.0.1:5001/friendRequests/${id}`;
@@ -92,23 +124,9 @@ async function friendRequests() {
   const request = await fetch(url);
 
   const response = await request.json();
-  console.log(response);
   response.forEach((item) => {
     li = document.createElement("li");
     btn = document.createElement("button");
-
-    async function getUserinfo(item) {
-      const link = `http://127.0.0.1:5001/get/${item}`;
-
-      const request = await fetch(link);
-
-      const response = await request.json();
-      console.log(response.firstName);
-      li.append(
-        `${response.firstName} ${response.lastName}(${response.email})`
-      );
-      li.append(btn);
-    }
 
     getUserinfo(item.from_user);
 
@@ -122,8 +140,6 @@ async function friendRequests() {
 
 async function acceptFriend(request_id) {
   const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
-
-  console.log(request_id);
 
   request = await fetch(url, { method: "POST" });
 

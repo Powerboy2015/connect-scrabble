@@ -63,15 +63,28 @@ async function checkNext(x, y, dx, dy, letters, position, direction, _directionN
     if (nextLetter !== "empty" && nextLetter !== undefined) {
         letters.push({letter: nextLetter, position: position, x: newX, y: newY, total: newX + newY});
         
+        // Check for valid words at each step, not just when reaching 4-7 letters
         if (letters.length >= 4 && letters.length <= 7) {
             console.log(`Found ${letters.length} in a row:`, letters);
             await sendCheckupRequest(letters, _directionName);
-            // Here you can add logic to handle the event of finding 4 in a row
-            // return letters
+            
+            // Add this section to check all possible valid subwords
+            if (letters.length > 4) {
+                // Check all possible subwords of length 4 or more
+                for (let startIdx = 0; startIdx <= letters.length - 4; startIdx++) {
+                    for (let endIdx = startIdx + 3; endIdx < letters.length; endIdx++) {
+                        const subLetters = letters.slice(startIdx, endIdx + 1);
+                        if (subLetters.length >= 4) {
+                            console.log(`Checking subword of length ${subLetters.length}:`, subLetters);
+                            await sendCheckupRequest(subLetters, _directionName);
+                        }
+                    }
+                }
+            }
         } else if (letters.length > 7) {
             return;
         }
-        return checkNext(newX, newY, dx, dy, letters, nextPosition,direction,_directionName);
+        return checkNext(newX, newY, dx, dy, letters, nextPosition, direction, _directionName);
     } else {
         console.debug("No letter at position:", newX, newY);
         return;

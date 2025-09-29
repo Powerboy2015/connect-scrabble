@@ -1,6 +1,6 @@
 function showProfileButton() {
   window.location =
-    "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/profilepage.html";
+    "http://127.0.0.1/HTML/profilepage.html";
 }
 
 async function getProfileData() {
@@ -56,7 +56,7 @@ async function deleteCurrentUser() {
     sessionStorage.clear();
 
     window.location =
-      "http://127.0.0.1:5500/connect-scrabble/frontend/src/HTML/StartScreen.html";
+      "http://127.0.0.1/HTML/StartScreen.html";
   } catch (err) {
     console.log(err);
   }

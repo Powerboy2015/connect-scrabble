@@ -174,7 +174,7 @@ def create_account():
 def addFriend(id1, id2):
     existing = Friends.query.filter_by(id1=id1, id2=id2).first()
     if existing:
-        return jsonify({"error": "Request already exists"}), 400
+        return jsonify({"error": "Vriendschapsverzoek bestaat al"}), 400
 
     friend_request = Friends(id1=id1, id2=id2, status="pending")
     db.session.add(friend_request)

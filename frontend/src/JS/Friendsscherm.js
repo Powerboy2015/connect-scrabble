@@ -25,7 +25,8 @@ async function addFriend(friendId) {
   const friendIdString = String(friendId);
 
   if (friendIdString === String(personId)) {
-    console.log("Je kunt jezelf niet als vriend toevoegen.");
+    document.querySelector(".VerzoekBestaatAl").innerHTML =
+      "Je kunt jezelf niet als vriend toevoegen.";
     return;
   }
 
@@ -33,8 +34,8 @@ async function addFriend(friendId) {
   const response = await fetch(url, { method: "POST" });
 
   if (!response.ok) {
-    console.error("Toevoegen mislukt:", response.status, response.statusText);
-    return;
+    document.querySelector(".VerzoekBestaatAl").innerHTML =
+      "Toevoegen mislukt, vriendschapsverzoek is al verstuurt";
   }
 
   const result = await response.json();
@@ -45,7 +46,7 @@ async function addFriend(friendId) {
 }
 
 async function myFriends() {
-  const id = sessionStorage.getItem("id");
+  const id = Number(sessionStorage.getItem("id"));
   const url = `http://127.0.0.1:5001/getUserFriends/${id}`;
 
   const request = await fetch(url);
@@ -102,7 +103,9 @@ async function friendRequests() {
 
       const response = await request.json();
       console.log(response.firstName);
-      li.append(response.firstName);
+      li.append(
+        `${response.firstName} ${response.lastName}(${response.email})`
+      );
       li.append(btn);
     }
 

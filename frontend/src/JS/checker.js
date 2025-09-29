@@ -132,16 +132,24 @@ async function getWordsFromServer(word) {
 }
 
 /**
- * Banner komt tevoorschijn bij vormen van een geldig woord
- * @param {string} word The valid word that was formed.
+ * Banner weergeeft bij correct woord het gebruikte woord en de winnaars
+ * @param {string} word correct woord gevormd
  */
 function showBanner(word) {
     const banner = document.getElementById("idk");
     const winText = document.getElementById("WinText");
 
     if (banner && winText) {
-        winText.textContent = `Winnaar: ${word}`;
-        banner.style.display = "flex"; // Show the banner
+        // Winnende team wordt bepaald door juiste speler
+        const currentPlayerIndex = GameData.currentPlayer;
+        const teamPlayers = Object.values(GameData.playerlist);
+        const winningTeam = currentPlayerIndex % 2 === 0
+            ? [teamPlayers[0], teamPlayers[2]] // Team 1
+            : [teamPlayers[1], teamPlayers[3]]; // Team 2
+
+        // Update banner text
+        winText.textContent = `Winnaars: ${winningTeam.join(" & ")} - "${word}"`;
+        banner.style.display = "flex"; // laat banner zien
     } else {
         console.error("Banner or WinText element not found.");
     }

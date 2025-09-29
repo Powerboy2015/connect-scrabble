@@ -3,6 +3,7 @@ package connManager
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
@@ -24,6 +25,7 @@ func HandleClientDisconnection(_client *utility.Client) {
 	for roomCode, lobby := range Manager.lobbies {
 		if _, inLobby := lobby[_client]; inLobby {
 			// Remove client from lobby
+			delete(lobby, _client)
 
 			// If lobby is empty, consider removing it
 			if len(lobby) == 0 {
@@ -42,6 +44,46 @@ func HandleClientDisconnection(_client *utility.Client) {
 				}
 			}
 		}
+	}
+}
+
+// When a client disconnects, mark them as disconnected but don't remove immediately
+func MarkClientDisconnected(client *utility.Client) {
+	// Set disconnection time
+	now := time.Now()
+	client.DisconnectedAt = &now
+	client.Conn = nil
+
+	// Notify other players about temporary disconnection
+	for roomCode, lobby := range Manager.lobbies {
+		if _, inLobby := lobby[client]; inLobby {
+			for otherClient := range lobby {
+				if otherClient != client && otherClient.Conn != nil {
+					otherClient.Send <- utility.JsonResp{
+						"ok":      true,
+						"message": "player temporarily disconnected",
+						"Payload": utility.JsonResp{"id": client.ID, "username": client.HashName},
+						"Action":  "PlayerTemporarilyDisconnected",
+					}
+				}
+			}
+
+			// Start a timer to remove the client if they don't reconnect
+			go scheduleClientRemoval(client, roomCode, 10*time.Second)
+		}
+	}
+}
+
+// Schedule client removal after timeout period
+func scheduleClientRemoval(client *utility.Client, roomCode string, timeout time.Duration) {
+	time.Sleep(timeout)
+
+	// After timeout, check if the client is still disconnected
+	if client.DisconnectedAt != nil && client.Conn == nil {
+		// Actually remove the client since they didn't reconnect in time
+		HandleClientDisconnection(client)
+
+		log.Printf("Client %s removed from room %s after timeout", client.ID, roomCode)
 	}
 }
 
@@ -76,9 +118,17 @@ func RejoinClient(_uuid string, _conn *websocket.Conn) (*utility.Client, error) 
 		log.Println("Rejoin error:", err)
 		return nil, err
 	}
+
+	// Check if the client exists but was marked as disconnected
+	if client.Conn == nil {
+		log.Println("Reconnecting previously disconnected client:", _uuid)
+	}
+
 	client.Conn = _conn
-	client.Send = make(chan utility.JsonResp)
-	client.Receive = make(chan []byte)
+	client.Send = make(chan utility.JsonResp, 256)
+	client.Receive = make(chan []byte, 256)
+	client.DisconnectedAt = nil // Clear disconnection timestamp
+
 	return client, nil
 }
 
@@ -125,44 +175,122 @@ func SendGameUpdate(_roomcode string, _message utility.GameDataObject) error {
 	return nil
 }
 
-func CheckLobbyReadiness(_roomcode string) (bool, error) {
+func GetWTFMessage(_roomcode string) (bool, error) {
 	_clients, err := GetLobbyPlayers(_roomcode)
 	if err != nil {
 		return false, err
 	}
-
-	// Check if there are at least 2 players
-	// if len(_clients) < 2 {
-	// 	return false, fmt.Errorf("not enough players in room %s", _roomcode)
-	// }
-
 	// Check if all clients are connected
-	allConnected := true
-	playerNames := []string{}
+	playerNames := []utility.JsonResp{}
 
 	for client := range _clients {
-		if client.Conn == nil {
-			allConnected = false
-			break
-		}
-		playerNames = append(playerNames, client.HashName)
+		playerNames = append(playerNames, utility.JsonResp{"id": client.ID, "username": client.HashName})
 	}
 
 	// If all clients are connected, send ready signal
-	if allConnected {
-		for client := range _clients {
-			client.Send <- utility.JsonResp{
-				"ok":      true,
-				"message": "all players connected",
-				"Payload": utility.JsonResp{
-					"players": playerNames,
-					"count":   len(_clients),
-				},
-				"Action": "GameReady",
-			}
+	for client := range _clients {
+		client.Send <- utility.JsonResp{
+			"ok":      true,
+			"message": "all players connected",
+			"Payload": utility.JsonResp{
+				"players": playerNames,
+				"count":   len(_clients),
+			},
+			"Action": "GameReady",
 		}
-		return true, nil
+	}
+	return true, nil
+
+}
+
+func SendJoinMessage(_roomcode string, _message utility.JsonResp, _client *utility.Client) error {
+	_clients, err := GetLobbyPlayers(_roomcode)
+	if err != nil {
+		return err
+	}
+	for client := range _clients {
+		if client != _client {
+			client.Send <- _message
+		}
+	}
+	return nil
+}
+
+func SendMessage(roomCode string, message utility.JsonResp) error {
+	_clients, err := GetLobbyPlayers(roomCode)
+	if err != nil {
+		return err
+	}
+	for client := range _clients {
+		client.Send <- message
+	}
+	return nil
+}
+
+// SetClientReady marks a client as ready in a given room
+func SetClientReady(roomCode string, client *utility.Client, isReady bool) error {
+	lobby, err := GetLobbyPlayers(roomCode)
+	if err != nil {
+		return err
 	}
 
-	return false, fmt.Errorf("not all players in room %s are connected", _roomcode)
+	if _, exists := lobby[client]; !exists {
+		return fmt.Errorf("client not in room %s", roomCode)
+	}
+
+	// Set client's ready status
+	client.IsReady = isReady
+
+	// // Notify all players about the status change
+	// for c := range lobby {
+	// 	c.Send <- utility.JsonResp{
+	// 		"ok":      true,
+	// 		"message": "player ready status changed",
+	// 		"Payload": utility.JsonResp{
+	// 			"id":       client.ID,
+	// 			"ready":    isReady,
+	// 			"username": client.HashName,
+	// 		},
+	// 		"Action": "PlayerReadyChanged",
+	// 	}
+	// }
+
+	// Check if everyone is ready
+	CheckAllPlayersReady(roomCode)
+
+	return nil
+}
+
+func CheckAllPlayersReady(roomCode string) bool {
+	lobby, err := GetLobbyPlayers(roomCode)
+	if err != nil {
+		return false
+	}
+
+	// Need at least 2 players
+	if len(lobby) < 2 {
+		return false
+	}
+
+	// Check if everyone is ready
+	allReady := true
+	for client := range lobby {
+		if !client.IsReady {
+			allReady = false
+			break
+		}
+	}
+
+	// If all are ready, notify everyone
+	if allReady {
+		for client := range lobby {
+			client.Send <- utility.JsonResp{
+				"ok":      true,
+				"message": "all players ready, game can start",
+				"Action":  "AllPlayersReady",
+			}
+		}
+	}
+
+	return allReady
 }

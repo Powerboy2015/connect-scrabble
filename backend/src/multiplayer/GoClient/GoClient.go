@@ -57,7 +57,7 @@ func clientReceiver(_client *utility.Client) {
 	defer func() {
 		_client.Conn.Close()
 		// Find and remove client from any lobbies they're in
-		connManager.HandleClientDisconnection(_client)
+		connManager.MarkClientDisconnected(_client)
 	}()
 
 	for {
@@ -104,21 +104,40 @@ func clientHandler(_client *utility.Client) {
 
 		switch p.Action {
 
-		case utility.UpdateGame:
+		case utility.StartGame:
+			roomCode := "JSX85K"
+			// SetPlayerReady(p, _client)
+
+			// First check if everyone is ready
+			allReady := connManager.CheckAllPlayersReady(roomCode)
+			if !allReady {
+				_client.Send <- utility.JsonResp{
+					"ok":      false,
+					"message": "not all players are ready",
+					"Action":  "GameStartFailed",
+				}
+				continue
+			}
+
+			// If everyone is ready, start the game
 
 		case utility.JoinLobby:
 			connManager.JoinLobby("JSX85K", _client)
+			connManager.SendJoinMessage("JSX85K", utility.JsonResp{"ok": true, "message": "user has joined room ", "Action": "LobbyJoined"}, _client)
+			SetPlayerReady(p, _client)
 
 			// response message
 			resp := utility.JsonResp{"ok": true, "message": "user has joined room ", "Action": "LobbyJoined"}
 			_client.Send <- resp
 
-			isReady, err := connManager.CheckLobbyReadiness("JSX85K")
-			if err != nil {
-				log.Printf("Lobby not ready: %v", err)
-			} else if isReady {
+			isReady := connManager.CheckAllPlayersReady("JSX85K")
+			if !isReady {
+				log.Printf("Loading players...")
+			} else {
 				log.Printf("Lobby is ready to start game!")
 				// Here you could trigger game start logic
+				connManager.GetWTFMessage("JSX85K")
+
 			}
 
 		case utility.ShowLobby:
@@ -171,6 +190,22 @@ func clientHandler(_client *utility.Client) {
 				_client.Send <- resp
 			}
 
+		case utility.GoToGame:
+			connManager.SendMessage("JSX85K", utility.JsonResp{
+				"ok":      true,
+				"message": "game is starting",
+				"Action":  "GameStarting",
+			})
+
+		case utility.WordFound:
+
+			connManager.SendMessage("JSX85K", utility.JsonResp{
+				"ok":      true,
+				"message": "a word was found",
+				"Action":  "WordFound",
+				"payload": p.Payload,
+			})
+
 			// If no action can be found, return a noEvent.
 		default:
 			resp := utility.JsonResp{"ok": false, "message": "action does not exist", "Action": "noEvent"}
@@ -178,4 +213,27 @@ func clientHandler(_client *utility.Client) {
 		}
 	}
 
+}
+
+func SetPlayerReady(p utility.Message, _client *utility.Client) {
+	readyStatus, ok := p.Payload["ready"].(bool)
+
+	if !ok {
+		_client.Send <- utility.JsonResp{
+			"ok":      false,
+			"message": "invalid ready status",
+			"Action":  "noEvent",
+		}
+	}
+
+	roomCode := "JSX85K" // Using your default room code
+
+	err := connManager.SetClientReady(roomCode, _client, readyStatus)
+	if err != nil {
+		_client.Send <- utility.JsonResp{
+			"ok":      false,
+			"message": err.Error(),
+			"Action":  "noEvent",
+		}
+	}
 }

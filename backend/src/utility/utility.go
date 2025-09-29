@@ -1,15 +1,19 @@
 package utility
 
 import (
+	"time"
+
 	"github.com/gorilla/websocket"
 )
 
 type Client struct {
-	ID       string
-	HashName string
-	Conn     *websocket.Conn
-	Send     chan JsonResp // a channel that can holds jsonrespones
-	Receive  chan []byte   // a channel that holds incoming messages
+	ID             string
+	HashName       string
+	Conn           *websocket.Conn
+	Send           chan JsonResp
+	Receive        chan []byte
+	DisconnectedAt *time.Time // Add this field to track disconnection time
+	IsReady        bool       // Add this field to track readiness
 }
 
 // a structure used to streamline responses
@@ -27,6 +31,10 @@ const (
 	ShowLobby        Action = "ShowLobby"
 	SendLobbyMessage Action = "SendLobbyMessage"
 	UpdateGameState  Action = "UpdateGameState"
+	StartGame        Action = "StartGame"
+	SetPlayerReady   Action = "SetPlayerReady"
+	GoToGame         Action = "GoToGame"
+	WordFound        Action = "WordFound"
 )
 
 type JsonResp map[string]interface{}

@@ -141,7 +141,7 @@ body {
 }
 
 #Interactibles {
-  height: 100%;
+
   gap: 2vw;
   display: flex;
   flex-direction: row;
@@ -352,6 +352,7 @@ body {
 
 #foutmelding {
   color: rgb(255, 37, 37);
+  font-size: 25px;
 }
 
 .login_button{

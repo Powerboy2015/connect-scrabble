@@ -97,6 +97,7 @@ async function sendCheckupRequest(letters, _directionName) {
         const found = await getWordsFromServer(word.toLowerCase());
         if (found) {
             console.log(`Valid word found (${_directionName}):`, word);
+            showBanner(word); // Show the banner when a valid word is found
         }
         console.debug("Found words for checkup:", found);
     }
@@ -127,5 +128,21 @@ async function getWordsFromServer(word) {
     } catch (error) {
         console.error("Error fetching words from server:", error);
         return [];
+    }
+}
+
+/**
+ * Banner komt tevoorschijn bij vormen van een geldig woord
+ * @param {string} word The valid word that was formed.
+ */
+function showBanner(word) {
+    const banner = document.getElementById("idk");
+    const winText = document.getElementById("WinText");
+
+    if (banner && winText) {
+        winText.textContent = `Winnaar: ${word}`;
+        banner.style.display = "flex"; // Show the banner
+    } else {
+        console.error("Banner or WinText element not found.");
     }
 }

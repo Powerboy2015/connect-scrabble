@@ -172,7 +172,9 @@ def create_account():
 # addFriend, persoon... voegt persoon... toe als vriend.
 @app.route("/addFriend/<int:id1>/<int:id2>", methods=["POST"])
 def addFriend(id1, id2):
-    existing = Friends.query.filter_by(id1=id1, id2=id2).first()
+    existing1 = Friends.query.filter_by(id1=id1, id2=id2).first()
+    existing2 = Friends.query.filter_by(id1=id2, id2=id1).first()
+    existing = existing1 or existing2
     if existing:
         return jsonify({"error": "Vriendschapsverzoek bestaat al"}), 400
 

@@ -10,6 +10,7 @@ async function searchFriends() {
   result.forEach((item) => {
     const newListItem = document.createElement("li");
     const newButton = document.createElement("button");
+    newButton.innerHTML = "add friend";
     newListItem.append(`${item.firstname} ${item.lastname} (${item.email})`);
 
     newButton.addEventListener("click", () => addFriend(item.id));
@@ -86,7 +87,8 @@ async function getUserinfo(item) {
 
   const response = await request.json();
   li.append(`${response.firstName} ${response.lastName}(${response.email})`);
-  li.append(btn);
+  li.append(btna);
+  li.append(btnd);
 }
 
 async function getUserinfoOut(item) {
@@ -126,12 +128,19 @@ async function friendRequests() {
   const response = await request.json();
   response.forEach((item) => {
     li = document.createElement("li");
-    btn = document.createElement("button");
+    btna = document.createElement("button");
+    btnd = document.createElement("button");
 
     getUserinfo(item.from_user);
 
-    btn.addEventListener("click", () => {
+    btna.innerHTML = "accept";
+    btnd.innerHTML = "decline";
+
+    btna.addEventListener("click", () => {
       acceptFriend(item.request_id);
+    });
+    btnd.addEventListener("click", () => {
+      declineFriend(item.request_id);
     });
 
     document.getElementById("friendRequest").append(li);
@@ -139,6 +148,16 @@ async function friendRequests() {
 }
 
 async function acceptFriend(request_id) {
+  const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
+
+  request = await fetch(url, { method: "POST" });
+
+  response = await request.json();
+
+  console.log(response);
+}
+
+async function declineFriend(request_id) {
   const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
 
   request = await fetch(url, { method: "POST" });

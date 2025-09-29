@@ -38,6 +38,7 @@ body {
 }
 
 #friendrequestbox {
+  
   display: flex;
   width: 90%;
   height: 33%;
@@ -49,13 +50,15 @@ body {
 }
 
 #friendRequest {
+  padding: 0%;
   height: 100%;
-  width: 80%;
+  width: 90%;
   border-radius: 10px;
   background-color: #687c5a;
 }
 
 #search {
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,8 +79,9 @@ body {
 }
 
 #searchResult {
+  padding: 0%;
   height: 90%;
-  width: 80%;
+  width: 90%;
   border-radius: 10px;
   background-color: #687c5a;
 }
@@ -93,12 +97,25 @@ body {
 }
 
 #myFriends {
-  width: 90%;
+  width: 95%;
   height: 90%;
   display: flex;
-  align-content: flex-start;
   flex-wrap: wrap;
   background-color: #687c5a;
   border-radius: 10px;
+  list-style-type: none;
+  padding: 0%;
+  column-gap: 1.76vh;
+
 }
 
+.friend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+  border-radius: 10px;
+  width: 32%;
+  height: 15%;
+
+}

@@ -104,31 +104,28 @@ async function getUserinfo(item) {
 }
 
 async function getUserinfoOut(item) {
-  console.log(item);
+  li = document.createElement("li");
   const link = `http://127.0.0.1:5001/get/${item}`;
 
   const request = await fetch(link);
-
+  li.className = "sentfriendrequests";
   const response = await request.json();
   li.append(
     `${response.firstName} ${response.lastName}(${response.email})(outgoing)`
   );
+  document.getElementById("friendRequest").append(li);
 }
 
 async function friendRequestOut() {
   const id = sessionStorage.getItem("id");
 
   const url = `http://127.0.0.1:5001/friendRequestsOutgoing/${id}`;
-
   const request = await fetch(url);
-
   const response = await request.json();
 
-  response.forEach((item) => {
-    li = document.createElement("li");
-    getUserinfoOut(item.to_user);
-    document.getElementById("friendRequest").append(li);
-  });
+  for (const item of response) {
+    await getUserinfoOut(item.to_user);
+  }
 }
 
 async function friendRequests() {

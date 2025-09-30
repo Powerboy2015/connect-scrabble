@@ -40,7 +40,7 @@ function RedirectClients() {
     });
 }
 
-// WAAROM IS ALLES NEDERLANDS WTFFFFF
+// WAAROM IS ALLES NEDERLANDS WTFFFFF, WAAROM NIET 
 function initStartButton() {
     const Startbutton = document.getElementById('startbutton');
     const spelerinfoelement = document.getElementById('spelerinfo');

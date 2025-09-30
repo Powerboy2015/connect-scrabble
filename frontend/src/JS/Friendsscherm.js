@@ -92,15 +92,20 @@ async function myFriends() {
   });
 }
 
-async function getUserinfo(item) {
-  const link = `http://127.0.0.1:5001/get/${item}`;
+async function getUserinfo(userId, li, btna, btnd) {
+  const link = `http://127.0.0.1:5001/get/${userId}`;
 
-  const request = await fetch(link);
+  try {
+    const request = await fetch(link);
+    const response = await request.json();
 
-  const response = await request.json();
-  li.append(`${response.firstName} ${response.lastName}(${response.email})`);
-  li.append(btna);
-  li.append(btnd);
+    li.textContent = `${response.firstName} ${response.lastName} (${response.email})`;
+    li.append(" ", btna, " ", btnd);
+    li.className = "sentfriendrequests";
+  } catch (error) {
+    console.error("Fout bij ophalen van user info:", error);
+    li.textContent = "Onbekende gebruiker";
+  }
 }
 
 async function getUserinfoOut(item) {
@@ -133,14 +138,12 @@ async function friendRequests() {
   const url = `http://127.0.0.1:5001/friendRequests/${id}`;
 
   const request = await fetch(url);
-
   const response = await request.json();
-  response.forEach((item) => {
-    li = document.createElement("li");
-    btna = document.createElement("button");
-    btnd = document.createElement("button");
 
-    getUserinfo(item.from_user);
+  for (const item of response) {
+    const li = document.createElement("li");
+    const btna = document.createElement("button");
+    const btnd = document.createElement("button");
 
     btna.innerHTML = "accept";
     btnd.innerHTML = "decline";
@@ -152,8 +155,11 @@ async function friendRequests() {
       declineFriend(item);
     });
 
-    document.getElementById("friendRequest").append(li);
-  });
+    // wacht op het ophalen en vullen van de <li>
+    await getUserinfo(item.from_user, li, btna, btnd);
+
+    document.getElementById("friendRequest").appendChild(li);
+  }
 }
 
 async function acceptFriend(request_id) {

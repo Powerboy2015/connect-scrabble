@@ -5,7 +5,7 @@ In order to realise our game we are making use of the following:
 ## Node
 - Takes care of loading in the front-end (HTML,CSS,JS)
 - hot reload for devs
-- Runs on port 80 (https://localhost)
+- Runs on port 80 (https://145.89.121.84)
 
 ## PostgreSQL
 The reason we are using PostgreSQL here instead of making api calls to another dictionary/database is in order to prevent both rate limiting and external dependence. In order to find a solution, we have downloaded a list from a public repo in order to get all the words used in the DUTCH dictionary.
@@ -17,7 +17,7 @@ https://github.com/OpenTaal/opentaal-wordlist
 ## Adminer
 Used for our developers to have a more direct way to interact with the current table/database to do checks or maybe test SQL queries.
 - insight into database
-- runs on port 8080 (https://localhost:8080)
+- runs on port 8080 (https://145.89.121.84:8080)
 - **server**: sql-database 
 - **username**: user
 - **password**: password
@@ -32,4 +32,4 @@ An in-memory database for quick retrievals.
 A language mostly used for quick backend applications.
 - Language used for api endpoints
 - possible future scoreboard?
-- runs on port 8081 (accessible through api https://localhost:8081/api/v1/checkWord)
+- runs on port 8081 (accessible through api https://145.89.121.84:8081/api/v1/checkWord)

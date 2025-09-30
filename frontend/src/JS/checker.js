@@ -169,7 +169,7 @@ async function sendCheckupRequest(letters, _directionName) {
  */
 async function getWordsFromServer(word) {
     try {
-        const response = await fetch("http://localhost:8081/api/v1/checkWord", {
+        const response = await fetch("http://145.89.121.84:8081/api/v1/checkWord", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

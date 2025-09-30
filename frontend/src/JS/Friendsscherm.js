@@ -2,7 +2,7 @@ async function searchFriends() {
   document.getElementById("searchResult").innerHTML = "";
   const search = document.getElementById("friendSearchInput").value;
   console.log(search.toLowerCase());
-  const url = `http://127.0.0.1:5001/searchFriend/${search.toLowerCase()}`;
+  const url = `http://145.89.121.84:5001/searchFriend/${search.toLowerCase()}`;
 
   const response = await fetch(url);
 
@@ -31,7 +31,7 @@ async function addFriend(friendId) {
     return;
   }
 
-  const url = `http://127.0.0.1:5001/addFriend/${personId}/${friendIdString}`;
+  const url = `http://145.89.121.84:5001/addFriend/${personId}/${friendIdString}`;
   const response = await fetch(url, { method: "POST" });
 
   if (!response.ok) {
@@ -47,7 +47,7 @@ async function addFriend(friendId) {
 
 async function myFriends() {
   const id = Number(sessionStorage.getItem("id"));
-  const url = `http://127.0.0.1:5001/getUserFriends/${id}`;
+  const url = `http://145.89.121.84:5001/getUserFriends/${id}`;
 
   const request = await fetch(url);
   const response = await request.json();
@@ -64,7 +64,7 @@ async function myFriends() {
     }
 
     async function getUserName(fid) {
-      const url = `http://127.0.0.1:5001/get/${fid}`;
+      const url = `http://145.89.121.84:5001/get/${fid}`;
       try {
         const btn = document.createElement("button");
         const request = await fetch(url);
@@ -78,7 +78,7 @@ async function myFriends() {
         btn.className = "removeBtn";
 
         btn.addEventListener("click", async () => {
-          const url = `http://127.0.0.1:5001/removeFriend/${id}/${fid}`;
+          const url = `http://145.89.121.84:5001/removeFriend/${id}/${fid}`;
           const request = await fetch(url, { method: "DELETE" });
           const response = await request.json();
         });
@@ -93,7 +93,7 @@ async function myFriends() {
 }
 
 async function getUserinfo(userId, li, btna, btnd) {
-  const link = `http://127.0.0.1:5001/get/${userId}`;
+  const link = `http://145.89.121.84:5001/get/${userId}`;
 
   try {
     const request = await fetch(link);
@@ -110,7 +110,7 @@ async function getUserinfo(userId, li, btna, btnd) {
 
 async function getUserinfoOut(item) {
   li = document.createElement("li");
-  const link = `http://127.0.0.1:5001/get/${item}`;
+  const link = `http://145.89.121.84:5001/get/${item}`;
 
   const request = await fetch(link);
   li.className = "sentfriendrequests";
@@ -124,7 +124,7 @@ async function getUserinfoOut(item) {
 async function friendRequestOut() {
   const id = sessionStorage.getItem("id");
 
-  const url = `http://127.0.0.1:5001/friendRequestsOutgoing/${id}`;
+  const url = `http://145.89.121.84:5001/friendRequestsOutgoing/${id}`;
   const request = await fetch(url);
   const response = await request.json();
 
@@ -135,7 +135,7 @@ async function friendRequestOut() {
 
 async function friendRequests() {
   const id = sessionStorage.getItem("id");
-  const url = `http://127.0.0.1:5001/friendRequests/${id}`;
+  const url = `http://145.89.121.84:5001/friendRequests/${id}`;
 
   const request = await fetch(url);
   const response = await request.json();
@@ -163,7 +163,7 @@ async function friendRequests() {
 }
 
 async function acceptFriend(request_id) {
-  const url = `http://127.0.0.1:5001/acceptFriend/${request_id}`;
+  const url = `http://145.89.121.84:5001/acceptFriend/${request_id}`;
 
   request = await fetch(url, { method: "POST" });
 
@@ -173,8 +173,8 @@ async function acceptFriend(request_id) {
 }
 
 async function declineFriend(item) {
-  const url = `http://127.0.0.1:5001/declineFriend/${item.request_id}`;
-  const url2 = `http://127.0.0.1:5001//removeFriend/${item.from_user}/${item.to_user}`;
+  const url = `http://145.89.121.84:5001/declineFriend/${item.request_id}`;
+  const url2 = `http://145.89.121.84:5001//removeFriend/${item.from_user}/${item.to_user}`;
   console.log(url2);
 
   request = await fetch(url, { method: "POST" });

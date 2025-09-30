@@ -1,13 +1,13 @@
 function showProfileButton() {
   window.location =
-    "http://127.0.0.1/HTML/profilepage.html";
+    "http://145.89.121.84/HTML/profilepage.html";
 }
 
 async function getProfileData() {
   const id = sessionStorage.getItem("id");
   const password = sessionStorage.getItem("password");
 
-  const url = `http://127.0.0.1:5001/get/${id}/${password}`;
+  const url = `http://145.89.121.84:5001/get/${id}/${password}`;
 
   try {
     const response = await fetch(url);
@@ -42,7 +42,7 @@ async function getProfileData() {
 async function deleteCurrentUser() {
   const user = sessionStorage.getItem("id");
 
-  const url = `http://127.0.0.1:5001/delete/${user}`;
+  const url = `http://145.89.121.84:5001/delete/${user}`;
 
   try {
     const request = fetch(url, { method: "DELETE" });
@@ -56,7 +56,7 @@ async function deleteCurrentUser() {
     sessionStorage.clear();
 
     window.location =
-      "http://127.0.0.1/HTML/StartScreen.html";
+      "http://145.89.121.84/HTML/StartScreen.html";
   } catch (err) {
     console.log(err);
   }

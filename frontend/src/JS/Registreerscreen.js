@@ -1,5 +1,5 @@
 async function postRegisterScreen() {
-  const url = "http://localhost:5001/create";
+  const url = "http://145.89.121.84:5001/create";
 
   const firstName = document.getElementById("fname").value;
   const lastName = document.getElementById("lname").value;
@@ -36,7 +36,7 @@ async function postRegisterScreen() {
 
     if (response.ok) {
       window.location =
-        "http://localhost/HTML/Loginscreen.html";
+        "http://145.89.121.84/HTML/Loginscreen.html";
     }
   }
 }
